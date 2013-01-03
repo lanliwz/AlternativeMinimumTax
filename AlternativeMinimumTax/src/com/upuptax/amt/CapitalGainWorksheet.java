@@ -149,6 +149,8 @@ public class CapitalGainWorksheet {
 			worksheet.put("19", line19);
 			
 			System.out.println("Final Tax = "+worksheet.get("19"));
+			
+			fillingForms.putWorksheet(AMTConstant.WKS_CAPITAL_GAIN,worksheet);
 		
 			
 		
