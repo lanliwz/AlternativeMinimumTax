@@ -14,6 +14,7 @@ public class CapitalGainWorksheet {
 	private FillingFormsAndSchedules fillingForms;
 	private Map<String,Double> form1040;
 	private Map<String,Double> worksheet=new HashMap<String,Double>();
+	
 	private double taxableIncome;
 	private double qualifiedDividend;
 	private double longTermCapitalGain;
