@@ -34,17 +34,17 @@ public class CapitalGainWorksheet {
 		
 		TaxRate marriedJoin = new TaxRate();
 		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
-		TaxRateRule r1=new TaxRateRule(0.1,0,17400);
-		rules.add(r1);
-		TaxRateRule r2=new TaxRateRule(0.15,17400,70700);
-		rules.add(r2);
-		TaxRateRule r3=new TaxRateRule(0.25,70700,142700);
+//		TaxRateRule r1=new TaxRateRule(0.1,0,17400);
+//		rules.add(r1);
+//		TaxRateRule r2=new TaxRateRule(0.15,17400,70700);
+//		rules.add(r2);
+		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
 		rules.add(r3);
-		TaxRateRule r4=new TaxRateRule(0.28,142700,217450);
+		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
 		rules.add(r4);
-		TaxRateRule r5=new TaxRateRule(0.33,217450,388350);
+		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
 		rules.add(r5);
-		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY);
+		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
 		rules.add(r6);
 		
 		marriedJoin.setTaxRateRules(rules);
@@ -52,7 +52,7 @@ public class CapitalGainWorksheet {
 		cptGain.setTaxRate4income(marriedJoin);
 		
 		Map<String,Double> frm = new HashMap<String,Double>();
-		frm.put("43", 401993d);
+		frm.put("43", 183540d);
 		frm.put("9b", 699d);
 		
 		cptGain.setForm1040(frm);
@@ -62,7 +62,7 @@ public class CapitalGainWorksheet {
 		Map<String,Map> schedules = new HashMap<String,Map>();
 		Map<String,Double> scheduleD = new HashMap<String,Double>();
 		
-		scheduleD.put("15", 430000d);
+		scheduleD.put("15", 430d);
 		
 		schedules.put(AMTConstant.SCHEDULE_D, scheduleD);
 		fillingForms.setSchedules(schedules);
@@ -127,7 +127,7 @@ public class CapitalGainWorksheet {
 			worksheet.put("15", line15);
 			//
 			System.out.println("Taxable Income Not Including Capital Gain="+worksheet.get("7"));
-			double line16 =worksheet.get("7")* taxRate4income.getTaxRate(worksheet.get("7"));
+			double line16 = taxRate4income.getTax(worksheet.get("7"));
 			worksheet.put("16", line16);
 			System.out.println("Tax on Taxable Income Not Including Capital Gain="+worksheet.get("16"));
 			
@@ -139,7 +139,7 @@ public class CapitalGainWorksheet {
 			System.out.println("Total Tax based on Capital Gain = "+worksheet.get("17"));
 			
 			System.out.println("Taxable Income="+worksheet.get("1"));
-			double line18 =worksheet.get("1")* taxRate4income.getTaxRate(worksheet.get("1"));
+			double line18 = taxRate4income.getTax(worksheet.get("1"));
 			worksheet.put("18", line18);
 			System.out.println("Tax On Taxable Income="+worksheet.get("18"));
 			System.out.println("Total Tax based on Taxable Income = "+worksheet.get("18"));

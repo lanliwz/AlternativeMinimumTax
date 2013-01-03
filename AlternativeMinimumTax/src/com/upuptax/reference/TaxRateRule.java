@@ -4,14 +4,24 @@ public class TaxRateRule {
 	private double taxRate;
 	private double taxableIncomeLowEnd;
 	private double taxableIncomeHighEnd;
+	private double substraction;
 	private String template="%s on taxable income over %s to %s";
 	
-	public TaxRateRule(double taxRate,double low, double high){
+	public TaxRateRule(double taxRate,double low, double high,double substraction){
 		this.taxRate=taxRate;
 		this.taxableIncomeLowEnd=low;
 		this.taxableIncomeHighEnd=high;
+		this.substraction=substraction;
 	}
 	
+	public double getSubstraction() {
+		return substraction;
+	}
+
+	public void setSubstraction(double substraction) {
+		this.substraction = substraction;
+	}
+
 	public String toString(){
 		return String.format(template, taxRate,taxableIncomeLowEnd,taxableIncomeHighEnd);
 	}

@@ -27,4 +27,17 @@ public class TaxRate {
 		
 	}
 
+	public double getTax(double taxableIncome){
+		for (TaxRateRule rule:taxRateRules){
+			if (rule.getTaxableIncomeLowEnd()<taxableIncome && rule.getTaxableIncomeHighEnd()>=taxableIncome)
+				{
+				System.out.println(rule.toString());
+				return rule.getTaxRate()*taxableIncome-rule.getSubstraction();
+				
+				}
+		}
+		return -1;
+		
+	}
+
 }
