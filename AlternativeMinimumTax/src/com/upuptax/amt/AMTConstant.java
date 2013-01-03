@@ -3,9 +3,11 @@ package com.upuptax.amt;
 public class AMTConstant {
 	//tax forms
 	public static String FORM_1040="1040";
+	public static String FORM_6251="6251";
 	
 	//tax schedule
 	public static String SCHEDULE_D="SCHEDULE D";
+	public static String SCHEDULE_A="SCHEDULE A";
 	
 	//worksheet
 	public static String WKS_CAPITAL_GAIN="QUALIFIED DIVIDENDS AND CAPITAL GAIN TAX WORKSHEET";
