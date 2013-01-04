@@ -72,12 +72,15 @@ public class Form6521 {
 		
 		double line40 = NumberUtil.getSmaller(form6521.get("36"),line39);
 		form6521.put("40", line40);
+		System.out.println("Capital Gain Income = "+line40);
 		
 		double line41=NumberUtil.substractWithPositiveReturn(form6521.get("36"),form6521.get("39"));
 		form6521.put("41", line41);
+		System.out.println("Non Capital Gain Income = "+line41);
 		
 		double line42=calculateAMT(line41);
 		form6521.put("42", line42);
+		System.out.println("AMT Based On Non Capital Gain Income = "+line42);
 		
 		if (fillingForms.getWorksheets()!=null && fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN)!=null){
 			Map<String,Double> cg=fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN);
@@ -96,6 +99,8 @@ public class Form6521 {
 		
 		double line49 = taxRate4capitalGain*form6521.get("48");
 		form6521.put("49", line49);
+		System.out.println("Capital Gain Tax = "+line49);
+		
 		form6521.put("50", NumberUtil.substractWithPositiveReturn(form6521.get("40"), form6521.get("46")));
 		form6521.put("51",0.25*form6521.get("50"));
 		Double[] params = {form6521.get("42"),form6521.get("49"),form6521.get("51")};
@@ -103,8 +108,11 @@ public class Form6521 {
 		form6521.put("52", NumberUtil.add(params));
 		
 		form6521.put("53", calculateAMT(form6521.get("36")));
+		System.out.println("AMT Tax Based on All Taxable Income = "+form6521.get("53"));
 		
 		form6521.put("54", NumberUtil.getSmaller(form6521.get("52"), form6521.get("53")));
+		
+		System.out.println("Final AMT Based Tax = "+form6521.get("54"));
 		
 		form6521.put("31", form6521.get("54"));
 		
@@ -113,7 +121,7 @@ public class Form6521 {
 		form6521.put("34", form1040.get("44"));
 		
 		form6521.put("35", NumberUtil.substractWithPositiveReturn(form6521.get("33"),form6521.get("34") ));
-		System.out.println(form6521.toString());
+		
 			
 			
 	}
