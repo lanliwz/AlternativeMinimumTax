@@ -17,6 +17,7 @@ public class Form6521 {
 	private double line31RateBellow=0.26d;
 	private double line31RateAbove=0.28d;
 	private double line31AboveAbstraction=3500d;
+	private double taxRate4capitalGain=0.15;
 	public void init(){
 		double line1=0;
 		if (fillingForms.getSchedules()!=null && fillingForms.getSchedules().get(AMTConstant.SCHEDULE_A)!=null){
@@ -41,12 +42,8 @@ public class Form6521 {
 		double line30 = NumberUtil.substractWithPositiveReturn(line28, form6521.get("29"));
 		form6521.put("30", line30);
 		
-		double line31=0;
-		if (line30<=line31Threshold){
-			line31=line30*line31RateBellow;
-		}else{
-			line31=line30*line31RateAbove-line31AboveAbstraction;
-		}
+		double line31=calculateAMT(line30);
+		
 		form6521.put("31", line31);
 		double line33=NumberUtil.substractWithPositiveReturn(line31, form6521.get("32"));
 		form6521.put("33",line33);
@@ -58,12 +55,66 @@ public class Form6521 {
 			form6521.put("37", cg.get("6"));
 		}
 		
+		double line39 = NumberUtil.add(37, 38, form6521);
+		form6521.put("39", line39);
 		
+		double line40 = NumberUtil.getSmaller(form6521.get("36"),line39);
+		form6521.put("40", line40);
 		
+		double line41=NumberUtil.substractWithPositiveReturn(form6521.get("36"),form6521.get("39"));
+		form6521.put("41", line41);
 		
+		double line42=calculateAMT(line41);
+		form6521.put("42", line42);
+		
+		if (fillingForms.getWorksheets()!=null && fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN)!=null){
+			Map<String,Double> cg=fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN);
+			form6521.put("43", cg.get("8"));
+			form6521.put("44", cg.get("7"));
+			double line45 = NumberUtil.substractWithPositiveReturn(form6521.get("43"), form6521.get("44"));
+			form6521.put("45", line45);
+	
+		}
+		
+		form6521.put("46", NumberUtil.getSmaller(form6521.get("36"), form6521.get("37")));
+		
+		form6521.put("47", NumberUtil.getSmaller(form6521.get("45"), form6521.get("46")));
+		
+		form6521.put("48", NumberUtil.substractWithPositiveReturn(form6521.get("46"), form6521.get("47")));
+		
+		double line49 = taxRate4capitalGain*form6521.get("48");
+		form6521.put("49", line49);
+		form6521.put("50", NumberUtil.substractWithPositiveReturn(form6521.get("40"), form6521.get("46")));
+		form6521.put("51",0.25*form6521.get("50"));
+		Double[] params = {form6521.get("42"),form6521.get("49"),form6521.get("51")};
+		
+		form6521.put("52", NumberUtil.add(params));
+		
+		form6521.put("53", calculateAMT(form6521.get("36")));
+		
+		form6521.put("54", NumberUtil.getSmaller(form6521.get("52"), form6521.get("53")));
+		
+		form6521.put("31", form6521.get("54"));
+		
+		form6521.put("33", NumberUtil.substractWithPositiveReturn(form6521.get("31"),form6521.get("32") ));
+		
+		form6521.put("34", form1040.get("44"));
+		
+		form6521.put("35", NumberUtil.substractWithPositiveReturn(form6521.get("33"),form6521.get("34") ));
 		
 			
 			
+	}
+	
+	private double calculateAMT(double amount ){
+		double line31=0;
+		if (amount<=line31Threshold){
+			line31=amount*line31RateBellow;
+		}else{
+			line31=amount*line31RateAbove-line31AboveAbstraction;
+		}
+		return line31;
+
 	}
 
 

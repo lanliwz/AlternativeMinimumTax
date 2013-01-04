@@ -38,4 +38,15 @@ public class NumberUtil {
 		}
 		return total;
 	}
+	public static double add(Double[] values){
+		double total=0;
+		for (Double value:values){
+
+			if (value!=null)
+				total=total+value.doubleValue();
+			
+		}
+		return total;
+	}
+
 }
