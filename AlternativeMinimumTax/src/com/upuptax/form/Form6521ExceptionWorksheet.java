@@ -18,6 +18,7 @@ public class Form6521ExceptionWorksheet {
 	
 	public void init(){
 		worksheet.put("1", fillingStatusExemption);
+		System.out.println("AMT Standard Exemption = "+fillingStatusExemption);
 		worksheet.put("2",form6521.get("28"));
 		worksheet.put("3",phaseoutThreshhold);
 		double line4=NumberUtil.substractWithPositiveReturn(worksheet.get("2"),worksheet.get("3"));
@@ -25,6 +26,7 @@ public class Form6521ExceptionWorksheet {
 		double line5=line4*phaseoutRate;
 		worksheet.put("5", line5);
 		double line6=NumberUtil.substractWithPositiveReturn(worksheet.get("1"),line5);
+		System.out.println("Your AMT Exemption = " + line6);
 		worksheet.put("6", line6);
 		
 	}

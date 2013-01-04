@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.upuptax.form.Form6521;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxRate;
 import com.upuptax.reference.TaxRateRule;
@@ -22,6 +23,12 @@ public class CapitalGainWorksheet {
 	private double deductAmt=69000;
 	private TaxRate taxRate4income;
 	
+	
+	
+	public Map<String, Double> getWorksheet() {
+		return worksheet;
+	}
+
 	public TaxRate getTaxRate4income() {
 		return taxRate4income;
 	}
@@ -55,20 +62,43 @@ public class CapitalGainWorksheet {
 		Map<String,Double> frm = new HashMap<String,Double>();
 		frm.put("43", 183540d);
 		frm.put("9b", 699d);
+		frm.put("10", 716d);
+		frm.put("38", 227834d);
+		frm.put("41", 190940d);
+		frm.put("44", 39314d);
 		
 		cptGain.setForm1040(frm);
 		
 		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
 		
 		Map<String,Map> schedules = new HashMap<String,Map>();
+		
+		Map<String,Double> scheduleA = new HashMap<String,Double>();
+		
+		scheduleA.put("9", 32708d);
+		
+		schedules.put(AMTConstant.SCHEDULE_A, scheduleA);
 		Map<String,Double> scheduleD = new HashMap<String,Double>();
 		
 		scheduleD.put("15", 430d);
+		scheduleD.put("16", 430d);
 		
 		schedules.put(AMTConstant.SCHEDULE_D, scheduleD);
 		fillingForms.setSchedules(schedules);
+		
+		Map<String,Map> forms = new HashMap<String,Map>();
+		forms.put(AMTConstant.FORM_1040, frm);
+		
+		fillingForms.setForms(forms);
 		cptGain.setFillingForms(fillingForms);
 		cptGain.init();
+		
+		Map<String,Double> cptGainWks =cptGain.getWorksheet();
+		
+		Form6521 form6521 = new Form6521();
+		
+		form6521.setFillingForms(fillingForms);
+		form6521.init();
 		
 		
 		

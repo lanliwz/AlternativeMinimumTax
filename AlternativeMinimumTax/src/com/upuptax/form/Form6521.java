@@ -18,16 +18,26 @@ public class Form6521 {
 	private double line31RateAbove=0.28d;
 	private double line31AboveAbstraction=3500d;
 	private double taxRate4capitalGain=0.15;
+	
+	public FillingFormsAndSchedules getFillingForms() {
+		return fillingForms;
+	}
+
+	public void setFillingForms(FillingFormsAndSchedules fillingForms) {
+		this.fillingForms = fillingForms;
+	}
+
 	public void init(){
-		double line1=0;
+		this.form1040=fillingForms.getForms().get(AMTConstant.FORM_1040);
+		Double line1=0d;
 		if (fillingForms.getSchedules()!=null && fillingForms.getSchedules().get(AMTConstant.SCHEDULE_A)!=null){
 			Map<String,Double> scheduleA=fillingForms.getSchedules().get(AMTConstant.SCHEDULE_A);
 			line1=form1040.get("41");
 			double line2 = NumberUtil.getSmaller(scheduleA.get("4"),medicalDentalRate*form1040.get("38"));
 			form6521.put("2", line2);
-			form6521.put("3", form1040.get("9"));
+			form6521.put("3", scheduleA.get("9"));
 			form6521.put("5", form1040.get("27"));
-			form6521.put("7",-form1040.get("10"));
+			form6521.put("7",-(form1040.get("10")==null?0d:form1040.get("10")));
 			
 		} else {
 			line1=form1040.get("38");
@@ -35,9 +45,11 @@ public class Form6521 {
 		form6521.put("1", line1);
 		double line28=NumberUtil.add(1, 27, form6521);
 		form6521.put("28", line28);
+		System.out.println("Alternative Minimum Taxable Income = "+line28);
 		
 		exemption.setForm6521(form6521);
 		exemption.init();
+		
 		form6521.put("29", exemption.getExcemtion());
 		double line30 = NumberUtil.substractWithPositiveReturn(line28, form6521.get("29"));
 		form6521.put("30", line30);
@@ -101,7 +113,7 @@ public class Form6521 {
 		form6521.put("34", form1040.get("44"));
 		
 		form6521.put("35", NumberUtil.substractWithPositiveReturn(form6521.get("33"),form6521.get("34") ));
-		
+		System.out.println(form6521.toString());
 			
 			
 	}
