@@ -40,6 +40,17 @@ public class NumberUtil {
 		}
 		return total;
 	}
+	public static double add(Map<String,Double> values){
+		double total=0;
+		if (values!=null)
+		for (String key:values.keySet()){
+			
+			if (values.get(key)!=null)
+				total=total+values.get(key);
+			
+		}
+		return total;
+	}
 	public static double add(Double[] values){
 		double total=0;
 		for (Double value:values){

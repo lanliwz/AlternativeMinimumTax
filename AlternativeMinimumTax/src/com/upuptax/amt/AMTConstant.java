@@ -8,10 +8,12 @@ public class AMTConstant {
 	//tax schedule
 	public static String SCHEDULE_D="SCHEDULE D";
 	public static String SCHEDULE_A="SCHEDULE A";
-	
+	public static String SCHEDULE_B="SCHEDULE B";
 	//worksheet
 	public static String WKS_CAPITAL_GAIN="QUALIFIED DIVIDENDS AND CAPITAL GAIN TAX WORKSHEET";
 	
+	//reference
+	public static String QUALIFIED_DIVIDENDS="QUALIFIED DIVIDENDS";
 	
 	public double SINGLE_MAX_EXCEPTION_AMT=48450;
 	public double MARRIED_JOIN_MAX_EXCEPTION_AMT=74450;
