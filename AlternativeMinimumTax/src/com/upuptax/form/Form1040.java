@@ -3,6 +3,7 @@ package com.upuptax.form;
 import java.util.List;
 import java.util.Map;
 
+import com.upuptax.amt.AMTConstant;
 import com.upuptax.amt.CapitalGainWorksheet;
 import com.upuptax.reference.FillingFormsAndSchedules;
 
@@ -27,7 +28,11 @@ public class Form1040 {
 		}
 		form1040.put("7", line7);
 		
-		
+		if (scheduleB!=null){
+			form1040.put("8a", scheduleB.get("4"));
+			form1040.put("9b", scheduleB.get(AMTConstant.QUALIFIED_DIVIDENDS));
+			form1040.put("9a", scheduleB.get("6"));
+		}
 	}
 	public FillingFormsAndSchedules getFillingForms() {
 		return fillingForms;
