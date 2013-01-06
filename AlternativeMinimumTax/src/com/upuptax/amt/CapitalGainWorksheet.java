@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.upuptax.form.Form6521;
 import com.upuptax.reference.FillingFormsAndSchedules;
-import com.upuptax.reference.TaxRate;
+import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
@@ -21,7 +21,7 @@ public class CapitalGainWorksheet {
 	private double longTermCapitalGain;
 	private double taxRate4capitalGain=0.15;
 	private double deductAmt=69000;
-	private TaxRate taxRate4income;
+	private TaxComputationWorksheet taxRate4income;
 	
 	
 	
@@ -29,18 +29,18 @@ public class CapitalGainWorksheet {
 		return worksheet;
 	}
 
-	public TaxRate getTaxRate4income() {
+	public TaxComputationWorksheet getTaxRate4income() {
 		return taxRate4income;
 	}
 
-	public void setTaxRate4income(TaxRate taxRate4income) {
+	public void setTaxRate4income(TaxComputationWorksheet taxRate4income) {
 		this.taxRate4income = taxRate4income;
 	}
 
 	public static void main(String[] args){
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
 		
-		TaxRate marriedJoin = new TaxRate();
+		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
 		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
 //		TaxRateRule r1=new TaxRateRule(0.1,0,17400);
 //		rules.add(r1);

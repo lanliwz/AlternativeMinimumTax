@@ -2,7 +2,7 @@ package com.upuptax.reference;
 
 import java.util.List;
 
-public class TaxRate {
+public class TaxComputationWorksheet {
 
 	private List<TaxRateRule> taxRateRules;
 
