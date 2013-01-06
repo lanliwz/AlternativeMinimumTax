@@ -70,5 +70,11 @@ public class NumberUtil {
 		}
 		return total;
 	}
+	public static double multiply(Double val1,Double val2){
+		if(val1==null || val2==null)
+			return 0d;
+		else
+			return val1*val2;
+	}
 
 }

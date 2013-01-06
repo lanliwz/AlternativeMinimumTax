@@ -9,6 +9,8 @@ import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040 {
+	private double standardDeduction=11600d;
+	private double personExemption=3700;
 	private FillingFormsAndSchedules fillingForms;
 	private List<Map<String,Double>> w2Forms;
 	private Map<String,Double> form1040;
@@ -53,6 +55,30 @@ public class Form1040 {
 		
 		form1040.put("38", line37);
 		
+		if (scheduleA!=null){
+			if (scheduleA.get("29")!=null && scheduleA.get("29").doubleValue()>standardDeduction){
+				form1040.put("40", scheduleA.get("29"));
+				System.out.println("Itermized Deduction = "+form1040.get("40"));
+			}
+			else{
+				form1040.put("40", standardDeduction);
+				System.out.println("Standard Deduction = "+standardDeduction);
+			}
+			
+				
+			
+		}
+		
+		form1040.put("41", NumberUtil.substractWithPositiveReturn(form1040.get("38"),form1040.get("40") ));
+		
+		double line42 = NumberUtil.multiply(form1040.get("6d"),personExemption);
+		form1040.put("42", line42);
+		
+		System.out.println("Exemption Amount = "+line42);
+		
+		double line43= NumberUtil.substractWithPositiveReturn(form1040.get("41"),form1040.get("42"));
+		form1040.put("43", line43);
+		System.out.println("Taxable Income = "+line43);
 		
 	}
 	public FillingFormsAndSchedules getFillingForms() {
