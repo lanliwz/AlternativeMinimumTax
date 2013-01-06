@@ -6,6 +6,7 @@ import java.util.Map;
 import com.upuptax.amt.AMTConstant;
 import com.upuptax.amt.CapitalGainWorksheet;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.utils.NumberUtil;
 
 public class Form1040 {
 	private FillingFormsAndSchedules fillingForms;
@@ -30,9 +31,29 @@ public class Form1040 {
 		
 		if (scheduleB!=null){
 			form1040.put("8a", scheduleB.get("4"));
+			form1040.put("8",  scheduleB.get("4"));
 			form1040.put("9b", scheduleB.get(AMTConstant.QUALIFIED_DIVIDENDS));
 			form1040.put("9a", scheduleB.get("6"));
+			form1040.put("9",  scheduleB.get("6"));
 		}
+		
+		if (scheduleD!=null){
+			form1040.put("13", scheduleD.get("22"));
+		}
+		
+		double line22 = NumberUtil.add(7,21,form1040);
+		form1040.put("22", line22);
+		System.out.println("Total Income"+line22);
+		
+		double line36 = NumberUtil.add(23,35,form1040);
+		form1040.put("36", line36);
+		
+		double line37=NumberUtil.substractWithPositiveReturn(form1040.get("22"), form1040.get("36"));
+		System.out.println("Adjusted Gross Income"+line37);
+		
+		form1040.put("38", line37);
+		
+		
 	}
 	public FillingFormsAndSchedules getFillingForms() {
 		return fillingForms;

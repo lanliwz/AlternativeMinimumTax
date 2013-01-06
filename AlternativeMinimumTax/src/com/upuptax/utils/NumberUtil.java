@@ -30,6 +30,15 @@ public class NumberUtil {
 		
 		return val;
 	}
+	public static double substract(Double value1,Double value2){
+		double val=0d;
+		if (value1!=null && value2!=null )
+			val=value1.doubleValue()-value2.doubleValue();
+		else if (value1==null || value2==null)
+			val=0d;
+		
+		return val;
+	}
 	public static double add(int startLineNum,int endLineNum,Map<String,Double> values){
 		double total=0;
 		for (int i=startLineNum;i<=endLineNum;i++){
