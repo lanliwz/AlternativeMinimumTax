@@ -1,10 +1,13 @@
 package com.upuptax.form;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.upuptax.amt.AMTConstant;
 import com.upuptax.amt.CapitalGainWorksheet;
+import com.upuptax.amt.W2Tax;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.utils.NumberUtil;
 
@@ -22,6 +25,36 @@ public class Form1040 {
 	private  Map<String,Double> capitalGainWorksheet;
 	//alternative minimum tax
 	
+	public static void main(String[] args){
+		Form1040 frm1040=new Form1040();
+		Map<String,Double> form1040=new HashMap<String,Double>();
+		frm1040.setForm1040(form1040);
+		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
+		Map<String,Double> w2tax1=new HashMap<String,Double>();
+		Map<String,Double> w2tax2=new HashMap<String,Double>();
+		w2tax1.put("1",125405.88);
+		w2tax1.put("2",21590.65);
+		w2tax1.put("3",106800d);
+		w2tax1.put("4",4485.6);
+		w2tax1.put("5",141905.88);
+		w2tax1.put("6",2057.64);
+		w2tax2.put("1",100177.95);
+		w2tax2.put("2",14768.0);
+		w2tax2.put("3",106800d);
+		w2tax2.put("4",4485.6);
+		w2tax2.put("5",116677.95);
+		w2tax2.put("6",1691.83);
+		w2forms.add(w2tax1);
+		w2forms.add(w2tax2);
+		frm1040.setW2Forms(w2forms);
+		frm1040.init();
+		
+	}
+	
+	public void setForm1040(Map<String, Double> form1040) {
+		this.form1040 = form1040;
+	}
+
 	public void init(){
 		double line7 =0;
 		double line62=0;
@@ -35,8 +68,9 @@ public class Form1040 {
 
 		}
 		form1040.put("7", line7);
+		System.out.println("Wages = "+line7);
 		form1040.put("62", line62);
-		
+		System.out.println("Federal Tax Withhold = "+line62);
 		if (scheduleB!=null){
 			form1040.put("8a", scheduleB.get("4"));
 			form1040.put("8",  scheduleB.get("4"));
@@ -51,13 +85,13 @@ public class Form1040 {
 		
 		double line22 = NumberUtil.add(7,21,form1040);
 		form1040.put("22", line22);
-		System.out.println("Total Income"+line22);
+		System.out.println("Total Income = "+line22);
 		
 		double line36 = NumberUtil.add(23,35,form1040);
 		form1040.put("36", line36);
 		
 		double line37=NumberUtil.substractWithPositiveReturn(form1040.get("22"), form1040.get("36"));
-		System.out.println("Adjusted Gross Income"+line37);
+		System.out.println("Adjusted Gross Income = "+line37);
 		
 		form1040.put("38", line37);
 		
