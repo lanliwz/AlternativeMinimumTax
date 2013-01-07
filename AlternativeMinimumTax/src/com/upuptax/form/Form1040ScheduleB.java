@@ -23,21 +23,15 @@ public class Form1040ScheduleB {
 		scheduleB.put(AMTConstant.QUALIFIED_DIVIDENDS, qualifiedDivendend);
 		
 	}
-	public Map<String, Double> getInterests() {
-		return interests;
-	}
+	
 	public void setInterests(Map<String, Double> interests) {
 		this.interests = interests;
 	}
-	public Map<String, Double> getOrdinaryDividends() {
-		return ordinaryDividends;
-	}
+	
 	public void setOrdinaryDividends(Map<String, Double> ordinaryDividends) {
 		this.ordinaryDividends = ordinaryDividends;
 	}
-	public Map<String, Double> getQualifiedDividends() {
-		return qualifiedDividends;
-	}
+	
 	public void setQualifiedDividends(Map<String, Double> qualifiedDividends) {
 		this.qualifiedDividends = qualifiedDividends;
 	}

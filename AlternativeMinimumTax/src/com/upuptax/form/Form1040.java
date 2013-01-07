@@ -47,7 +47,29 @@ public class Form1040 {
 		w2forms.add(w2tax1);
 		w2forms.add(w2tax2);
 		frm1040.setW2Forms(w2forms);
+//		frm1040.init();
+		
+		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
+		Map<String,Double> interests = new HashMap<String,Double>();
+		interests.put("citi1", 76.06);
+		interests.put("citi2", 187.3);
+		interests.put("citi3", 22.51);
+		interests.put("citi4", 22.5);
+		interests.put("citi5", 49.8);
+		interests.put("citi6", 11.56);
+		scheduleB.setInterests(interests);
+		Map<String,Double> dividends = new HashMap<String,Double>();
+		dividends.put("citi", 734.4);
+		Map<String,Double> qdividends = new HashMap<String,Double>();
+		dividends.put("citi", 699.29);
+		
+		scheduleB.setOrdinaryDividends(dividends);
+		scheduleB.setQualifiedDividends(qdividends);
+		scheduleB.init();
+
+		frm1040.setScheduleB(scheduleB.getScheduleB());
 		frm1040.init();
+		
 		
 	}
 	
@@ -73,10 +95,14 @@ public class Form1040 {
 		System.out.println("Federal Tax Withhold = "+line62);
 		if (scheduleB!=null){
 			form1040.put("8a", scheduleB.get("4"));
+			System.out.println("Interests = "+form1040.get("8a"));
 			form1040.put("8",  scheduleB.get("4"));
+			
 			form1040.put("9b", scheduleB.get(AMTConstant.QUALIFIED_DIVIDENDS));
 			form1040.put("9a", scheduleB.get("6"));
+			System.out.println("Dividents = "+form1040.get("9a"));
 			form1040.put("9",  scheduleB.get("6"));
+			System.out.println("Qualified Dividents = "+form1040.get("9b"));
 		}
 		
 		if (scheduleD!=null){
@@ -139,7 +165,7 @@ public class Form1040 {
 		form1040.put("61", line61);
 		
 		form1040.put("72", NumberUtil.add(62,71,form1040));
-		System.out.println("total Payments"+form1040.get("72"));
+		System.out.println("total Payments = "+form1040.get("72"));
 		
 		double line73 = NumberUtil.substractWithPositiveReturn(form1040.get("61"), form1040.get("72"));
 		form1040.put("73", line73);
