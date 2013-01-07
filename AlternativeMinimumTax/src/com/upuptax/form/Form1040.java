@@ -14,22 +14,28 @@ public class Form1040 {
 	private FillingFormsAndSchedules fillingForms;
 	private List<Map<String,Double>> w2Forms;
 	private Map<String,Double> form1040;
+	private Map<String,Double> form6521;
 	private Map<String,Double> scheduleA;
 	private Map<String,Double> scheduleB;
 	private Map<String,Double> scheduleD;
 	//capital gain
-	private CapitalGainWorksheet capitalGainWorksheet;
+	private  Map<String,Double> capitalGainWorksheet;
 	//alternative minimum tax
-	private Form6521 form6521;
 	
 	public void init(){
 		double line7 =0;
+		double line62=0;
 		if (w2Forms!=null){
 			for (Map<String,Double> w2:w2Forms){
 				line7=w2.get("1")+line7;
 			}
+			for (Map<String,Double> w2:w2Forms){
+				line62=w2.get("2")+line62;
+			}
+
 		}
 		form1040.put("7", line7);
+		form1040.put("62", line62);
 		
 		if (scheduleB!=null){
 			form1040.put("8a", scheduleB.get("4"));
@@ -80,6 +86,35 @@ public class Form1040 {
 		form1040.put("43", line43);
 		System.out.println("Taxable Income = "+line43);
 		
+		if (capitalGainWorksheet!=null){
+			form1040.put("44", capitalGainWorksheet.get("19"));
+		}
+		if (form6521!=null){
+			form1040.put("45", form6521.get("35"));
+		}
+		double line46 = NumberUtil.add(44, 45, form1040);
+		form1040.put("46",line46);
+		
+		double line54=NumberUtil.add(47, 53, form1040);
+		form1040.put("54", line54);
+		
+		System.out.println("Total Credits = "+line54);
+		
+		form1040.put("55", NumberUtil.substractWithPositiveReturn(form1040.get("46"),form1040.get("54")));
+		double line61= NumberUtil.add(55, 60, form1040);
+		form1040.put("61", line61);
+		
+		form1040.put("72", NumberUtil.add(62,71,form1040));
+		System.out.println("total Payments"+form1040.get("72"));
+		
+		double line73 = NumberUtil.substractWithPositiveReturn(form1040.get("61"), form1040.get("72"));
+		form1040.put("73", line73);
+		System.out.println("Overpaid Tax = "+line73);
+		
+		double line76 = NumberUtil.substractWithPositiveReturn(form1040.get("72"), form1040.get("61"));
+		form1040.put("76", line76);
+		System.out.println("Tax you own = "+line73);
+
 	}
 	public FillingFormsAndSchedules getFillingForms() {
 		return fillingForms;
@@ -111,18 +146,8 @@ public class Form1040 {
 	public void setScheduleD(Map<String, Double> scheduleD) {
 		this.scheduleD = scheduleD;
 	}
-	public CapitalGainWorksheet getCapitalGainWorksheet() {
-		return capitalGainWorksheet;
-	}
-	public void setCapitalGainWorksheet(CapitalGainWorksheet capitalGainWorksheet) {
-		this.capitalGainWorksheet = capitalGainWorksheet;
-	}
-	public Form6521 getForm6521() {
-		return form6521;
-	}
-	public void setForm6521(Form6521 form6521) {
-		this.form6521 = form6521;
-	}
+
+
 	public Map<String, Double> getForm1040() {
 		return form1040;
 	}
