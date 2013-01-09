@@ -28,6 +28,7 @@ public class Form1040 {
 	public static void main(String[] args){
 		Form1040 frm1040=new Form1040();
 		Map<String,Double> form1040=new HashMap<String,Double>();
+		form1040.put("10",716d);
 		frm1040.setForm1040(form1040);
 		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
@@ -61,13 +62,38 @@ public class Form1040 {
 		Map<String,Double> dividends = new HashMap<String,Double>();
 		dividends.put("citi", 734.4);
 		Map<String,Double> qdividends = new HashMap<String,Double>();
-		dividends.put("citi", 699.29);
+		qdividends.put("citi", 699.29);
 		
 		scheduleB.setOrdinaryDividends(dividends);
 		scheduleB.setQualifiedDividends(qdividends);
 		scheduleB.init();
-
+		
+		Form1040ScheduleD scheduleD=new Form1040ScheduleD();
+		Map<String,Double> schD= new HashMap<String,Double>();
+		schD.put("9e", 3490d);
+		schD.put("9f", 3060d);
+		scheduleD.setScheduleD(schD);
+		
+		scheduleD.init();
+		
+		Form1040ScheduleA scheduleA=new Form1040ScheduleA();
+		Map<String,Double> schA= new HashMap<String,Double>();
+		schA.put("5", 14467d);
+		schA.put("6", 18111d);
+		schA.put("7", 130d);
+		schA.put("10", 1087d);
+		schA.put("12", 99d);
+		schA.put("16", 3000d);
+		schA.put("22", 120d);
+		scheduleA.setScheduleA(schA);
+		scheduleA.init();
+		
+		
+		frm1040.setScheduleD(scheduleD.getScheduleD());
 		frm1040.setScheduleB(scheduleB.getScheduleB());
+		frm1040.setScheduleA(scheduleA.getScheduleA());
+		frm1040.init();
+		scheduleA.calculate(form1040);
 		frm1040.init();
 		
 		
