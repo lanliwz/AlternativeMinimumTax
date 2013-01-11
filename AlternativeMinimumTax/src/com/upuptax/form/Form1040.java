@@ -9,6 +9,8 @@ import com.upuptax.amt.AMTConstant;
 import com.upuptax.amt.CapitalGainWorksheet;
 import com.upuptax.amt.W2Tax;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.TaxComputationWorksheet;
+import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040 {
@@ -28,7 +30,9 @@ public class Form1040 {
 	public static void main(String[] args){
 		Form1040 frm1040=new Form1040();
 		Map<String,Double> form1040=new HashMap<String,Double>();
+		form1040.put("6d",2d);
 		form1040.put("10",716d);
+		form1040.put("52",400d);
 		frm1040.setForm1040(form1040);
 		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
@@ -96,9 +100,82 @@ public class Form1040 {
 		scheduleA.calculate(form1040);
 		frm1040.init();
 		
+		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
+		
+		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
+		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
+		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
+		rules.add(r3);
+		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
+		rules.add(r4);
+		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
+		rules.add(r5);
+		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
+		rules.add(r6);
+		
+		marriedJoin.setTaxRateRules(rules);
+		cptGain.setTaxRate4income(marriedJoin);
+		
+//		Map<String,Double> frm = new HashMap<String,Double>();	
+		cptGain.setForm1040(frm1040.getForm1040());
+		
+		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
+
+		
+		Map<String,Map> schedules = new HashMap<String,Map>();
+		
+		
+		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getScheduleA());
+		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getScheduleD());
+		fillingForms.setSchedules(schedules);
+		
+		Map<String,Map> forms = new HashMap<String,Map>();
+		forms.put(AMTConstant.FORM_1040, frm1040.getForm1040());
+		
+		fillingForms.setForms(forms);
+		cptGain.setFillingForms(fillingForms);
+		cptGain.init();
+		
+		Map<String,Double> cptGainWks =cptGain.getWorksheet();
+		
+		frm1040.setCapitalGainWorksheet(cptGainWks);
+		frm1040.init();
+		forms.put(AMTConstant.FORM_1040, frm1040.getForm1040());
+		
+		fillingForms.setForms(forms);
+		
+		Form6521 form6521 = new Form6521();
+		
+		form6521.setFillingForms(fillingForms);
+		form6521.init();
+		
+
+		frm1040.setForm6521(form6521.getForm6521());
+		frm1040.init();
+		
+		
+		
+		
+		
 		
 	}
 	
+	public Map<String, Double> getForm6521() {
+		return form6521;
+	}
+
+	public void setForm6521(Map<String, Double> form6521) {
+		this.form6521 = form6521;
+	}
+
+	public Map<String, Double> getCapitalGainWorksheet() {
+		return capitalGainWorksheet;
+	}
+
+	public void setCapitalGainWorksheet(Map<String, Double> capitalGainWorksheet) {
+		this.capitalGainWorksheet = capitalGainWorksheet;
+	}
+
 	public void setForm1040(Map<String, Double> form1040) {
 		this.form1040 = form1040;
 	}
@@ -174,7 +251,9 @@ public class Form1040 {
 		
 		if (capitalGainWorksheet!=null){
 			form1040.put("44", capitalGainWorksheet.get("19"));
+			
 		}
+		
 		if (form6521!=null){
 			form1040.put("45", form6521.get("35"));
 		}
@@ -189,17 +268,20 @@ public class Form1040 {
 		form1040.put("55", NumberUtil.substractWithPositiveReturn(form1040.get("46"),form1040.get("54")));
 		double line61= NumberUtil.add(55, 60, form1040);
 		form1040.put("61", line61);
+		System.out.println("total tax = "+form1040.get("61"));
+		
 		
 		form1040.put("72", NumberUtil.add(62,71,form1040));
 		System.out.println("total Payments = "+form1040.get("72"));
 		
-		double line73 = NumberUtil.substractWithPositiveReturn(form1040.get("61"), form1040.get("72"));
+		double line73 = NumberUtil.substractWithPositiveReturn(form1040.get("72"), form1040.get("61"));
 		form1040.put("73", line73);
 		System.out.println("Overpaid Tax = "+line73);
 		
-		double line76 = NumberUtil.substractWithPositiveReturn(form1040.get("72"), form1040.get("61"));
+		double line76 = NumberUtil.substractWithPositiveReturn(form1040.get("61"), form1040.get("72"));
 		form1040.put("76", line76);
-		System.out.println("Tax you own = "+line73);
+		System.out.println("Tax you own = "+line76);
+		System.out.println(form1040);
 
 	}
 	public FillingFormsAndSchedules getFillingForms() {

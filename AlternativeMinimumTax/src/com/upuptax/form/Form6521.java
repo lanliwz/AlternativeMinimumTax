@@ -22,6 +22,9 @@ public class Form6521 {
 	public FillingFormsAndSchedules getFillingForms() {
 		return fillingForms;
 	}
+	public Map<String,Double> getForm6521(){
+		return form6521;
+	}
 
 	public void setFillingForms(FillingFormsAndSchedules fillingForms) {
 		this.fillingForms = fillingForms;
@@ -122,7 +125,7 @@ public class Form6521 {
 		
 		form6521.put("35", NumberUtil.substractWithPositiveReturn(form6521.get("33"),form6521.get("34") ));
 		
-			
+		System.out.println(form6521);	
 			
 	}
 	
