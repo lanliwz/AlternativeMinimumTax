@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.upuptax.amt.AMTConstant;
 import com.upuptax.amt.CapitalGainWorksheet;
-import com.upuptax.amt.W2Tax;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxRateRule;
