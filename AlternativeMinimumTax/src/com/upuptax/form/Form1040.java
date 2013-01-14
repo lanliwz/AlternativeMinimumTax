@@ -12,7 +12,7 @@ import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
-public class Form1040 {
+public class Form1040  implements Form{
 	private double standardDeduction=11600d;
 	private double personExemption=3700;
 	private FillingFormsAndSchedules fillingForms;
@@ -32,7 +32,7 @@ public class Form1040 {
 		form1040.put("6d",2d);
 		form1040.put("10",716d);
 		form1040.put("52",400d);
-		frm1040.setForm1040(form1040);
+		frm1040.setForm(form1040);
 		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
 		Map<String,Double> w2tax2=new HashMap<String,Double>();
@@ -116,7 +116,7 @@ public class Form1040 {
 		cptGain.setTaxRate4income(marriedJoin);
 		
 //		Map<String,Double> frm = new HashMap<String,Double>();	
-		cptGain.setForm1040(frm1040.getForm1040());
+		cptGain.setForm1040(frm1040.getForm());
 		
 		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
 
@@ -129,7 +129,7 @@ public class Form1040 {
 		fillingForms.setSchedules(schedules);
 		
 		Map<String,Map> forms = new HashMap<String,Map>();
-		forms.put(AMTConstant.FORM_1040, frm1040.getForm1040());
+		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
 		
 		fillingForms.setForms(forms);
 		cptGain.setFillingForms(fillingForms);
@@ -139,7 +139,7 @@ public class Form1040 {
 		
 		frm1040.setCapitalGainWorksheet(cptGainWks);
 		frm1040.init();
-		forms.put(AMTConstant.FORM_1040, frm1040.getForm1040());
+		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
 		
 		fillingForms.setForms(forms);
 		
@@ -175,7 +175,7 @@ public class Form1040 {
 		this.capitalGainWorksheet = capitalGainWorksheet;
 	}
 
-	public void setForm1040(Map<String, Double> form1040) {
+	public void setForm(Map<String, Double> form1040) {
 		this.form1040 = form1040;
 	}
 
@@ -315,9 +315,13 @@ public class Form1040 {
 	}
 
 
-	public Map<String, Double> getForm1040() {
+	public Map<String, Double> getForm() {
 		return form1040;
 	}
+
+	
+
+	
 	
 
 }

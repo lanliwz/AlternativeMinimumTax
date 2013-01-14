@@ -4,6 +4,7 @@ public class AMTConstant {
 	//tax forms
 	public static String FORM_1040="1040";
 	public static String FORM_6251="6251";
+	public static String FORM_W2="W-2";
 	
 	//tax schedule
 	public static String SCHEDULE_D="SCHEDULE D";

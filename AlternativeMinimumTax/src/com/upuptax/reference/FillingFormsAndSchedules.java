@@ -8,6 +8,14 @@ public class FillingFormsAndSchedules {
 	private Map<String,Map> schedules=new HashMap<String,Map>();
 	private Map<String,Map> worksheets=new HashMap<String,Map>();
 	
+	public static FillingFormsAndSchedules newInstance(){
+		return new FillingFormsAndSchedules();
+	}
+	
+	public static void main(String[] args){
+		
+	}
+	
 	public Map<String, Map> getWorksheets() {
 		return worksheets;
 	}
