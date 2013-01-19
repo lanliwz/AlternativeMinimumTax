@@ -95,16 +95,16 @@ public class Form1040  implements Form{
 		schA.put("12", 99d);
 		schA.put("16", 3000d);
 		schA.put("22", 120d);
-		scheduleA.setScheduleA(schA);
+		scheduleA.setForm(schA);
 		scheduleA.init();
 		
 		
 		frm1040.setScheduleD(scheduleD.getScheduleD());
-		frm1040.setScheduleB(scheduleB.getScheduleB());
-		frm1040.setScheduleA(scheduleA.getScheduleA());
+		frm1040.setScheduleB(scheduleB.getForm());
+		frm1040.setScheduleA(scheduleA.getForm());
 		frm1040.init();
 		scheduleA.calculate(form1040);
-		frm1040.init();
+//		frm1040.init();
 		
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
 		
@@ -131,7 +131,7 @@ public class Form1040  implements Form{
 		Map<String,Map> schedules = new HashMap<String,Map>();
 		
 		
-		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getScheduleA());
+		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getForm());
 		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getScheduleD());
 		fillingforms.setSchedules(schedules);
 		

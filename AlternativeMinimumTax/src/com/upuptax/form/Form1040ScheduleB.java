@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.upuptax.amt.AMTConstant;
+import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.utils.NumberUtil;
 
-public class Form1040ScheduleB {
+public class Form1040ScheduleB implements Form{
 	private Map<String,Double> interests;
 	private Map<String,Double> ordinaryDividends;
 	private Map<String,Double> qualifiedDividends;
 	private Map<String,Double> scheduleB=new HashMap<String,Double>();
+	private FillingFormsAndSchedules fillingForms;
 	
 	public void init(){
 		double line2=NumberUtil.add(interests);
@@ -21,6 +23,11 @@ public class Form1040ScheduleB {
 		
 		double qualifiedDivendend = NumberUtil.add(qualifiedDividends);
 		scheduleB.put(AMTConstant.QUALIFIED_DIVIDENDS, qualifiedDivendend);
+		if (fillingForms==null){
+			fillingForms=new FillingFormsAndSchedules();
+		}
+		fillingForms.putSchedule(AMTConstant.SCHEDULE_B, scheduleB);
+		
 		
 	}
 	
@@ -35,13 +42,23 @@ public class Form1040ScheduleB {
 	public void setQualifiedDividends(Map<String, Double> qualifiedDividends) {
 		this.qualifiedDividends = qualifiedDividends;
 	}
-	public Map<String, Double> getScheduleB() {
+	public Map<String, Double> getForm() {
 		return scheduleB;
 	}
-	public void setScheduleB(Map<String, Double> scheduleB) {
+	public void setForm(Map<String, Double> scheduleB) {
 		this.scheduleB = scheduleB;
 	}
-	
+
+	@Override
+	public void setFillingForms(FillingFormsAndSchedules forms) {
+		this.fillingForms=forms;
+		
+	}
+	@Override
+	public FillingFormsAndSchedules getFillingForms() {
+		// TODO Auto-generated method stub
+		return fillingForms;
+	}
 	
 
 }
