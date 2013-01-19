@@ -1,6 +1,8 @@
 package com.upuptax.reference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FillingFormsAndSchedules {
@@ -24,6 +26,16 @@ public class FillingFormsAndSchedules {
 	}
 	public Map<String, Map> getForms() {
 		return forms;
+	}
+	public List<Map<String,Double>> getForms(String name) {
+		List<Map<String,Double>> fms = new ArrayList<Map<String,Double>>();
+		for (String nm:forms.keySet()){
+			if (nm.contains(name)){
+				fms.add(forms.get(nm));
+				
+			}
+		}
+		return fms;
 	}
 	public void setForms(Map<String, Map> forms) {
 		this.forms = forms;

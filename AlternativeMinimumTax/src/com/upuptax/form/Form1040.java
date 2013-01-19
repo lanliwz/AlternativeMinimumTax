@@ -27,12 +27,15 @@ public class Form1040  implements Form{
 	//alternative minimum tax
 	
 	public static void main(String[] args){
+		FillingFormsAndSchedules fillingforms = FillingFormsAndSchedules.newInstance();
 		Form1040 frm1040=new Form1040();
 		Map<String,Double> form1040=new HashMap<String,Double>();
 		form1040.put("6d",2d);
 		form1040.put("10",716d);
 		form1040.put("52",400d);
 		frm1040.setForm(form1040);
+		
+		
 		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
 		Map<String,Double> w2tax2=new HashMap<String,Double>();
@@ -50,6 +53,10 @@ public class Form1040  implements Form{
 		w2tax2.put("6",1691.83);
 		w2forms.add(w2tax1);
 		w2forms.add(w2tax2);
+		
+		fillingforms.putForm(AMTConstant.FORM_W2+"-1", w2tax1);
+		fillingforms.putForm(AMTConstant.FORM_W2+"-2", w2tax2);
+//		frm1040.setFillingForms(fillingforms);
 		frm1040.setW2Forms(w2forms);
 //		frm1040.init();
 		
@@ -118,7 +125,7 @@ public class Form1040  implements Form{
 //		Map<String,Double> frm = new HashMap<String,Double>();	
 		cptGain.setForm1040(frm1040.getForm());
 		
-		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
+//		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
 
 		
 		Map<String,Map> schedules = new HashMap<String,Map>();
@@ -126,13 +133,13 @@ public class Form1040  implements Form{
 		
 		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getScheduleA());
 		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getScheduleD());
-		fillingForms.setSchedules(schedules);
+		fillingforms.setSchedules(schedules);
 		
 		Map<String,Map> forms = new HashMap<String,Map>();
 		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
 		
-		fillingForms.setForms(forms);
-		cptGain.setFillingForms(fillingForms);
+		fillingforms.setForms(forms);
+		cptGain.setFillingForms(fillingforms);
 		cptGain.init();
 		
 		Map<String,Double> cptGainWks =cptGain.getWorksheet();
@@ -141,11 +148,11 @@ public class Form1040  implements Form{
 		frm1040.init();
 		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
 		
-		fillingForms.setForms(forms);
+		fillingforms.setForms(forms);
 		
 		Form6521 form6521 = new Form6521();
 		
-		form6521.setFillingForms(fillingForms);
+		form6521.setFillingForms(fillingforms);
 		form6521.init();
 		
 
@@ -182,6 +189,8 @@ public class Form1040  implements Form{
 	public void init(){
 		double line7 =0;
 		double line62=0;
+		if(w2Forms==null)
+			w2Forms=fillingForms.getForms(AMTConstant.FORM_W2);
 		if (w2Forms!=null){
 			for (Map<String,Double> w2:w2Forms){
 				line7=w2.get("1")+line7;
