@@ -117,9 +117,10 @@ public class Form1040  implements Form{
 		scheduleA.calculate(form1040);
 		fillingforms=scheduleA.getFillingForms();
 		fillingforms.print();
-//		frm1040.init();
+
 		
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
+		cptGain.setFillingForms(fillingforms);
 		
 		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
 		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
@@ -141,27 +142,34 @@ public class Form1040  implements Form{
 //		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
 
 		
-		Map<String,Map> schedules = new HashMap<String,Map>();
+//		Map<String,Map> schedules = new HashMap<String,Map>();
+//		
+//		
+//		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getForm());
+//		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getForm());
+//		fillingforms.setSchedules(schedules);
+//		
+//		Map<String,Map> forms = new HashMap<String,Map>();
+//		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
+//		
+//		fillingforms.setForms(forms);
 		
+//		cptGain.setFillingForms(fillingforms);
 		
-		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getForm());
-		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getForm());
-		fillingforms.setSchedules(schedules);
-		
-		Map<String,Map> forms = new HashMap<String,Map>();
-		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
-		
-		fillingforms.setForms(forms);
-		cptGain.setFillingForms(fillingforms);
 		cptGain.init();
 		
-		Map<String,Double> cptGainWks =cptGain.getWorksheet();
+		fillingforms=cptGain.getFillingForms();
+		frm1040.setFillingForms(fillingforms);
+		
+		Map<String,Double> cptGainWks =cptGain.getForm();
 		
 		frm1040.setCapitalGainWorksheet(cptGainWks);
 		frm1040.init();
-		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
-		
-		fillingforms.setForms(forms);
+		fillingforms=frm1040.getFillingForms();
+		fillingforms.print();
+//		forms.put(AMTConstant.FORM_1040, frm1040.getForm());
+//		
+//		fillingforms.setForms(forms);
 		
 		Form6521 form6521 = new Form6521();
 		
@@ -305,6 +313,10 @@ public class Form1040  implements Form{
 		form1040.put("76", line76);
 		System.out.println("Tax you own = "+line76);
 		System.out.println(form1040);
+		if(fillingForms==null){
+			fillingForms = new FillingFormsAndSchedules();
+		}
+		fillingForms.putForm(AMTConstant.FORM_1040, form1040);
 
 	}
 	public FillingFormsAndSchedules getFillingForms() {

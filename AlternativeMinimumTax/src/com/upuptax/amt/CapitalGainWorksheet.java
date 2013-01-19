@@ -5,14 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.upuptax.form.Form;
 import com.upuptax.form.Form6521;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
-public class CapitalGainWorksheet {
-	private FillingFormsAndSchedules fillingForms;
+public class CapitalGainWorksheet implements Form{
+	private FillingFormsAndSchedules fillingforms;
 	private Map<String,Double> form1040;
 	private Map<String,Double> worksheet=new HashMap<String,Double>();
 	
@@ -25,10 +26,12 @@ public class CapitalGainWorksheet {
 	
 	
 	
-	public Map<String, Double> getWorksheet() {
+	public Map<String, Double> getForm() {
 		return worksheet;
 	}
-
+	public void setForm(Map<String, Double> form) {
+		this.worksheet=form;
+	}
 	public TaxComputationWorksheet getTaxRate4income() {
 		return taxRate4income;
 	}
@@ -37,72 +40,72 @@ public class CapitalGainWorksheet {
 		this.taxRate4income = taxRate4income;
 	}
 
-	public static void main(String[] args){
-		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
-		
-		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
-		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
-//		TaxRateRule r1=new TaxRateRule(0.1,0,17400);
-//		rules.add(r1);
-//		TaxRateRule r2=new TaxRateRule(0.15,17400,70700);
-//		rules.add(r2);
-		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
-		rules.add(r3);
-		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
-		rules.add(r4);
-		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
-		rules.add(r5);
-		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
-		rules.add(r6);
-		
-		marriedJoin.setTaxRateRules(rules);
-		
-		cptGain.setTaxRate4income(marriedJoin);
-		
-		Map<String,Double> frm = new HashMap<String,Double>();
-		frm.put("43", 183540d);
-		frm.put("9b", 699d);
-		frm.put("10", 716d);
-		frm.put("38", 227834d);
-		frm.put("41", 190940d);
-		frm.put("44", 39314d);
-		
-		cptGain.setForm1040(frm);
-		
-		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
-		
-		Map<String,Map> schedules = new HashMap<String,Map>();
-		
-		Map<String,Double> scheduleA = new HashMap<String,Double>();
-		
-		scheduleA.put("9", 32708d);
-		
-		schedules.put(AMTConstant.SCHEDULE_A, scheduleA);
-		Map<String,Double> scheduleD = new HashMap<String,Double>();
-		
-		scheduleD.put("15", 430d);
-		scheduleD.put("16", 430d);
-		
-		schedules.put(AMTConstant.SCHEDULE_D, scheduleD);
-		fillingForms.setSchedules(schedules);
-		
-		Map<String,Map> forms = new HashMap<String,Map>();
-		forms.put(AMTConstant.FORM_1040, frm);
-		
-		fillingForms.setForms(forms);
-		cptGain.setFillingForms(fillingForms);
-		cptGain.init();
-		
-		Map<String,Double> cptGainWks =cptGain.getWorksheet();
-		
-		Form6521 form6521 = new Form6521();
-		
-		form6521.setFillingForms(fillingForms);
-		form6521.init();
-		
-		
-		
-	}
+//	public static void main(String[] args){
+//		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
+//		
+//		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
+//		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
+////		TaxRateRule r1=new TaxRateRule(0.1,0,17400);
+////		rules.add(r1);
+////		TaxRateRule r2=new TaxRateRule(0.15,17400,70700);
+////		rules.add(r2);
+//		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
+//		rules.add(r3);
+//		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
+//		rules.add(r4);
+//		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
+//		rules.add(r5);
+//		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
+//		rules.add(r6);
+//		
+//		marriedJoin.setTaxRateRules(rules);
+//		
+//		cptGain.setTaxRate4income(marriedJoin);
+//		
+//		Map<String,Double> frm = new HashMap<String,Double>();
+//		frm.put("43", 183540d);
+//		frm.put("9b", 699d);
+//		frm.put("10", 716d);
+//		frm.put("38", 227834d);
+//		frm.put("41", 190940d);
+//		frm.put("44", 39314d);
+//		
+//		cptGain.setForm1040(frm);
+//		
+//		FillingFormsAndSchedules fillingForms = new FillingFormsAndSchedules();
+//		
+//		Map<String,Map> schedules = new HashMap<String,Map>();
+//		
+//		Map<String,Double> scheduleA = new HashMap<String,Double>();
+//		
+//		scheduleA.put("9", 32708d);
+//		
+//		schedules.put(AMTConstant.SCHEDULE_A, scheduleA);
+//		Map<String,Double> scheduleD = new HashMap<String,Double>();
+//		
+//		scheduleD.put("15", 430d);
+//		scheduleD.put("16", 430d);
+//		
+//		schedules.put(AMTConstant.SCHEDULE_D, scheduleD);
+//		fillingForms.setSchedules(schedules);
+//		
+//		Map<String,Map> forms = new HashMap<String,Map>();
+//		forms.put(AMTConstant.FORM_1040, frm);
+//		
+//		fillingForms.setForms(forms);
+//		cptGain.setFillingForms(fillingForms);
+//		cptGain.init();
+//		
+//		Map<String,Double> cptGainWks =cptGain.getWorksheet();
+//		
+//		Form6521 form6521 = new Form6521();
+//		
+//		form6521.setFillingForms(fillingForms);
+//		form6521.init();
+//		
+//		
+//		
+//	}
 	
 	public void init(){
 		System.out.println("Capital Gain Tax Rate="+taxRate4capitalGain);
@@ -114,8 +117,8 @@ public class CapitalGainWorksheet {
 		worksheet.put("2",line2 );
 		
 		//capital gain
-		if (fillingForms.getSchedules().get(AMTConstant.SCHEDULE_D) != null){
-			Map<String,Double> scheduleD=fillingForms.getSchedules().get(AMTConstant.SCHEDULE_D);
+		if (fillingforms.getSchedules().get(AMTConstant.SCHEDULE_D) != null){
+			Map<String,Double> scheduleD=fillingforms.getSchedules().get(AMTConstant.SCHEDULE_D);
 			double line3 = NumberUtil.getSmaller(scheduleD.get("15"), scheduleD.get("16"));
 			worksheet.put("3",line3);
 		}else{
@@ -181,7 +184,8 @@ public class CapitalGainWorksheet {
 			
 			System.out.println("Final Tax = "+worksheet.get("19"));
 			
-			fillingForms.putWorksheet(AMTConstant.WKS_CAPITAL_GAIN,worksheet);
+			
+			fillingforms.putWorksheet(AMTConstant.WKS_CAPITAL_GAIN,worksheet);
 		
 			
 		
@@ -207,11 +211,11 @@ public class CapitalGainWorksheet {
 	}
 
 	public FillingFormsAndSchedules getFillingForms() {
-		return fillingForms;
+		return fillingforms;
 	}
 
 	public void setFillingForms(FillingFormsAndSchedules fillingForms) {
-		this.fillingForms = fillingForms;
+		this.fillingforms = fillingForms;
 	}
 
 	public Map<String, Double> getForm1040() {
@@ -221,5 +225,6 @@ public class CapitalGainWorksheet {
 	public void setForm1040(Map<String, Double> form1040) {
 		this.form1040 = form1040;
 	}
+	
 	
 }
