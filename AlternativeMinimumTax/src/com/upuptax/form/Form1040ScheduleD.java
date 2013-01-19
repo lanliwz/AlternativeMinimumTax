@@ -2,6 +2,7 @@ package com.upuptax.form;
 
 import java.util.Map;
 
+import com.upuptax.amt.AMTConstant;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.utils.NumberUtil;
 
@@ -40,7 +41,10 @@ public class Form1040ScheduleD implements Form {
 		}else
 			scheduleD.put("22", scheduleD.get("21"));
 
-		
+		if (fillingForms==null){
+			fillingForms=new FillingFormsAndSchedules();
+		}
+		fillingForms.putSchedule(AMTConstant.SCHEDULE_D, scheduleD);		
 		
 	}
 

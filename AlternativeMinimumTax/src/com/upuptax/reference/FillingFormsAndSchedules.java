@@ -57,6 +57,24 @@ public class FillingFormsAndSchedules {
 		schedules.put(name, schedule);
 	}
 	
+	public void print(){
+		if(forms!=null)
+		for (String nm:forms.keySet()){
+			System.out.println(nm);
+		}
+		if(schedules!=null)
+		for (String nm:schedules.keySet()){
+			System.out.println(nm);
+		}
+		if(worksheets!=null)
+		for (String nm:worksheets.keySet()){
+			System.out.println(nm);
+		}
+
+		
+		
+	}
+	
 	
 	
 

@@ -28,6 +28,7 @@ public class Form1040  implements Form{
 	
 	public static void main(String[] args){
 		FillingFormsAndSchedules fillingforms = FillingFormsAndSchedules.newInstance();
+		
 		Form1040 frm1040=new Form1040();
 		Map<String,Double> form1040=new HashMap<String,Double>();
 		form1040.put("6d",2d);
@@ -61,6 +62,7 @@ public class Form1040  implements Form{
 //		frm1040.init();
 		
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
+		scheduleB.setFillingForms(fillingforms);
 		Map<String,Double> interests = new HashMap<String,Double>();
 		interests.put("citi1", 76.06);
 		interests.put("citi2", 187.3);
@@ -77,16 +79,23 @@ public class Form1040  implements Form{
 		scheduleB.setOrdinaryDividends(dividends);
 		scheduleB.setQualifiedDividends(qdividends);
 		scheduleB.init();
+		fillingforms=scheduleB.getFillingForms();
+		
+		fillingforms.print();
 		
 		Form1040ScheduleD scheduleD=new Form1040ScheduleD();
+		scheduleD.setFillingForms(fillingforms);
 		Map<String,Double> schD= new HashMap<String,Double>();
 		schD.put("9e", 3490d);
 		schD.put("9f", 3060d);
 		scheduleD.setForm(schD);
 		
 		scheduleD.init();
+		fillingforms=scheduleD.getFillingForms();
+		fillingforms.print();
 		
 		Form1040ScheduleA scheduleA=new Form1040ScheduleA();
+		scheduleA.setFillingForms(fillingforms);
 		Map<String,Double> schA= new HashMap<String,Double>();
 		schA.put("5", 14467d);
 		schA.put("6", 18111d);
@@ -97,6 +106,8 @@ public class Form1040  implements Form{
 		schA.put("22", 120d);
 		scheduleA.setForm(schA);
 		scheduleA.init();
+		fillingforms=scheduleA.getFillingForms();
+		fillingforms.print();
 		
 		
 		frm1040.setScheduleD(scheduleD.getForm());
@@ -104,6 +115,8 @@ public class Form1040  implements Form{
 		frm1040.setScheduleA(scheduleA.getForm());
 		frm1040.init();
 		scheduleA.calculate(form1040);
+		fillingforms=scheduleA.getFillingForms();
+		fillingforms.print();
 //		frm1040.init();
 		
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
@@ -158,6 +171,8 @@ public class Form1040  implements Form{
 
 		frm1040.setForm6521(form6521.getForm6521());
 		frm1040.init();
+		
+		fillingforms.print();
 		
 		
 		
