@@ -2,8 +2,8 @@ package com.upuptax.form;
 
 import java.util.Map;
 
-import com.upuptax.amt.AMTConstant;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040ScheduleA implements Form{
@@ -21,7 +21,7 @@ public class Form1040ScheduleA implements Form{
 		if (fillingForms==null){
 			fillingForms=new FillingFormsAndSchedules();
 		}
-		fillingForms.putSchedule(AMTConstant.SCHEDULE_A, scheduleA);
+		fillingForms.putSchedule(TaxConstant.SCHEDULE_A, scheduleA);
 
 	}
 	public void calculate(Map<String,Double> form1040){
@@ -31,7 +31,7 @@ public class Form1040ScheduleA implements Form{
 		scheduleA.put("27", line27);
 		Double[] l29 = {scheduleA.get("4"),scheduleA.get("9"),scheduleA.get("15"),scheduleA.get("19"),scheduleA.get("20"),scheduleA.get("27"),scheduleA.get("28")};
 		scheduleA.put("29", NumberUtil.add(l29));
-		fillingForms.putSchedule(AMTConstant.SCHEDULE_A, scheduleA);
+		fillingForms.putSchedule(TaxConstant.SCHEDULE_A, scheduleA);
 	}
 	public Map<String, Double> getForm() {
 		return scheduleA;

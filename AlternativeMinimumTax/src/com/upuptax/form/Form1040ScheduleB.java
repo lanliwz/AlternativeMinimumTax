@@ -3,8 +3,8 @@ package com.upuptax.form;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.upuptax.amt.AMTConstant;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040ScheduleB implements Form{
@@ -22,11 +22,11 @@ public class Form1040ScheduleB implements Form{
 		scheduleB.put("6", line6);
 		
 		double qualifiedDivendend = NumberUtil.add(qualifiedDividends);
-		scheduleB.put(AMTConstant.QUALIFIED_DIVIDENDS, qualifiedDivendend);
+		scheduleB.put(TaxConstant.QUALIFIED_DIVIDENDS, qualifiedDivendend);
 		if (fillingForms==null){
 			fillingForms=new FillingFormsAndSchedules();
 		}
-		fillingForms.putSchedule(AMTConstant.SCHEDULE_B, scheduleB);
+		fillingForms.putSchedule(TaxConstant.SCHEDULE_B, scheduleB);
 		
 		
 	}

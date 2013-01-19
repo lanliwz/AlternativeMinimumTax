@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.upuptax.amt.AMTConstant;
 import com.upuptax.amt.CapitalGainWorksheet;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
+import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
@@ -55,8 +55,8 @@ public class Form1040  implements Form{
 //		w2forms.add(w2tax1);
 //		w2forms.add(w2tax2);
 		
-		fillingforms.putForm(AMTConstant.FORM_W2+"-1", w2tax1);
-		fillingforms.putForm(AMTConstant.FORM_W2+"-2", w2tax2);
+		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
+		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
 //		frm1040.setFillingForms(fillingforms);
 //		frm1040.setW2Forms(w2forms);
 //		frm1040.init();
@@ -215,7 +215,7 @@ public class Form1040  implements Form{
 		double line7 =0;
 		double line62=0;
 		if(w2Forms==null)
-			w2Forms=fillingForms.getForms(AMTConstant.FORM_W2);
+			w2Forms=fillingForms.getForms(TaxConstant.FORM_W2);
 		if (w2Forms!=null){
 			for (Map<String,Double> w2:w2Forms){
 				line7=w2.get("1")+line7;
@@ -229,19 +229,19 @@ public class Form1040  implements Form{
 		System.out.println("Wages = "+line7);
 		form1040.put("62", line62);
 		System.out.println("Federal Tax Withhold = "+line62);
-		scheduleB=fillingForms.getSchedule(AMTConstant.SCHEDULE_B);
+		scheduleB=fillingForms.getSchedule(TaxConstant.SCHEDULE_B);
 		if (scheduleB!=null){
 			form1040.put("8a", scheduleB.get("4"));
 			System.out.println("Interests = "+form1040.get("8a"));
 			form1040.put("8",  scheduleB.get("4"));
 			
-			form1040.put("9b", scheduleB.get(AMTConstant.QUALIFIED_DIVIDENDS));
+			form1040.put("9b", scheduleB.get(TaxConstant.QUALIFIED_DIVIDENDS));
 			form1040.put("9a", scheduleB.get("6"));
 			System.out.println("Dividents = "+form1040.get("9a"));
 			form1040.put("9",  scheduleB.get("6"));
 			System.out.println("Qualified Dividents = "+form1040.get("9b"));
 		}
-		scheduleD=fillingForms.getSchedule(AMTConstant.SCHEDULE_D);
+		scheduleD=fillingForms.getSchedule(TaxConstant.SCHEDULE_D);
 		if (scheduleD!=null){
 			form1040.put("13", scheduleD.get("22"));
 		}
@@ -257,7 +257,7 @@ public class Form1040  implements Form{
 		System.out.println("Adjusted Gross Income = "+line37);
 		
 		form1040.put("38", line37);
-		scheduleA=fillingForms.getSchedule(AMTConstant.SCHEDULE_A);
+		scheduleA=fillingForms.getSchedule(TaxConstant.SCHEDULE_A);
 		if (scheduleA!=null){
 			if (scheduleA.get("29")!=null && scheduleA.get("29").doubleValue()>standardDeduction){
 				form1040.put("40", scheduleA.get("29"));
@@ -319,7 +319,7 @@ public class Form1040  implements Form{
 		if(fillingForms==null){
 			fillingForms = new FillingFormsAndSchedules();
 		}
-		fillingForms.putForm(AMTConstant.FORM_1040, form1040);
+		fillingForms.putForm(TaxConstant.FORM_1040, form1040);
 
 	}
 	public FillingFormsAndSchedules getFillingForms() {

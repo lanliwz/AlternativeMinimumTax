@@ -2,8 +2,8 @@ package com.upuptax.form;
 
 import java.util.Map;
 
-import com.upuptax.amt.AMTConstant;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040ScheduleD implements Form {
@@ -44,7 +44,7 @@ public class Form1040ScheduleD implements Form {
 		if (fillingForms==null){
 			fillingForms=new FillingFormsAndSchedules();
 		}
-		fillingForms.putSchedule(AMTConstant.SCHEDULE_D, scheduleD);		
+		fillingForms.putSchedule(TaxConstant.SCHEDULE_D, scheduleD);		
 		
 	}
 

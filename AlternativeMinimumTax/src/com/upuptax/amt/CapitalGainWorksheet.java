@@ -9,6 +9,7 @@ import com.upuptax.form.Form;
 import com.upuptax.form.Form6521;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
+import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
@@ -117,8 +118,8 @@ public class CapitalGainWorksheet implements Form{
 		worksheet.put("2",line2 );
 		
 		//capital gain
-		if (fillingforms.getSchedules().get(AMTConstant.SCHEDULE_D) != null){
-			Map<String,Double> scheduleD=fillingforms.getSchedules().get(AMTConstant.SCHEDULE_D);
+		if (fillingforms.getSchedules().get(TaxConstant.SCHEDULE_D) != null){
+			Map<String,Double> scheduleD=fillingforms.getSchedules().get(TaxConstant.SCHEDULE_D);
 			double line3 = NumberUtil.getSmaller(scheduleD.get("15"), scheduleD.get("16"));
 			worksheet.put("3",line3);
 		}else{
@@ -185,7 +186,7 @@ public class CapitalGainWorksheet implements Form{
 			System.out.println("Final Tax = "+worksheet.get("19"));
 			
 			
-			fillingforms.putWorksheet(AMTConstant.WKS_CAPITAL_GAIN,worksheet);
+			fillingforms.putWorksheet(TaxConstant.WKS_CAPITAL_GAIN,worksheet);
 		
 			
 		

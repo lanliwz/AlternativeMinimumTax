@@ -3,8 +3,8 @@ package com.upuptax.form;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.upuptax.amt.AMTConstant;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form6521 implements Form{
@@ -31,10 +31,10 @@ public class Form6521 implements Form{
 	}
 
 	public void init(){
-		this.form1040=fillingForms.getForms().get(AMTConstant.FORM_1040);
+		this.form1040=fillingForms.getForms().get(TaxConstant.FORM_1040);
 		Double line1=0d;
-		if (fillingForms.getSchedules()!=null && fillingForms.getSchedules().get(AMTConstant.SCHEDULE_A)!=null){
-			Map<String,Double> scheduleA=fillingForms.getSchedules().get(AMTConstant.SCHEDULE_A);
+		if (fillingForms.getSchedules()!=null && fillingForms.getSchedules().get(TaxConstant.SCHEDULE_A)!=null){
+			Map<String,Double> scheduleA=fillingForms.getSchedules().get(TaxConstant.SCHEDULE_A);
 			line1=form1040.get("41");
 			double line2 = NumberUtil.getSmaller(scheduleA.get("4"),medicalDentalRate*form1040.get("38"));
 			form6521.put("2", line2);
@@ -65,8 +65,8 @@ public class Form6521 implements Form{
 		
 		//Tax Computation using Capital Gain Rate
 		form6521.put("36", form6521.get("30"));
-		if (fillingForms.getWorksheets()!=null && fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN)!=null){
-			Map<String,Double> cg=fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN);
+		if (fillingForms.getWorksheets()!=null && fillingForms.getWorksheets().get(TaxConstant.WKS_CAPITAL_GAIN)!=null){
+			Map<String,Double> cg=fillingForms.getWorksheets().get(TaxConstant.WKS_CAPITAL_GAIN);
 			form6521.put("37", cg.get("6"));
 		}
 		
@@ -85,8 +85,8 @@ public class Form6521 implements Form{
 		form6521.put("42", line42);
 		System.out.println("AMT Based On Non Capital Gain Income = "+line42);
 		
-		if (fillingForms.getWorksheets()!=null && fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN)!=null){
-			Map<String,Double> cg=fillingForms.getWorksheets().get(AMTConstant.WKS_CAPITAL_GAIN);
+		if (fillingForms.getWorksheets()!=null && fillingForms.getWorksheets().get(TaxConstant.WKS_CAPITAL_GAIN)!=null){
+			Map<String,Double> cg=fillingForms.getWorksheets().get(TaxConstant.WKS_CAPITAL_GAIN);
 			form6521.put("43", cg.get("8"));
 			form6521.put("44", cg.get("7"));
 			double line45 = NumberUtil.substractWithPositiveReturn(form6521.get("43"), form6521.get("44"));
@@ -127,7 +127,7 @@ public class Form6521 implements Form{
 		
 		System.out.println(form6521);	
 		
-		fillingForms.putForm(AMTConstant.FORM_6251, form6521);
+		fillingForms.putForm(TaxConstant.FORM_6251, form6521);
 			
 	}
 	

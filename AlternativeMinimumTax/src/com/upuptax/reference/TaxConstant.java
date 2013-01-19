@@ -1,6 +1,6 @@
-package com.upuptax.amt;
+package com.upuptax.reference;
 
-public class AMTConstant {
+public class TaxConstant {
 	//tax forms
 	public static String FORM_1040="1040";
 	public static String FORM_6251="6251";
