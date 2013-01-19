@@ -2,10 +2,12 @@ package com.upuptax.form;
 
 import java.util.Map;
 
+import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.utils.NumberUtil;
 
-public class Form1040ScheduleD {
+public class Form1040ScheduleD implements Form {
 	private Map<String,Double> scheduleD;
+	private FillingFormsAndSchedules fillingForms;
 	
 	public void init(){
 		double line1h = NumberUtil.substract(scheduleD.get("1e"),scheduleD.get("1f"));
@@ -42,13 +44,24 @@ public class Form1040ScheduleD {
 		
 	}
 
-	public Map<String, Double> getScheduleD() {
+	public Map<String, Double> getForm() {
 		return scheduleD;
 	}
 
-	public void setScheduleD(Map<String, Double> scheduleD) {
+	public void setForm(Map<String, Double> scheduleD) {
 		this.scheduleD = scheduleD;
 	}
+	@Override
+	public void setFillingForms(FillingFormsAndSchedules forms) {
+		this.fillingForms=forms;
+		
+	}
+	@Override
+	public FillingFormsAndSchedules getFillingForms() {
+		// TODO Auto-generated method stub
+		return fillingForms;
+	}
+
 	
 
 }

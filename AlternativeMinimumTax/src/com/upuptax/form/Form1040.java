@@ -82,7 +82,7 @@ public class Form1040  implements Form{
 		Map<String,Double> schD= new HashMap<String,Double>();
 		schD.put("9e", 3490d);
 		schD.put("9f", 3060d);
-		scheduleD.setScheduleD(schD);
+		scheduleD.setForm(schD);
 		
 		scheduleD.init();
 		
@@ -99,7 +99,7 @@ public class Form1040  implements Form{
 		scheduleA.init();
 		
 		
-		frm1040.setScheduleD(scheduleD.getScheduleD());
+		frm1040.setScheduleD(scheduleD.getForm());
 		frm1040.setScheduleB(scheduleB.getForm());
 		frm1040.setScheduleA(scheduleA.getForm());
 		frm1040.init();
@@ -132,7 +132,7 @@ public class Form1040  implements Form{
 		
 		
 		schedules.put(AMTConstant.SCHEDULE_A, scheduleA.getForm());
-		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getScheduleD());
+		schedules.put(AMTConstant.SCHEDULE_D, scheduleD.getForm());
 		fillingforms.setSchedules(schedules);
 		
 		Map<String,Map> forms = new HashMap<String,Map>();
