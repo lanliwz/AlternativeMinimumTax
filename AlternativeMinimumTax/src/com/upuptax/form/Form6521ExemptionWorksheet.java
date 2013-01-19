@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.upuptax.utils.NumberUtil;
 
-public class Form6521ExceptionWorksheet {
+public class Form6521ExemptionWorksheet {
 	
 	private Map<String,Double> worksheet = new HashMap<String,Double>();
 	private Map<String,Double> form6521;

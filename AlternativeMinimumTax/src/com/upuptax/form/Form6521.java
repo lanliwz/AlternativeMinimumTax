@@ -9,7 +9,7 @@ import com.upuptax.utils.NumberUtil;
 
 public class Form6521 implements Form{
 	private FillingFormsAndSchedules fillingForms;
-	private Form6521ExceptionWorksheet exemption=new Form6521ExceptionWorksheet();
+	private Form6521ExemptionWorksheet exemption=new Form6521ExemptionWorksheet();
 	private Map<String,Double> form1040;
 	private Map<String,Double> form6521=new HashMap<String,Double>();
 	private double medicalDentalRate=0.025;
