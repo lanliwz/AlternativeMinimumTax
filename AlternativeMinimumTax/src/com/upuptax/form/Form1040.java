@@ -37,7 +37,7 @@ public class Form1040  implements Form{
 		frm1040.setForm(form1040);
 		
 		
-		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
+//		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
 		Map<String,Double> w2tax2=new HashMap<String,Double>();
 		w2tax1.put("1",125405.88);
@@ -52,13 +52,13 @@ public class Form1040  implements Form{
 		w2tax2.put("4",4485.6);
 		w2tax2.put("5",116677.95);
 		w2tax2.put("6",1691.83);
-		w2forms.add(w2tax1);
-		w2forms.add(w2tax2);
+//		w2forms.add(w2tax1);
+//		w2forms.add(w2tax2);
 		
 		fillingforms.putForm(AMTConstant.FORM_W2+"-1", w2tax1);
 		fillingforms.putForm(AMTConstant.FORM_W2+"-2", w2tax2);
 //		frm1040.setFillingForms(fillingforms);
-		frm1040.setW2Forms(w2forms);
+//		frm1040.setW2Forms(w2forms);
 //		frm1040.init();
 		
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
@@ -110,9 +110,10 @@ public class Form1040  implements Form{
 		fillingforms.print();
 		
 		
-		frm1040.setScheduleD(scheduleD.getForm());
-		frm1040.setScheduleB(scheduleB.getForm());
-		frm1040.setScheduleA(scheduleA.getForm());
+//		frm1040.setScheduleD(scheduleD.getForm());
+//		frm1040.setScheduleB(scheduleB.getForm());
+//		frm1040.setScheduleA(scheduleA.getForm());
+		frm1040.setFillingForms(fillingforms);
 		frm1040.init();
 		scheduleA.calculate(form1040);
 		fillingforms=scheduleA.getFillingForms();
@@ -210,6 +211,7 @@ public class Form1040  implements Form{
 	}
 
 	public void init(){
+		
 		double line7 =0;
 		double line62=0;
 		if(w2Forms==null)
@@ -227,6 +229,7 @@ public class Form1040  implements Form{
 		System.out.println("Wages = "+line7);
 		form1040.put("62", line62);
 		System.out.println("Federal Tax Withhold = "+line62);
+		scheduleB=fillingForms.getSchedule(AMTConstant.SCHEDULE_B);
 		if (scheduleB!=null){
 			form1040.put("8a", scheduleB.get("4"));
 			System.out.println("Interests = "+form1040.get("8a"));
@@ -238,7 +241,7 @@ public class Form1040  implements Form{
 			form1040.put("9",  scheduleB.get("6"));
 			System.out.println("Qualified Dividents = "+form1040.get("9b"));
 		}
-		
+		scheduleD=fillingForms.getSchedule(AMTConstant.SCHEDULE_D);
 		if (scheduleD!=null){
 			form1040.put("13", scheduleD.get("22"));
 		}
@@ -254,7 +257,7 @@ public class Form1040  implements Form{
 		System.out.println("Adjusted Gross Income = "+line37);
 		
 		form1040.put("38", line37);
-		
+		scheduleA=fillingForms.getSchedule(AMTConstant.SCHEDULE_A);
 		if (scheduleA!=null){
 			if (scheduleA.get("29")!=null && scheduleA.get("29").doubleValue()>standardDeduction){
 				form1040.put("40", scheduleA.get("29"));
@@ -325,31 +328,6 @@ public class Form1040  implements Form{
 	public void setFillingForms(FillingFormsAndSchedules fillingForms) {
 		this.fillingForms = fillingForms;
 	}
-	public List<Map<String, Double>> getW2Forms() {
-		return w2Forms;
-	}
-	public void setW2Forms(List<Map<String, Double>> w2Forms) {
-		this.w2Forms = w2Forms;
-	}
-	public Map<String, Double> getScheduleA() {
-		return scheduleA;
-	}
-	public void setScheduleA(Map<String, Double> scheduleA) {
-		this.scheduleA = scheduleA;
-	}
-	public Map<String, Double> getScheduleB() {
-		return scheduleB;
-	}
-	public void setScheduleB(Map<String, Double> scheduleB) {
-		this.scheduleB = scheduleB;
-	}
-	public Map<String, Double> getScheduleD() {
-		return scheduleD;
-	}
-	public void setScheduleD(Map<String, Double> scheduleD) {
-		this.scheduleD = scheduleD;
-	}
-
 
 	public Map<String, Double> getForm() {
 		return form1040;

@@ -56,6 +56,15 @@ public class FillingFormsAndSchedules {
 	public void putSchedule(String name,Map<String,Double> schedule){
 		schedules.put(name, schedule);
 	}
+	public Map<String,Double> getForm(String name){
+		return forms.get(name);
+	}
+	public Map<String,Double> getSchedule(String name){
+		return schedules.get(name);
+	}
+	public Map<String,Double> getWorksheet(String name){
+		return worksheets.get(name);
+	}
 	
 	public void print(){
 		if(forms!=null)
