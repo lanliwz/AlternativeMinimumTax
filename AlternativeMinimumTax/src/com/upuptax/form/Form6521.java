@@ -7,7 +7,7 @@ import com.upuptax.amt.AMTConstant;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.utils.NumberUtil;
 
-public class Form6521 {
+public class Form6521 implements Form{
 	private FillingFormsAndSchedules fillingForms;
 	private Form6521ExceptionWorksheet exemption=new Form6521ExceptionWorksheet();
 	private Map<String,Double> form1040;
@@ -126,6 +126,8 @@ public class Form6521 {
 		form6521.put("35", NumberUtil.substractWithPositiveReturn(form6521.get("33"),form6521.get("34") ));
 		
 		System.out.println(form6521);	
+		
+		fillingForms.putForm(AMTConstant.FORM_6251, form6521);
 			
 	}
 	
@@ -138,6 +140,16 @@ public class Form6521 {
 		}
 		return line31;
 
+	}
+	@Override
+	public Map<String, Double> getForm() {
+		// TODO Auto-generated method stub
+		return form6521;
+	}
+	@Override
+	public void setForm(Map<String, Double> form) {
+		this.form6521=form;
+		
 	}
 
 
