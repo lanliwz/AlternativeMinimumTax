@@ -141,12 +141,12 @@ public class Form6521 implements Form{
 		return line31;
 
 	}
-	@Override
+
 	public Map<String, Double> getForm() {
 		// TODO Auto-generated method stub
 		return form6521;
 	}
-	@Override
+
 	public void setForm(Map<String, Double> form) {
 		this.form6521=form;
 		

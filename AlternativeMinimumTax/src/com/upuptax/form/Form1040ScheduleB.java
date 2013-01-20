@@ -49,12 +49,11 @@ public class Form1040ScheduleB implements Form{
 		this.scheduleB = scheduleB;
 	}
 
-	@Override
 	public void setFillingForms(FillingFormsAndSchedules forms) {
 		this.fillingForms=forms;
 		
 	}
-	@Override
+
 	public FillingFormsAndSchedules getFillingForms() {
 		// TODO Auto-generated method stub
 		return fillingForms;

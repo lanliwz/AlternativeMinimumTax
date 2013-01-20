@@ -55,12 +55,12 @@ public class Form1040ScheduleD implements Form {
 	public void setForm(Map<String, Double> scheduleD) {
 		this.scheduleD = scheduleD;
 	}
-	@Override
+
 	public void setFillingForms(FillingFormsAndSchedules forms) {
 		this.fillingForms=forms;
 		
 	}
-	@Override
+
 	public FillingFormsAndSchedules getFillingForms() {
 		// TODO Auto-generated method stub
 		return fillingForms;

@@ -40,12 +40,11 @@ public class Form1040ScheduleA implements Form{
 	public void setForm(Map<String, Double> scheduleA) {
 		this.scheduleA = scheduleA;
 	}
-	@Override
+
 	public void setFillingForms(FillingFormsAndSchedules forms) {
 		this.fillingForms=forms;
 		
 	}
-	@Override
 	public FillingFormsAndSchedules getFillingForms() {
 		// TODO Auto-generated method stub
 		return fillingForms;
