@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
+import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.exceptions.CryptographyException;
 import org.apache.pdfbox.exceptions.InvalidPasswordException;
 
@@ -38,6 +39,51 @@ import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
  */
 public class PrintFields
 {
+    public void setField( PDDocument pdfDocument, String name, String value ) throws IOException
+    {
+        PDDocumentCatalog docCatalog = pdfDocument.getDocumentCatalog();
+        PDAcroForm acroForm = docCatalog.getAcroForm();
+        PDField field = acroForm.getField( name );
+        if( field != null )
+        {
+            field.setValue( value );
+        }
+        else
+        {
+            System.err.println( "No field found with name:" + name );
+        }
+
+    }
+
+    public void setField( PDField field, String value ) throws IOException
+    {
+        if( field != null )
+        {
+            field.setValue( value );
+        }
+        else
+        {
+            System.err.println( "No field found with name:" + field );
+        }
+
+    }
+
+    private void save(PDDocument pdf,String filename) throws IOException, COSVisitorException
+    {
+        try
+        {
+                pdf.save( filename );
+
+        }
+        finally
+        {
+            if( pdf != null )
+            {
+                pdf.close();
+            }
+        }
+    }
+
 
     /**
      * This will print all the fields from the document.
@@ -88,6 +134,8 @@ public class PrintFields
          {
              String outputString = sLevel + sParent + "." + field.getPartialName() + " = " + field.getValue() +
                  ",  type=" + field.getClass().getName();
+             
+             field.setValue(field.getPartialName());
 
              System.out.println(outputString);
          }
@@ -129,6 +177,12 @@ public class PrintFields
                     }
                 }
                 exporter.printFields( pdf );
+                try {
+					exporter.save(pdf, "c:\\download\\test.pdf");
+				} catch (COSVisitorException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
         finally
