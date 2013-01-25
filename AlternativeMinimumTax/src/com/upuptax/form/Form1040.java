@@ -332,6 +332,18 @@ public class Form1040  implements Form{
 		return form1040;
 	}
 
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 	

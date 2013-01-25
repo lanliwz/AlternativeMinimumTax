@@ -224,6 +224,16 @@ public class CapitalGainWorksheet implements Form{
 	public void setForm1040(Map<String, Double> form1040) {
 		this.form1040 = form1040;
 	}
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

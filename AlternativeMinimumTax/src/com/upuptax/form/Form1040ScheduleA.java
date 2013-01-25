@@ -49,6 +49,16 @@ public class Form1040ScheduleA implements Form{
 		// TODO Auto-generated method stub
 		return fillingForms;
 	}
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

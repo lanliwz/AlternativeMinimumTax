@@ -151,6 +151,16 @@ public class Form6521 implements Form{
 		this.form6521=form;
 		
 	}
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

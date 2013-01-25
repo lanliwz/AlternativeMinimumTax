@@ -1,13 +1,23 @@
 package com.upuptax.ui;
+import java.util.Map;
+
+import com.upuptax.form.Form;
+
 import javafx.application.Application;
 import javafx.scene.effect.InnerShadowBuilder;
 import javafx.scene.text.TextBuilder;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,6 +26,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
 public class UIFormW2 extends Application {
@@ -31,6 +42,34 @@ public class UIFormW2 extends Application {
 		SplitPane splitPane = new SplitPane();
 		splitPane.prefWidthProperty().bind(scene.widthProperty());
 		splitPane.prefHeightProperty().bind(scene.heightProperty());
+		
+        ObservableList<Form> fillingforms = FXCollections.observableArrayList();
+        final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
+        fillingformsView.setPrefWidth(150);
+        fillingformsView.setPrefHeight(150);
+        
+        // display first and last name with tooltip using alias
+        fillingformsView.setCellFactory(new Callback<ListView<Form>, ListCell<Form>>() {
+
+            public ListCell<Form> call(ListView<Form> param) {
+                final Label leadLbl = new Label();
+                final Tooltip tooltip = new Tooltip();
+                    final ListCell<Form> cell = new ListCell<Form>() {
+                        @Override 
+                        public void updateItem(Form item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    leadLbl.setText(item.getName());
+                                    setText(item.getName());
+                                    tooltip.setText(item.getDescription());
+                                    setTooltip(tooltip);
+                                }
+                        }
+                    }; // ListCell
+                    return cell;
+            
+            }
+        }); // setCellFactory
 
 		VBox leftArea = new VBox(10);
 
