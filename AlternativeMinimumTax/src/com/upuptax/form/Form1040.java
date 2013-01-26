@@ -335,13 +335,13 @@ public class Form1040  implements Form{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return TaxConstant.FORM_1040;
 	}
 
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Form 1040";
 	}
 
 	

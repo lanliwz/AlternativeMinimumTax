@@ -2,6 +2,8 @@ package com.upuptax.form;
 
 import java.util.Map;
 
+import javafx.collections.ObservableList;
+
 import com.upuptax.reference.FillingFormsAndSchedules;
 
 public interface Form {
@@ -12,5 +14,6 @@ public interface Form {
 	public void setForm(Map<String,Double> form);
 	public void setFillingForms(FillingFormsAndSchedules forms);
 	public FillingFormsAndSchedules getFillingForms();
+//	public ObservableList<FormLineDetail> getInputs();
 
 }

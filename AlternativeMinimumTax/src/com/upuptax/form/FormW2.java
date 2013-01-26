@@ -2,7 +2,10 @@ package com.upuptax.form;
 
 import java.util.Map;
 
-public class FormW2 {
+import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.TaxConstant;
+
+public class FormW2 implements Form {
 	private String name;
 	private String socialSecurityNumber;
 	private boolean spouceW2=false;
@@ -10,11 +13,10 @@ public class FormW2 {
 	private Map<String,String> employmentWks;
 	private Map<String,Double> incomeWks;
 	public String getName() {
-		return name;
+		return TaxConstant.FORM_W2;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
+
 	public String getSocialSecurityNumber() {
 		return socialSecurityNumber;
 	}
@@ -44,6 +46,48 @@ public class FormW2 {
 	}
 	public void setIncomeWks(Map<String, Double> incomeWks) {
 		this.incomeWks = incomeWks;
+	}
+
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return "W-2 Form";
+	}
+
+
+	@Override
+	public Map<String, Double> getForm() {
+		// TODO Auto-generated method stub
+		return incomeWks;
+	}
+
+
+	@Override
+	public void setForm(Map<String, Double> form) {
+		this.incomeWks=form;
+		
+	}
+
+
+	@Override
+	public void setFillingForms(FillingFormsAndSchedules forms) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public FillingFormsAndSchedules getFillingForms() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
