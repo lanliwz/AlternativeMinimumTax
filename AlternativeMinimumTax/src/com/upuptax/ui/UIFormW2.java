@@ -210,7 +210,7 @@ public class UIFormW2 extends Application {
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("W-2 Form");
 		Group root = new Group();
-        Scene scene = new Scene(root, 500, 250, Color.WHITE);
+        Scene scene = new Scene(root, 1024, 768, Color.WHITE);
 		SplitPane splitPane = new SplitPane();
 		splitPane.prefWidthProperty().bind(scene.widthProperty());
 		splitPane.prefHeightProperty().bind(scene.heightProperty());
@@ -221,8 +221,14 @@ public class UIFormW2 extends Application {
         ObservableMap<String,Double> form = FXCollections.observableHashMap();
         
         TableColumn<FormLineDetail,String> linenumber = new TableColumn<FormLineDetail,String>("Line Number");
+        linenumber.setPrefWidth(500);
+        
+        
         TableColumn<FormLineDetail,String> lineinput = new TableColumn<FormLineDetail,String>("Value");
+        lineinput.setPrefWidth(200);
+        
         TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
+        formInputView.prefHeightProperty().bind(scene.heightProperty());
         final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
         formInputView.setItems(forminputs);
         formInputView.getColumns().addAll(linenumber,lineinput);
@@ -302,7 +308,7 @@ public class UIFormW2 extends Application {
 		VBox rightArea = new VBox();
 //		rightArea.getChildren().add(e)
 		
-		rightArea.setAlignment(Pos.CENTER);
+		rightArea.setAlignment(Pos.TOP_CENTER);
 		rightArea.getChildren().add(formInputView);
 
 		// add left area
