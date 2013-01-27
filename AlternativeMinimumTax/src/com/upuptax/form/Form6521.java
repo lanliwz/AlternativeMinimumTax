@@ -154,12 +154,12 @@ public class Form6521 implements Form{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return TaxConstant.FORM_6251;
 	}
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Form 6521 (AMT)";
 	}
 
 
