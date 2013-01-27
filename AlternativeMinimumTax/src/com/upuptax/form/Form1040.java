@@ -1,9 +1,19 @@
 package com.upuptax.form;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
@@ -25,6 +35,47 @@ public class Form1040  implements Form{
 	private  Map<String,Double> capitalGainWorksheet;
 	//alternative minimum tax
 	
+	public void save(String fillingBy) throws IOException{
+		Path file = Paths.get(System.getProperty("user.home"),fillingBy,"form1040.properies");
+		Path folder=Paths.get(System.getProperty("user.home"),fillingBy);
+		if (!Files.exists(folder)){
+			Files.createDirectory(folder);
+		}
+		if(!Files.exists(file)){
+			Files.createFile(file);		
+		
+			
+		}
+		Writer writer = Files.newBufferedWriter(file,Charset.defaultCharset());
+		Properties prop = new Properties();
+		if (form1040!=null){
+			for (String key:form1040.keySet()){
+				prop.put(key, String.valueOf(form1040.get(key)));
+			}
+		}
+		prop.store(writer, null);
+		
+		
+	}
+	public void load(String fillingBy) throws IOException{
+		Path file = Paths.get(System.getProperty("user.home"),fillingBy,"form1040.properies");
+		if(Files.exists(file)){
+			Reader reader= Files.newBufferedReader(file, Charset.defaultCharset());		
+			Properties prop = new Properties();
+			prop.load(reader);
+			if (prop.size()>0 && form1040!=null){
+				for (Object key:prop.keySet()){
+					form1040.clear();
+					form1040.put((String) key, Double.valueOf(prop.getProperty((String)key)));
+				}
+			}
+		
+			
+		}
+	
+		
+		
+	}
 	public static void main(String[] args){
 		FillingFormsAndSchedules fillingforms = FillingFormsAndSchedules.newInstance();
 		
@@ -181,6 +232,14 @@ public class Form1040  implements Form{
 		frm1040.init();
 		
 		fillingforms.print();
+		try {
+			frm1040.save("wei_tax_test");
+			frm1040.load("wei_tax_test");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
