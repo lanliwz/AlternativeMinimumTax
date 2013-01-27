@@ -1,13 +1,16 @@
 package com.upuptax.form;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040ScheduleB implements Form{
+	private String filedBy="wei_tax_test";
 	private Map<String,Double> interests;
 	private Map<String,Double> ordinaryDividends;
 	private Map<String,Double> qualifiedDividends;
@@ -69,6 +72,19 @@ public class Form1040ScheduleB implements Form{
 	public String getDescription() {
 		// TODO Auto-generated method stub
 		return "Schedule B";
+	}
+
+	
+	
+	public void save() throws IOException{
+		FileUtil.save(getName(), filedBy, scheduleB);
+		
+	}
+	public void load() throws IOException{
+		
+		scheduleB=FileUtil.load(getName(), filedBy, scheduleB);
+		
+		
 	}
 	
 

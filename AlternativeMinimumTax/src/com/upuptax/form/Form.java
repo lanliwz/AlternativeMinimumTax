@@ -1,5 +1,6 @@
 package com.upuptax.form;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import javafx.collections.ObservableList;
 import com.upuptax.reference.FillingFormsAndSchedules;
 
 public interface Form {
+	
 	public void init();
 	public String getName();
 	public String getDescription();
@@ -14,7 +16,8 @@ public interface Form {
 	public void setForm(Map<String,Double> form);
 	public void setFillingForms(FillingFormsAndSchedules forms);
 	public FillingFormsAndSchedules getFillingForms();
-//	public void updateLineDetail(FormLineDetail detail);
-//	public ObservableList<FormLineDetail> getInputs();
+	public void save() throws IOException;
+	public void load() throws IOException;
+
 
 }

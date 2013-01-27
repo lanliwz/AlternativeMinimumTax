@@ -1,13 +1,16 @@
 package com.upuptax.form;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form6521 implements Form{
+	private String filedBy="wei_tax_test";
 	private FillingFormsAndSchedules fillingForms;
 	private Form6521ExemptionWorksheet exemption=new Form6521ExemptionWorksheet();
 	private Map<String,Double> form1040;
@@ -161,6 +164,16 @@ public class Form6521 implements Form{
 		// TODO Auto-generated method stub
 		return "Form 6521 (AMT)";
 	}
-
+	
+	public void save() throws IOException{
+		FileUtil.save(getName(), filedBy, form1040);
+		
+	}
+	public void load() throws IOException{
+		
+		form1040=FileUtil.load(getName(), filedBy, form1040);
+		
+		
+	}
 
 }

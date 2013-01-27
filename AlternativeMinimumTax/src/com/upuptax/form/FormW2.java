@@ -1,11 +1,14 @@
 package com.upuptax.form;
 
+import java.io.IOException;
 import java.util.Map;
 
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
 
 public class FormW2 implements Form {
+	private String filedBy="wei_tax_test";
 	private String name;
 	private String socialSecurityNumber;
 	private boolean spouceW2=false;
@@ -88,6 +91,19 @@ public class FormW2 implements Form {
 	public FillingFormsAndSchedules getFillingForms() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	
+	public void save() throws IOException{
+		FileUtil.save(getName(), filedBy, incomeWks);
+		
+	}
+	public void load() throws IOException{
+		
+		incomeWks=FileUtil.load(getName(), filedBy, incomeWks);
+		
+		
 	}
 	
 	

@@ -1,10 +1,12 @@
 package com.upuptax.form;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxConstant;
@@ -12,6 +14,7 @@ import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
 public class CapitalGainWorksheet implements Form{
+	private String filedBy="wei_tax_test";
 	private FillingFormsAndSchedules fillingforms;
 	private Map<String,Double> form1040;
 	private Map<String,Double> worksheet=new HashMap<String,Double>();
@@ -233,6 +236,17 @@ public class CapitalGainWorksheet implements Form{
 	public String getDescription() {
 		// TODO Auto-generated method stub
 		return "Capital Gain Worksheet";
+		
+	}
+	
+	public void save() throws IOException{
+		FileUtil.save(getName(), filedBy, form1040);
+		
+	}
+	public void load() throws IOException{
+		
+		form1040=FileUtil.load(getName(), filedBy, form1040);
+		
 		
 	}
 	

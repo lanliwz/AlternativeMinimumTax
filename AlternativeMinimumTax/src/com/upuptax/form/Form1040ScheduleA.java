@@ -1,12 +1,15 @@
 package com.upuptax.form;
 
+import java.io.IOException;
 import java.util.Map;
 
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form1040ScheduleA implements Form{
+	private String filedBy="wei_tax_test";
 	private double jobExpenseRate=0.02;
 	private Map<String,Double> scheduleA;
 	private FillingFormsAndSchedules fillingForms;
@@ -58,6 +61,17 @@ public class Form1040ScheduleA implements Form{
 	public String getDescription() {
 		// TODO Auto-generated method stub
 		return "Schedule A";
+	}
+	
+	public void save() throws IOException{
+		FileUtil.save(getName(), filedBy, scheduleA);
+		
+	}
+	public void load() throws IOException{
+		
+		scheduleA=FileUtil.load(getName(), filedBy, scheduleA);
+		
+		
 	}
 	
 	
