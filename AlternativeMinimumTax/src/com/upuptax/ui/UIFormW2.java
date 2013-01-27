@@ -203,6 +203,11 @@ public class UIFormW2 extends Application {
 		fillingforms.print();
 		formProcess.add(frm1040);
 		formProcess.add(form6521);
+		formProcess.add(scheduleA);
+		formProcess.add(scheduleD);
+		formProcess.add(scheduleB);
+	    formProcess.add(cptGain);
+		
 		return formProcess;
 	}
 

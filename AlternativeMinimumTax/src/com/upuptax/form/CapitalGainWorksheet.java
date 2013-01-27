@@ -227,12 +227,13 @@ public class CapitalGainWorksheet implements Form{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return TaxConstant.WKS_CAPITAL_GAIN;
 	}
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Capital Gain Worksheet";
+		
 	}
 	
 	

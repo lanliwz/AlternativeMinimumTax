@@ -62,13 +62,13 @@ public class Form1040ScheduleB implements Form{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return TaxConstant.SCHEDULE_B;
 	}
 
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Schedule B";
 	}
 	
 
