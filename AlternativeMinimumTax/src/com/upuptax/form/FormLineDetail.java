@@ -1,11 +1,22 @@
 package com.upuptax.form;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class FormLineDetail {
+	private Form form;
 	private String formName;
 	private String lineNumber;
 	private String lineDescription;
-	private String value;
+	private StringProperty value;
 	
+	
+	public Form getForm() {
+		return form;
+	}
+	public void setForm(Form form) {
+		this.form = form;
+	}
 	public String getFormName() {
 		return formName;
 	}
@@ -25,10 +36,13 @@ public class FormLineDetail {
 		this.lineDescription = lineDescription;
 	}
 	public String getValue() {
-		return value;
+		return value.getValue();
 	}
 	public void setValue(String value) {
-		this.value = value;
+		this.value = new SimpleStringProperty(value);
+	}
+	public StringProperty valueProperty(){
+		return this.value;
 	}
 	
 

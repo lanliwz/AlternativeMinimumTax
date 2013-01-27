@@ -14,6 +14,7 @@ public interface Form {
 	public void setForm(Map<String,Double> form);
 	public void setFillingForms(FillingFormsAndSchedules forms);
 	public FillingFormsAndSchedules getFillingForms();
+//	public void updateLineDetail(FormLineDetail detail);
 //	public ObservableList<FormLineDetail> getInputs();
 
 }

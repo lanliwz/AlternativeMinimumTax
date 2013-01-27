@@ -246,7 +246,13 @@ public class UIFormW2 extends Application {
         lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
         	            @Override
         	            public void handle(CellEditEvent<FormLineDetail, String> t) {
-        	                ((FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow())).setValue(t.getNewValue());
+        	            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
+        	                System.out.println("old val:"+linedetail.getValue());
+        	                
+        	            	linedetail.setValue(t.getNewValue());
+        	            	System.out.println("new val:"+linedetail.getValue());
+        	            	
+        	            	linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
         	            }
         	        });
         
@@ -295,9 +301,9 @@ public class UIFormW2 extends Application {
 				if (observable != null && observable.getValue() != null) {
 			}
 	                    forminputs.clear();
-	                    Map<String,Double> inputs = observable.getValue().getForm();
+//	                    Map<String,Double> inputs = observable.getValue().getForm();
 	                    
-	                    forminputs.addAll(transform(inputs));
+	                    forminputs.addAll(transform(observable.getValue()));
 	                }
 
 			
@@ -345,18 +351,22 @@ public class UIFormW2 extends Application {
 				} 
     };
     
-    public ObservableList<FormLineDetail> transform(Map<String,Double> map){
+
+    public ObservableList<FormLineDetail> transform(Form form){
+    	Map<String,Double> map=form.getForm();
     	ObservableList<FormLineDetail> inputs = FXCollections.observableArrayList();
     	if(map!=null)
     	for (String key:map.keySet()){
     		FormLineDetail detail = new FormLineDetail();
+    		detail.setForm(form);
+    		detail.setFormName(form.getName());
+    		
     		detail.setLineNumber(key);
     		detail.setValue(String.valueOf(map.get(key)));
     		inputs.add(detail);
     	}
     	return inputs;
     }
-
 
 
 }
