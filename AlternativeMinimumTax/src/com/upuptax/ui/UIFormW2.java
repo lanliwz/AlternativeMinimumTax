@@ -1,10 +1,12 @@
 package com.upuptax.ui;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.upuptax.form.CapitalGainWorksheet;
+import com.upuptax.form.FederalInfoWorksheet;
 import com.upuptax.form.Form;
 import com.upuptax.form.Form1040;
 import com.upuptax.form.Form1040ScheduleA;
@@ -13,6 +15,7 @@ import com.upuptax.form.Form1040ScheduleD;
 import com.upuptax.form.Form6521;
 import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.FormW2;
+import com.upuptax.form.InfoForm;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxConstant;
@@ -59,6 +62,27 @@ public class UIFormW2 extends Application {
 
 
 		launch(args);
+	}
+	
+	public List<InfoForm> getListOfInfoForm(){
+		List<InfoForm> info = new ArrayList<InfoForm>();
+		FederalInfoWorksheet infowks = new FederalInfoWorksheet();
+		Map<String,String> infoform = new HashMap<String,String>();
+		infoform.put("1", "test 1");
+		infoform.put("2", "test 2");
+		infoform.put("3", "test 1");
+		infoform.put("4", "test 1");
+		infoform.put("5", "test 1");
+		infowks.setForm(infoform);
+		info.add(infowks);
+		try {
+			infowks.save();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return info;
+		
 	}
 	
 	public List<Form> getListOfForm(){
@@ -223,6 +247,10 @@ public class UIFormW2 extends Application {
         ObservableList<Form> fillingforms = FXCollections.observableArrayList();
         final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
         
+        ObservableList<InfoForm> infoforms=FXCollections.observableArrayList();
+        final ListView<InfoForm> infoView = new ListView<InfoForm>(infoforms);
+        
+        
         ObservableMap<String,Double> form = FXCollections.observableHashMap();
         
         TableColumn<FormLineDetail,String> linenumber = new TableColumn<FormLineDetail,String>("Line Number");
@@ -259,10 +287,17 @@ public class UIFormW2 extends Application {
         for (Form f:getListOfForm()){
         fillingforms.add(f);
         }
+        
+        for(InfoForm f:getListOfInfoForm()){
+        	infoforms.add(f);
+        }
                 
         
         fillingformsView.setPrefWidth(150);
-        fillingformsView.setPrefHeight(150);
+        fillingformsView.setPrefHeight(scene.getHeight());
+        
+        infoView.setPrefHeight(scene.getHeight());
+        infoView.setPrefWidth(150);
         
         // display first and last name with tooltip using alias
         fillingformsView.setCellFactory(new Callback<ListView<Form>, ListCell<Form>>() {
@@ -287,12 +322,34 @@ public class UIFormW2 extends Application {
             }
         }); // setCellFactory
 
-        
+        infoView.setCellFactory(new Callback<ListView<InfoForm>, ListCell<InfoForm>>() {
+
+            public ListCell<InfoForm> call(ListView<InfoForm> param) {
+                final Label leadLbl = new Label();
+                final Tooltip tooltip = new Tooltip();
+                    final ListCell<InfoForm> cell = new ListCell<InfoForm>() {
+                        @Override 
+                        public void updateItem(InfoForm item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    leadLbl.setText(item.getName());
+                                    setText(item.getName());
+                                    tooltip.setText(item.getDescription());
+                                    setTooltip(tooltip);
+                                }
+                        }
+                    }; // ListCell
+                    return cell;
+            
+            }
+        }); // setCellFactory
+       
         
 		VBox leftArea = new VBox(10);
 		Label leftLabel = new Label("Filling Forms");
 		leftArea.getChildren().add(leftLabel);
 		leftArea.getChildren().add(fillingformsView);
+		leftArea.getChildren().add(infoView);
 		
 		fillingformsView.getSelectionModel().selectedItemProperty().addListener(
 			new ChangeListener<Form>() {

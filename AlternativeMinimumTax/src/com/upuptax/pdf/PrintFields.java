@@ -95,6 +95,7 @@ public class PrintFields
     public void printFields( PDDocument pdfDocument ) throws IOException
     {
         PDDocumentCatalog docCatalog = pdfDocument.getDocumentCatalog();
+        
         PDAcroForm acroForm = docCatalog.getAcroForm();
         List fields = acroForm.getFields();
         Iterator fieldsIter = fields.iterator();
