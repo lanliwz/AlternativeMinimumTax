@@ -22,6 +22,8 @@ import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
 
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.effect.InnerShadowBuilder;
@@ -46,6 +48,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -279,8 +282,11 @@ public class UIFormW2 extends Application {
         	                
         	            	linedetail.setValue(t.getNewValue());
         	            	System.out.println("new val:"+linedetail.getValue());
-        	            	
-        	            	linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            	if (linedetail.getForm()!=null)
+        	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            	if (linedetail.getInfoForm()!=null)
+        	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
+
         	            }
         	        });
         
@@ -317,6 +323,21 @@ public class UIFormW2 extends Application {
                                 }
                         }
                     }; // ListCell
+                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+
+						@Override
+						public void handle(MouseEvent event) {
+							if(fillingformsView.getSelectionModel().getSelectedItem()!=null){
+								forminputs.clear();
+			                    
+			                    forminputs.addAll(transform(fillingformsView.getSelectionModel().getSelectedItem()));
+			
+							}
+							
+						}
+                    	
+                    });
+
                     return cell;
             
             }
@@ -339,6 +360,20 @@ public class UIFormW2 extends Application {
                                 }
                         }
                     }; // ListCell
+                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+
+						@Override
+						public void handle(MouseEvent event) {
+							if(infoView.getSelectionModel().getSelectedItem()!=null){
+								forminputs.clear();
+			                    
+			                    forminputs.addAll(transform(infoView.getSelectionModel().getSelectedItem()));
+			
+							}
+							
+						}
+                    	
+                    });
                     return cell;
             
             }
@@ -351,24 +386,22 @@ public class UIFormW2 extends Application {
 		leftArea.getChildren().add(fillingformsView);
 		leftArea.getChildren().add(infoView);
 		
-		fillingformsView.getSelectionModel().selectedItemProperty().addListener(
-			new ChangeListener<Form>() {
-			@Override
-			public void changed(ObservableValue<? extends Form> observable,Form arg1, Form arg2){
-				if (observable != null && observable.getValue() != null) {
-			}
-	                    forminputs.clear();
-//	                    Map<String,Double> inputs = observable.getValue().getForm();
-	                    
-	                    forminputs.addAll(transform(observable.getValue()));
-	                }
-
-			
-				
-			}
-        );
-
-
+//		fillingformsView.getSelectionModel().selectedItemProperty().addListener(
+//			new ChangeListener<Form>() {
+//			@Override
+//			public void changed(ObservableValue<? extends Form> observable,Form arg1, Form arg2){
+//				if (observable != null && observable.getValue() != null) {
+//			}
+//	                    forminputs.clear();
+////	                    Map<String,Double> inputs = observable.getValue().getForm();
+//	                    
+//	                    forminputs.addAll(transform(observable.getValue()));
+//	                }
+//
+//			
+//				
+//			}
+//        );
 		
 		leftArea.setAlignment(Pos.TOP_CENTER);
 
@@ -420,6 +453,21 @@ public class UIFormW2 extends Application {
     		
     		detail.setLineNumber(key);
     		detail.setValue(String.valueOf(map.get(key)));
+    		inputs.add(detail);
+    	}
+    	return inputs;
+    }
+    public ObservableList<FormLineDetail> transform(InfoForm form){
+    	Map<String,String> map=form.getForm();
+    	ObservableList<FormLineDetail> inputs = FXCollections.observableArrayList();
+    	if(map!=null)
+    	for (String key:map.keySet()){
+    		FormLineDetail detail = new FormLineDetail();
+    		detail.setInfoForm(form);
+    		detail.setFormName(form.getName());
+    		
+    		detail.setLineNumber(key);
+    		detail.setValue(map.get(key));
     		inputs.add(detail);
     	}
     	return inputs;

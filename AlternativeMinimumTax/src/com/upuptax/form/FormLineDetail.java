@@ -5,12 +5,19 @@ import javafx.beans.property.StringProperty;
 
 public class FormLineDetail {
 	private Form form;
+	private InfoForm infoForm;
 	private String formName;
 	private String lineNumber;
 	private String lineDescription;
 	private StringProperty value;
 	
 	
+	public InfoForm getInfoForm() {
+		return infoForm;
+	}
+	public void setInfoForm(InfoForm infoForm) {
+		this.infoForm = infoForm;
+	}
 	public Form getForm() {
 		return form;
 	}
