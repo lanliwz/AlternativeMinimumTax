@@ -79,17 +79,18 @@ public class EditingCell extends TableCell<FormLineDetail, String> {
                 }
             }
         });
-        textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (!newValue && textField != null) {
-                    commitEdit(textField.getText());
-                }
-            }
-        });
+//        textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+//                if (!newValue && textField != null) {
+//                    commitEdit(textField.getText());
+//                }
+//            }
+//        });
     }
     private String getString() {
-        return getItem() == null ? "" : getItem().toString();
+//        return getItem() == null ? "" : getItem().toString();
+        return getItem() == null ? "" : getItem();
     }
     /**
      *

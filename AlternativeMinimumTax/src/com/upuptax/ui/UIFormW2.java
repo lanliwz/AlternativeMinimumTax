@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.upuptax.form.CapitalGainWorksheet;
 import com.upuptax.form.FederalInfoWorksheet;
@@ -47,6 +48,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -70,15 +72,17 @@ public class UIFormW2 extends Application {
 	public List<InfoForm> getListOfInfoForm(){
 		List<InfoForm> info = new ArrayList<InfoForm>();
 		FederalInfoWorksheet infowks = new FederalInfoWorksheet();
-		Map<String,String> infoform = new HashMap<String,String>();
-		infoform.put("1", "test 1");
-		infoform.put("2", "test 2");
-		infoform.put("3", "test 1");
-		infoform.put("4", "test 1");
-		infoform.put("5", "test 1");
-		infowks.setForm(infoform);
+		
+//		Map<String,String> infoform = new HashMap<String,String>();
+//		infoform.put("1", "test 1");
+//		infoform.put("2", "test 2");
+//		infoform.put("3", "test 1");
+//		infoform.put("4", "test 1");
+//		infoform.put("5", "test 1");
+//		infowks.setForm(infoform);
 		info.add(infowks);
 		try {
+			infowks.init();
 			infowks.save();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -270,9 +274,10 @@ public class UIFormW2 extends Application {
         formInputView.getColumns().addAll(linenumber,lineinput);
         formInputView.setEditable(true);
         linenumber.setEditable(false);
-        linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineNumber"));
+        linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
         lineinput.setEditable(true);
         lineinput.setCellFactory(cellFactory);
+//        lineinput.setCellFactory(TextFieldTableCell.forTableColumn());
         lineinput.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("value"));
         lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
         	            @Override
@@ -282,14 +287,36 @@ public class UIFormW2 extends Application {
         	                
         	            	linedetail.setValue(t.getNewValue());
         	            	System.out.println("new val:"+linedetail.getValue());
-        	            	if (linedetail.getForm()!=null)
+        	            	if (linedetail.getForm()!=null){
         	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            		return;
+        	            	}
+        	            		
         	            	if (linedetail.getInfoForm()!=null)
         	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
 
         	            }
         	        });
-        
+
+//        lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
+//            @Override
+//            public void handle(CellEditEvent<FormLineDetail, String> t) {
+//            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
+//                System.out.println("old val:"+linedetail.getValue());
+//                
+//            	linedetail.setValue(t.getNewValue());
+//            	System.out.println("new val:"+linedetail.getValue());
+//            	if (linedetail.getForm()!=null){
+//            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+//            		return;
+//            	}
+//            		
+//            	if (linedetail.getInfoForm()!=null)
+//            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
+//
+//            }
+//        });
+
         for (Form f:getListOfForm()){
         fillingforms.add(f);
         }
@@ -430,7 +457,8 @@ public class UIFormW2 extends Application {
 		stage.show();
 		
 	}
-    Callback<TableColumn<FormLineDetail,String>, TableCell<FormLineDetail,String>>    cellFactory = new Callback<TableColumn<FormLineDetail,String>, TableCell<FormLineDetail,String>>() 
+    Callback<TableColumn<FormLineDetail,String>, TableCell<FormLineDetail,String>>    cellFactory
+    = new Callback<TableColumn<FormLineDetail,String>, TableCell<FormLineDetail,String>>() 
     		{
 
 				@Override
@@ -460,15 +488,20 @@ public class UIFormW2 extends Application {
     public ObservableList<FormLineDetail> transform(InfoForm form){
     	Map<String,String> map=form.getForm();
     	ObservableList<FormLineDetail> inputs = FXCollections.observableArrayList();
-    	if(map!=null)
-    	for (String key:map.keySet()){
-    		FormLineDetail detail = new FormLineDetail();
-    		detail.setInfoForm(form);
-    		detail.setFormName(form.getName());
+    	if(map!=null){
+    		List<FormLineDetail> linedetails=form.getLineDetails();
     		
-    		detail.setLineNumber(key);
-    		detail.setValue(map.get(key));
-    		inputs.add(detail);
+	    	for(FormLineDetail dt:linedetails){
+	    		FormLineDetail detail=new FormLineDetail();
+	    		detail.setInfoForm(form);
+	    		detail.setFormName(form.getName());
+	    		detail.setLineDescription(dt.getLineDescription());
+	    		detail.setLineNumber(dt.getLineNumber());
+	    		System.out.println(detail.getLineNumber());
+	    		detail.setValue(map.get(detail.getLineNumber())==null?"":map.get(detail.getLineNumber()));
+//	    		detail.setValue(detail.getLineNumber());
+	    		inputs.add(detail);
+	    	}
     	}
     	return inputs;
     }
