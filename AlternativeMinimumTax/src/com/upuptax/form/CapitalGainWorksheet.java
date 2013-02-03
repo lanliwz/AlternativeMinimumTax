@@ -14,6 +14,7 @@ import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
 
 public class CapitalGainWorksheet implements Form{
+	private List<FormLineDetail> lineDetails;
 	private String filedBy="wei_tax_test";
 	private FillingFormsAndSchedules fillingforms;
 	private Map<String,Double> form1040;
@@ -248,6 +249,13 @@ public class CapitalGainWorksheet implements Form{
 		form1040=FileUtil.load(getName(), filedBy, form1040);
 		
 		
+	}
+	@Override
+	public List<FormLineDetail> getLineDetails() throws IOException {
+		if(lineDetails==null){
+		   lineDetails=FileUtil.loadLineDescription(getName(), "");	
+		}
+		return lineDetails;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.upuptax.form;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import com.upuptax.io.FileUtil;
@@ -72,6 +73,14 @@ public class Form1040ScheduleA implements Form{
 		scheduleA=FileUtil.load(getName(), filedBy, scheduleA);
 		
 		
+	}
+	private List<FormLineDetail> lineDetails;	
+	@Override
+	public List<FormLineDetail> getLineDetails() throws IOException {
+		if(lineDetails==null){
+		   lineDetails=FileUtil.loadLineDescription(getName(), "");	
+		}
+		return lineDetails;
 	}
 	
 	

@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -53,7 +54,7 @@ public class FileUtil {
 		Properties prop = new Properties();
 		if (form!=null){
 			for (String key:form.keySet()){
-				prop.put(key, String.valueOf(form.get(key)));
+				prop.put(key, String.valueOf(form.get(key)==null?"":form.get(key)));
 			}
 		}
 		prop.store(writer, null);
@@ -82,13 +83,16 @@ public class FileUtil {
 	}
 	public static Map<String,String> loadInfo(String formName,String fillingBy,Map<String,String> form) throws IOException{
 		Path file = Paths.get(System.getProperty("user.home"),fillingBy,formName+".properies");
+		if (form==null){
+			form=new HashMap<String,String>();
+		}
 		if(Files.exists(file)){
 			Reader reader= Files.newBufferedReader(file, Charset.defaultCharset());		
 			Properties prop = new Properties();
 			prop.load(reader);
 			if (prop.size()>0 && form!=null){
 				for (Object key:prop.keySet()){
-					form.clear();
+					
 					form.put((String) key, prop.getProperty((String)key));
 				}
 			}

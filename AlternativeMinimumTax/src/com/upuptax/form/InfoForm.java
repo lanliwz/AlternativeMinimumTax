@@ -14,5 +14,6 @@ public interface InfoForm {
 	public String getDescription();
 	public void save() throws IOException;
 	public void load() throws IOException;
+	public void init() throws IOException;
 
 }

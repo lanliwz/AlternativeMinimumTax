@@ -1,6 +1,7 @@
 package com.upuptax.form;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ public interface Form {
 	public FillingFormsAndSchedules getFillingForms();
 	public void save() throws IOException;
 	public void load() throws IOException;
+	public List<FormLineDetail> getLineDetails() throws IOException;
 
 
 }

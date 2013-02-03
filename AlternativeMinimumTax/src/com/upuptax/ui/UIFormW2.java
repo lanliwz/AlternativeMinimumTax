@@ -83,7 +83,7 @@ public class UIFormW2 extends Application {
 		info.add(infowks);
 		try {
 			infowks.init();
-			infowks.save();
+//			infowks.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -289,11 +289,24 @@ public class UIFormW2 extends Application {
         	            	System.out.println("new val:"+linedetail.getValue());
         	            	if (linedetail.getForm()!=null){
         	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            		try {
+									linedetail.getForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
         	            		return;
         	            	}
         	            		
-        	            	if (linedetail.getInfoForm()!=null)
+        	            	if (linedetail.getInfoForm()!=null){
         	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
+        	            		try {
+									linedetail.getInfoForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            	}
 
         	            }
         	        });
@@ -497,7 +510,7 @@ public class UIFormW2 extends Application {
 	    		detail.setFormName(form.getName());
 	    		detail.setLineDescription(dt.getLineDescription());
 	    		detail.setLineNumber(dt.getLineNumber());
-	    		System.out.println(detail.getLineNumber());
+//	    		System.out.println(detail.getLineNumber());
 	    		detail.setValue(map.get(detail.getLineNumber())==null?"":map.get(detail.getLineNumber()));
 //	    		detail.setValue(detail.getLineNumber());
 	    		inputs.add(detail);

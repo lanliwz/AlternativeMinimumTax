@@ -50,13 +50,15 @@ public class FederalInfoWorksheet implements InfoForm {
 		
 	}
 	public void init() throws IOException{
+		load();
+		lineDetails=FileUtil.loadLineDescription(getName(), "");
 		if (form==null){
-			lineDetails=FileUtil.loadLineDescription(getName(), "");
 			form=new HashMap<String,String>();
-			for (FormLineDetail detail:lineDetails){
-				form.put(detail.getLineNumber(), null);
-			}
 		}
+		for (FormLineDetail detail:lineDetails){
+			form.put(detail.getLineNumber(), form.get(detail.getLineNumber()));
+		}
+
 	}
 
 	@Override

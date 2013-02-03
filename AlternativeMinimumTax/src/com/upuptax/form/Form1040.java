@@ -386,7 +386,14 @@ public class Form1040  implements Form{
 		return "Form 1040";
 	}
 
-	
+	private List<FormLineDetail> lineDetails;	
+	@Override
+	public List<FormLineDetail> getLineDetails() throws IOException {
+		if(lineDetails==null){
+		   lineDetails=FileUtil.loadLineDescription(getName(), "");	
+		}
+		return lineDetails;
+	}
 
 	
 	
