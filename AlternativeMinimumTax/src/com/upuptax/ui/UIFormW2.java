@@ -486,16 +486,36 @@ public class UIFormW2 extends Application {
     public ObservableList<FormLineDetail> transform(Form form){
     	Map<String,Double> map=form.getForm();
     	ObservableList<FormLineDetail> inputs = FXCollections.observableArrayList();
-    	if(map!=null)
-    	for (String key:map.keySet()){
-    		FormLineDetail detail = new FormLineDetail();
-    		detail.setForm(form);
-    		detail.setFormName(form.getName());
+    	if(map!=null){
+    		List<FormLineDetail> linedetails;
+			try {
+				linedetails = form.getLineDetails();
+		    	for(FormLineDetail dt:linedetails){
+		    		FormLineDetail detail=new FormLineDetail();
+		    		detail.setForm(form);
+		    		detail.setFormName(form.getName());
+		    		detail.setLineDescription(dt.getLineDescription());
+		    		detail.setLineNumber(dt.getLineNumber());
+		    		detail.setValue(map.get(detail.getLineNumber())==null?"":String.valueOf(map.get(detail.getLineNumber())));
+		    		inputs.add(detail);
+		    	}
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		
-    		detail.setLineNumber(key);
-    		detail.setValue(String.valueOf(map.get(key)));
-    		inputs.add(detail);
+
     	}
+//    	for (String key:map.keySet()){
+//    		FormLineDetail detail = new FormLineDetail();
+//    		detail.setForm(form);
+//    		detail.setFormName(form.getName());
+//    		
+//    		detail.setLineNumber(key);
+//    		detail.setValue(String.valueOf(map.get(key)));
+//    		inputs.add(detail);
+//    	}
     	return inputs;
     }
     public ObservableList<FormLineDetail> transform(InfoForm form){
