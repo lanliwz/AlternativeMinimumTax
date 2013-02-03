@@ -1,0 +1,4 @@
+1=1 Medical and dental expenses (see instructions)
+2=2 Enter amount from Form 1040, line 38
+3=3 Multiply line 2 by 7.5% (.075)
+4=4 Subtract line 3 from line 1. If line 3 is more than line 1, enter -0-
