@@ -121,6 +121,16 @@ public class UIFormW2 extends Application {
 //		w2forms.add(w2tax1);
 //		w2forms.add(w2tax2);
 		
+		FormW2 w2f1=new FormW2();
+		w2f1.setForm(w2tax1);
+		w2f1.setName("f1");
+		FormW2 w2f2=new FormW2();
+		w2f2.setForm(w2tax2);
+		w2f2.setName("f2");
+		
+		
+		
+		
 		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
 		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
 //		frm1040.setFillingForms(fillingforms);
@@ -238,7 +248,8 @@ public class UIFormW2 extends Application {
 		formProcess.add(scheduleD);
 		formProcess.add(scheduleB);
 	    formProcess.add(cptGain);
-		
+	    formProcess.add(w2f2);
+	    formProcess.add(w2f1);
 		return formProcess;
 	}
 

@@ -17,9 +17,11 @@ public class FormW2 implements Form {
 	private Map<String,String> employmentWks;
 	private Map<String,Double> incomeWks;
 	public String getName() {
-		return TaxConstant.FORM_W2;
+		return TaxConstant.FORM_W2+name;
 	}
-	
+	public void setName(String myname){
+		this.name=myname;
+	}
 
 	public String getSocialSecurityNumber() {
 		return socialSecurityNumber;
@@ -111,7 +113,7 @@ public class FormW2 implements Form {
 	@Override
 	public List<FormLineDetail> getLineDetails() throws IOException {
 		if(lineDetails==null){
-		   lineDetails=FileUtil.loadLineDescription(getName(), "");	
+		   lineDetails=FileUtil.loadLineDescription(TaxConstant.FORM_W2, "");	
 		}
 		return lineDetails;
 	}
