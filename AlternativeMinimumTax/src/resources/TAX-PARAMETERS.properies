@@ -1,0 +1,12 @@
+standardDeduction=11600
+personExemption=3700
+medicalDentalRate=0.025
+line31Threshold=175000
+line31RateBellow=0.26
+line31RateAbove=0.28
+line31AboveAbstraction=3500
+taxRate4capitalGain=0.15
+fillingStatusExemption=74450
+phaseoutThreshhold=150000
+phaseoutRate=0.25
+
