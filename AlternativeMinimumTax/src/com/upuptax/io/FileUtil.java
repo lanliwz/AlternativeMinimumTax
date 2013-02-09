@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import com.upuptax.reference.FedTaxTable;
+import com.upuptax.reference.FedTaxTableRow;
 
 import com.upuptax.form.FormLineDetail;
 
@@ -130,6 +132,27 @@ public class FileUtil {
 					detail.setLineDescription(token[1]);
 					lines.add(detail);
 				}
+					
+			}
+			
+			
+			
+		}
+	
+		return lines;
+		
+	}
+	public static List<FedTaxTableRow> loadTaxTable(String year) throws IOException{
+		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"FED TAX TABLES.properies");
+		List<FedTaxTableRow> lines = new ArrayList<FedTaxTableRow>(); 
+		
+		if(Files.exists(file)){
+			List<String> slines = Files.readAllLines(file, Charset.defaultCharset());
+			for (String ln:slines){
+				FedTaxTableRow row = new FedTaxTableRow(ln);
+
+				lines.add(row);
+
 					
 			}
 			

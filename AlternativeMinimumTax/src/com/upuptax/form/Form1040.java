@@ -16,11 +16,14 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.upuptax.io.FileUtil;
+import com.upuptax.reference.FedTaxTable;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
 import com.upuptax.utils.NumberUtil;
+
 
 public class Form1040  implements Form{
 	private String filedBy="wei_tax_test";
@@ -48,6 +51,9 @@ public class Form1040  implements Form{
 		
 	}
 	public static void main(String[] args){
+		FedTaxTable taxtable= new FedTaxTable(FillingStatus.JOIN);
+		taxtable.init();
+		System.out.println("Test tax table"+taxtable.getTax(10500d));
 		FillingFormsAndSchedules fillingforms = FillingFormsAndSchedules.newInstance();
 		
 		Form1040 frm1040=new Form1040();
