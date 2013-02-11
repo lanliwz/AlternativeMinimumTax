@@ -265,5 +265,29 @@ public class FileUtil {
 		return lines;
 		
 	}
+	
+	public static double loadExemption(String year) throws IOException{
+		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"TAX-PARAMETERS.properies");
+
+		
+		if(Files.exists(file)){
+			List<String> slines = Files.readAllLines(file, Charset.defaultCharset());
+			for (String ln:slines){
+				String[] token = ln.split(";");
+				if (token.length==2 && token[0].equals("EXEMPTION")){
+					return Double.valueOf(token[1]);
+					
+					
+			}
+			
+			
+			
+			}
+	
+		
+		
+	}
+		return 0;
+		}
 
 }

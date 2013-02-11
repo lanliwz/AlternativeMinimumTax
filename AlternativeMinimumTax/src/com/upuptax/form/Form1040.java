@@ -47,6 +47,9 @@ public class Form1040  implements Form{
 	public void setStandardDeduction(double standardDeduction){
 		this.standardDeduction=standardDeduction;
 	}
+	public void setPersonExemption(double exemption){
+		personExemption=exemption;
+	}
 	public void load() throws IOException{
 		
 		form1040=FileUtil.load(getName(), filedBy, form1040);
@@ -168,6 +171,7 @@ public class Form1040  implements Form{
 		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet(FillingStatus.JOIN);
 		marriedJoin.init();
 		frm1040.setStandardDeduction(marriedJoin.getDeduction(2));
+		frm1040.setPersonExemption(marriedJoin.getExemption());
 //		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
 //		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
 //		rules.add(r3);

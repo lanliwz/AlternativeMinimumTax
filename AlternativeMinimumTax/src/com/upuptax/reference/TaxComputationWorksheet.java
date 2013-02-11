@@ -12,14 +12,20 @@ public class TaxComputationWorksheet {
 	private List<TaxRateRule> taxRateRules;
 	
 	private List<DeductionRule> deductionRules;
+	
+	private double exemption;
 
 	public TaxComputationWorksheet(FillingStatus status){
 		this.fillingStatus=status;
+	}
+	public double getExemption(){
+		return exemption;
 	}
 	public void init(){
 		try {
 			taxRateRules=FileUtil.loadTaxParameters("", fillingStatus);
 			deductionRules=FileUtil.loadTaxDeductions("", fillingStatus);
+			exemption=FileUtil.loadExemption("");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
