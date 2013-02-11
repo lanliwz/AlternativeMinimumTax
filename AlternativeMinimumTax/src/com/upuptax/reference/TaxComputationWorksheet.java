@@ -10,13 +10,16 @@ public class TaxComputationWorksheet {
 	
 
 	private List<TaxRateRule> taxRateRules;
+	
+	private List<DeductionRule> deductionRules;
 
 	public TaxComputationWorksheet(FillingStatus status){
 		this.fillingStatus=status;
 	}
 	public void init(){
 		try {
-			taxRateRules=FileUtil.loadTaParameters("", fillingStatus);
+			taxRateRules=FileUtil.loadTaxParameters("", fillingStatus);
+			deductionRules=FileUtil.loadTaxDeductions("", fillingStatus);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,6 +56,25 @@ public class TaxComputationWorksheet {
 				}
 		}
 		return -1;
+		
+	}
+	public double getDeduction(int numberOfDependency){
+		
+		double maxdeduction=0;
+		for (DeductionRule rule:deductionRules){
+			if (rule.getNumberOfDependency() ==numberOfDependency )
+				{
+				System.out.println(rule.toString());
+				return rule.getDeduction();
+				
+				}
+			if (rule.getDeduction()>maxdeduction)
+				maxdeduction=rule.getDeduction();
+		}
+		if (numberOfDependency>deductionRules.size())
+			return maxdeduction;
+		else
+			return 0;
 		
 	}
 

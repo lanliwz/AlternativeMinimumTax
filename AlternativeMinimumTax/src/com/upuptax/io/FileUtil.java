@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import com.upuptax.reference.DeductionRule;
 import com.upuptax.reference.FedTaxTable;
 import com.upuptax.reference.FedTaxTableRow;
 import com.upuptax.reference.FillingStatus;
@@ -165,7 +167,56 @@ public class FileUtil {
 		return lines;
 		
 	}
-	public static List<TaxRateRule> loadTaParameters(String year,FillingStatus status) throws IOException{
+	public static List<DeductionRule> loadTaxDeductions(String year,FillingStatus status) throws IOException{
+		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"TAX-PARAMETERS.properies");
+		List<DeductionRule> lines = new ArrayList<DeductionRule>(); 
+		
+		if(Files.exists(file)){
+			List<String> slines = Files.readAllLines(file, Charset.defaultCharset());
+			for (String ln:slines){
+				String[] token = ln.split(";");
+				if (token.length==4 && token[0].equals("DEDUCTION")){
+					DeductionRule row=null;
+					switch(status){
+					case SINGLE: {
+						 if (token[1].equals("SINGLE"))
+							 row= new DeductionRule(token);
+						 break;
+
+					}
+					case JOIN: {
+						 if (token[1].equals("JOIN"))
+							 row= new DeductionRule(token);
+						 break;
+					}
+					case SEPERATE: {
+						 if (token[1].equals("SEPERATE"))
+							 row= new DeductionRule(token);
+						 break;
+					}
+					case HEAD: {
+						 if (token[1].equals("HEAD"))
+							 row= new DeductionRule(token);
+						 break;
+					}
+					
+					}
+					if (row!=null)
+						lines.add(row);					
+					
+				}
+
+					
+			}
+			
+			
+			
+		}
+	
+		return lines;
+		
+	}
+	public static List<TaxRateRule> loadTaxParameters(String year,FillingStatus status) throws IOException{
 		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"TAX-PARAMETERS.properies");
 		List<TaxRateRule> lines = new ArrayList<TaxRateRule>(); 
 		
