@@ -18,6 +18,7 @@ import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.FormW2;
 import com.upuptax.form.InfoForm;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
@@ -199,7 +200,7 @@ public class UIFormW2 extends Application {
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
 		cptGain.setFillingForms(fillingforms);
 		
-		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
+		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet(FillingStatus.JOIN);
 		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
 		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
 		rules.add(r3);

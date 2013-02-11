@@ -14,6 +14,17 @@ public class TaxRateRule {
 		this.substraction=substraction;
 	}
 	
+	public TaxRateRule(String row){
+		String[] srow = row.split(";");
+		this.taxRate=Double.valueOf(srow[4])/100;
+		this.taxableIncomeLowEnd=Double.valueOf(srow[2]);
+		if (srow[3]==null ||srow[3].equals(""))
+			this.taxableIncomeHighEnd=Double.MAX_VALUE;
+		else
+			this.taxableIncomeHighEnd=Double.valueOf(srow[3]);
+		this.substraction=Double.valueOf(srow[5]);;
+	}
+
 	public double getSubstraction() {
 		return substraction;
 	}

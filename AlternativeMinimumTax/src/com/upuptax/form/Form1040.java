@@ -162,18 +162,19 @@ public class Form1040  implements Form{
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
 		cptGain.setFillingForms(fillingforms);
 		
-		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet();
-		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
-		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
-		rules.add(r3);
-		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
-		rules.add(r4);
-		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
-		rules.add(r5);
-		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
-		rules.add(r6);
-		
-		marriedJoin.setTaxRateRules(rules);
+		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet(FillingStatus.JOIN);
+		marriedJoin.init();
+//		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
+//		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
+//		rules.add(r3);
+//		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
+//		rules.add(r4);
+//		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
+//		rules.add(r5);
+//		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
+//		rules.add(r6);
+//		
+//		marriedJoin.setTaxRateRules(rules);
 		cptGain.setTaxRate4income(marriedJoin);
 		
 //		Map<String,Double> frm = new HashMap<String,Double>();	

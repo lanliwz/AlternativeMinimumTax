@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Properties;
 import com.upuptax.reference.FedTaxTable;
 import com.upuptax.reference.FedTaxTableRow;
+import com.upuptax.reference.FillingStatus;
+import com.upuptax.reference.TaxRateRule;
 
 import com.upuptax.form.FormLineDetail;
 
@@ -163,4 +165,54 @@ public class FileUtil {
 		return lines;
 		
 	}
+	public static List<TaxRateRule> loadTaParameters(String year,FillingStatus status) throws IOException{
+		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"TAX-PARAMETERS.properies");
+		List<TaxRateRule> lines = new ArrayList<TaxRateRule>(); 
+		
+		if(Files.exists(file)){
+			List<String> slines = Files.readAllLines(file, Charset.defaultCharset());
+			for (String ln:slines){
+				String[] token = ln.split(";");
+				if (token.length==6 && token[0].equals("RATE")){
+					TaxRateRule row=null;
+					switch(status){
+					case SINGLE: {
+						 if (token[1].equals("SINGLE"))
+							 row= new TaxRateRule(ln);
+						 break;
+
+					}
+					case JOIN: {
+						 if (token[1].equals("JOIN"))
+							 row= new TaxRateRule(ln);
+						 break;
+					}
+					case SEPERATE: {
+						 if (token[1].equals("SEPERATE"))
+							 row= new TaxRateRule(ln);
+						 break;
+					}
+					case HEAD: {
+						 if (token[1].equals("HEAD"))
+							 row= new TaxRateRule(ln);
+						 break;
+					}
+					
+					}
+					if (row!=null)
+						lines.add(row);					
+					
+				}
+
+					
+			}
+			
+			
+			
+		}
+	
+		return lines;
+		
+	}
+
 }
