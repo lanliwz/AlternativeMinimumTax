@@ -7,13 +7,14 @@ import java.util.Map;
 
 import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
+import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.NumberUtil;
 
 public class Form6521 implements Form{
 	private String filedBy="wei_tax_test";
 	private FillingFormsAndSchedules fillingForms;
-	private Form6521ExemptionWorksheet exemption=new Form6521ExemptionWorksheet();
+	private Form6521ExemptionWorksheet exemption=new Form6521ExemptionWorksheet(FillingStatus.JOIN);
 	private Map<String,Double> form1040;
 	private Map<String,Double> form6521=new HashMap<String,Double>();
 	private double medicalDentalRate=0.025;
@@ -55,6 +56,7 @@ public class Form6521 implements Form{
 		System.out.println("Alternative Minimum Taxable Income = "+line28);
 		
 		exemption.setForm6521(form6521);
+		exemption.load();
 		exemption.init();
 		
 		form6521.put("29", exemption.getExcemtion());

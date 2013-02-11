@@ -216,6 +216,17 @@ public class FileUtil {
 		return lines;
 		
 	}
+	public static List<String> loadParameters(String formName,String year) throws IOException {
+		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,formName+"-PARAMETERS.properies");
+		
+		if(Files.exists(file)){
+			List<String> slines = Files.readAllLines(file, Charset.defaultCharset());
+			return slines;
+					
+			}			
+	
+		return null;
+	}
 	public static List<TaxRateRule> loadTaxParameters(String year,FillingStatus status) throws IOException{
 		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"TAX-PARAMETERS.properies");
 		List<TaxRateRule> lines = new ArrayList<TaxRateRule>(); 

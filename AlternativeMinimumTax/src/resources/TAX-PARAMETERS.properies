@@ -11,7 +11,12 @@ DEDUCTION;SEPERATE;1;7100
 DEDUCTION;SEPERATE;2;8250
 DEDUCTION;SEPERATE;1;9400
 DEDUCTION;SEPERATE;4;10500
-personExemption;3800
+
+EXEMPTION;3800
+
+
+
+
 
 medicalDentalRate=0.025
 line31Threshold=175000
@@ -19,9 +24,9 @@ line31RateBellow=0.26
 line31RateAbove=0.28
 line31AboveAbstraction=3500
 taxRate4capitalGain=0.15
-fillingStatusExemption=74450
-phaseoutThreshhold=150000
-phaseoutRate=0.25
+
+
+
 RATE;SINGLE;0;8700;10;0
 RATE;SINGLE;8700;35350;15;870
 RATE;SINGLE;35350;85650;25;4867
