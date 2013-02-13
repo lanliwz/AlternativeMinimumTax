@@ -19,6 +19,7 @@ import com.upuptax.reference.FedTaxTable;
 import com.upuptax.reference.FedTaxTableRow;
 import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxRateRule;
+import com.upuptax.utils.NumberUtil;
 
 import com.upuptax.form.FormLineDetail;
 
@@ -76,8 +77,8 @@ public class FileUtil {
 			prop.load(reader);
 			if (prop.size()>0 && form!=null){
 				for (Object key:prop.keySet()){
-//					form.clear();
-					form.put((String) key, Double.valueOf(prop.getProperty((String)key)));
+
+					form.put((String) key, NumberUtil.valueOf(prop.getProperty((String)key)));
 				}
 			}
 		

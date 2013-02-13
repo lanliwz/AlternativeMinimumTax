@@ -129,9 +129,7 @@ public class UIFormW2 extends Application {
 		
 		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
 		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
-//		frm1040.setFillingForms(fillingforms);
-//		frm1040.setW2Forms(w2forms);
-//		frm1040.init();
+
 		
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
 		scheduleB.setFillingForms(fillingforms);
@@ -169,14 +167,13 @@ public class UIFormW2 extends Application {
 		Form1040ScheduleA scheduleA=new Form1040ScheduleA();
 		scheduleA.setFillingForms(fillingforms);
 		Map<String,Double> schA= new HashMap<String,Double>();
-		schA.put("5", 14467d);
-		schA.put("6", 18111d);
-		schA.put("7", 130d);
-		schA.put("10", 1087d);
-		schA.put("12", 99d);
-		schA.put("16", 3000d);
-		schA.put("22", 120d);
 		scheduleA.setForm(schA);
+		try {
+			scheduleA.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		scheduleA.init();
 		fillingforms=scheduleA.getFillingForms();
 		fillingforms.print();

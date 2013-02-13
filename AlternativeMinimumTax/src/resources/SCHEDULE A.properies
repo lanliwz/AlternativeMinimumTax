@@ -2,3 +2,33 @@
 2=2 Enter amount from Form 1040, line 38
 3=3 Multiply line 2 by 7.5% (.075)
 4=4 Subtract line 3 from line 1. If line 3 is more than line 1, enter -0-
+5a=5 State and local (check only one box): a Income taxes, or
+5b=5 b General sales taxes
+5=5 State and local Income taxes
+6=6 Real estate taxes (see instructions)
+7=7 Personal property taxes
+8=8 Other taxes. List type and amount
+9=9 Add lines 5 through 8
+Interest You Paid
+Note. Your mortgage interest deduction may be limited (see instructions).
+10=10 Home mortgage interest and points reported to you on Form 1098
+11=11 Home mortgage interest not reported to you on Form 1098. If paid to the person from whom you bought the home, see instructions and show that person’s name, identifying no., and address
+12=12 Points not reported to you on Form 1098. See instructions for special rules
+13=13 Mortgage insurance premiums (see instructions)
+14=14 Investment interest. Attach Form 4952 if required. (See instructions.)
+15=15 Add lines 10 through 14
+16=16 Gifts by cash or check. If you made any gift of $250 or more, see instructions
+17=17 Other than by cash or check. If any gift of $250 or more, see instructions. You must attach Form 8283 if over $500
+18=18 Carryover from prior year
+19=19 Add lines 16 through 18
+20=Casualty or theft loss(es). Attach Form 4684. (See instructions.)
+21=21 Unreimbursed employee expenses—job travel, union dues, job education, etc. Attach Form 2106 or 2106-EZ if required.
+22=22 Tax preparation fees
+23=23 Other expenses.investment, safe deposit box, etc. List type and amount
+24=24 Add lines 21 through 23
+25=25 Enter amount from Form 1040, line 38
+26=26 Multiply line 25 by 2% (.02)
+27=27 Subtract line 26 from line 24. If line 26 is more than line 24, enter -0-
+28=28 Other.from list in instructions. List type and amount
+29=29 Add the amounts in the far right column for lines 4 through 28. Also, enter this amount on Form 1040, line 40
+30=30 If you elect to itemize deductions even though they are less than your standard deduction, check here

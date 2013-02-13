@@ -14,8 +14,20 @@ public class Form1040ScheduleA implements Form{
 	private double jobExpenseRate=0.02;
 	private Map<String,Double> scheduleA;
 	private FillingFormsAndSchedules fillingForms;
+	private List<Map<String,Double>> w2Forms;
 
 	public void init(){
+		if(w2Forms==null)
+			w2Forms=fillingForms.getForms(TaxConstant.FORM_W2);
+		double line5=0;
+		if (w2Forms!=null){
+			for (Map<String,Double> w2:w2Forms){
+				line5=w2.get("17")+line5;
+			}
+
+
+		}
+		scheduleA.put("5", line5);
 		scheduleA.put("9", NumberUtil.add(1,8,scheduleA));
 		scheduleA.put("15", NumberUtil.add(10,14,scheduleA));
 		scheduleA.put("19", NumberUtil.add(16,18,scheduleA));

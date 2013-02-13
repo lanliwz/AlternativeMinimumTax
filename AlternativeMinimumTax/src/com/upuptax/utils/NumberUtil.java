@@ -76,5 +76,17 @@ public class NumberUtil {
 		else
 			return val1*val2;
 	}
+	public static double valueOf(String svalue){
+		double value=0d;
+		if (svalue==null)
+			return value;
+		else if (svalue.trim().equalsIgnoreCase("null") || svalue.trim().equals("")){
+			return value;
+		} else {
+			value=Double.valueOf(svalue);
+		}
+		
+		return value;
+	}
 
 }
