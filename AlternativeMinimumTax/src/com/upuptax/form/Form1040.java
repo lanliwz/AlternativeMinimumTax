@@ -281,6 +281,9 @@ public class Form1040  implements Form{
 			}
 
 		}
+		if (form1040==null){
+			form1040=new HashMap<String,Double>();
+		}
 		form1040.put("7", line7);
 		System.out.println("Wages = "+line7);
 		form1040.put("62", line62);

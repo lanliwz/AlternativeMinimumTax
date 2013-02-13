@@ -73,18 +73,9 @@ public class UIFormW2 extends Application {
 	public List<InfoForm> getListOfInfoForm(){
 		List<InfoForm> info = new ArrayList<InfoForm>();
 		FederalInfoWorksheet infowks = new FederalInfoWorksheet();
-		
-//		Map<String,String> infoform = new HashMap<String,String>();
-//		infoform.put("1", "test 1");
-//		infoform.put("2", "test 2");
-//		infoform.put("3", "test 1");
-//		infoform.put("4", "test 1");
-//		infoform.put("5", "test 1");
-//		infowks.setForm(infoform);
 		info.add(infowks);
 		try {
 			infowks.init();
-//			infowks.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,10 +89,13 @@ public class UIFormW2 extends Application {
 		List<Form> formProcess = new ArrayList<Form>();
 		Form1040 frm1040=new Form1040();
 		Map<String,Double> form1040=new HashMap<String,Double>();
-		form1040.put("6d",2d);
-		form1040.put("10",716d);
-		form1040.put("52",400d);
-		frm1040.setForm(form1040);
+
+		try {
+			frm1040.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 //		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
