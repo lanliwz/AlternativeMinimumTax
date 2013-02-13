@@ -101,27 +101,28 @@ public class UIFormW2 extends Application {
 //		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
 		Map<String,Double> w2tax2=new HashMap<String,Double>();
-		w2tax1.put("1",125405.88);
-		w2tax1.put("2",21590.65);
-		w2tax1.put("3",106800d);
-		w2tax1.put("4",4485.6);
-		w2tax1.put("5",141905.88);
-		w2tax1.put("6",2057.64);
-		w2tax2.put("1",100177.95);
-		w2tax2.put("2",14768.0);
-		w2tax2.put("3",106800d);
-		w2tax2.put("4",4485.6);
-		w2tax2.put("5",116677.95);
-		w2tax2.put("6",1691.83);
-//		w2forms.add(w2tax1);
-//		w2forms.add(w2tax2);
+
 		
 		FormW2 w2f1=new FormW2();
 		w2f1.setForm(w2tax1);
 		w2f1.setName("f1");
+		try {
+			w2f1.load();
+			w2tax1=w2f1.getForm();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		FormW2 w2f2=new FormW2();
 		w2f2.setForm(w2tax2);
 		w2f2.setName("f2");
+		try {
+			w2f2.load();
+			w2tax2=w2f2.getForm();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
