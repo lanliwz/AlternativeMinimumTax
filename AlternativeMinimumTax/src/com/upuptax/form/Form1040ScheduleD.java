@@ -15,26 +15,26 @@ public class Form1040ScheduleD implements Form {
 	private FillingFormsAndSchedules fillingForms;
 	
 	public void init(){
-		double line1h = NumberUtil.substract(scheduleD.get("1e"),scheduleD.get("1f"));
+		double line1h = NumberUtil.substract(scheduleD.get("1d"),scheduleD.get("1e"));
 		scheduleD.put("1h", line1h);
-		scheduleD.put("1", line1h);
-		double line2h = NumberUtil.substract(scheduleD.get("2e"),scheduleD.get("2f"));
+		scheduleD.put("1", NumberUtil.add(line1h,scheduleD.get("1g")));
+		double line2h = NumberUtil.substract(scheduleD.get("2d"),scheduleD.get("2e"));
 		scheduleD.put("2h", line2h);
-		scheduleD.put("2", line2h);
-		double line3h = NumberUtil.substract(scheduleD.get("3e"),scheduleD.get("3f"));
+		scheduleD.put("2", NumberUtil.add(line2h,scheduleD.get("2g")));
+		double line3h = NumberUtil.substract(scheduleD.get("3d"),scheduleD.get("3e"));
 		scheduleD.put("3h", line3h);
-		scheduleD.put("3", line3h);
+		scheduleD.put("3", NumberUtil.add(line3h,scheduleD.get("3g")));
 		
 		scheduleD.put("7", NumberUtil.add(1,6, scheduleD));
-		double line8h = NumberUtil.substract(scheduleD.get("8e"),scheduleD.get("8f"));
+		double line8h = NumberUtil.substract(scheduleD.get("8d"),scheduleD.get("8e"));
 		scheduleD.put("8h", line8h);
-		scheduleD.put("8", line8h);
-		double line9h = NumberUtil.substract(scheduleD.get("9e"),scheduleD.get("9f"));
+		scheduleD.put("8", NumberUtil.add(line8h,scheduleD.get("8g")));
+		double line9h = NumberUtil.substract(scheduleD.get("9d"),scheduleD.get("9e"));
 		scheduleD.put("9h", line9h);
-		scheduleD.put("9", line9h);
-		double line10h = NumberUtil.substract(scheduleD.get("10e"),scheduleD.get("10f"));
+		scheduleD.put("9", NumberUtil.add(line9h,scheduleD.get("9g")));
+		double line10h = NumberUtil.substract(scheduleD.get("10d"),scheduleD.get("10e"));
 		scheduleD.put("10h", line10h);
-		scheduleD.put("10", line10h);
+		scheduleD.put("10", NumberUtil.add(line10h,scheduleD.get("10g")));
 		scheduleD.put("15", NumberUtil.add(8,14, scheduleD));
 		Double[] line16={scheduleD.get("7"),scheduleD.get("15")};
 		scheduleD.put("16", NumberUtil.add(line16));

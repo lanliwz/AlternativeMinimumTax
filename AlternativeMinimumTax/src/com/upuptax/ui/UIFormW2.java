@@ -134,20 +134,18 @@ public class UIFormW2 extends Application {
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
 		scheduleB.setFillingForms(fillingforms);
 		Map<String,Double> interests = new HashMap<String,Double>();
-		interests.put("citi1", 76.06);
-		interests.put("citi2", 187.3);
-		interests.put("citi3", 22.51);
-		interests.put("citi4", 22.5);
-		interests.put("citi5", 49.8);
-		interests.put("citi6", 11.56);
 		scheduleB.setInterests(interests);
 		Map<String,Double> dividends = new HashMap<String,Double>();
-		dividends.put("citi", 734.4);
 		Map<String,Double> qdividends = new HashMap<String,Double>();
-		qdividends.put("citi", 699.29);
 		
 		scheduleB.setOrdinaryDividends(dividends);
 		scheduleB.setQualifiedDividends(qdividends);
+		try {
+			scheduleB.load();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		scheduleB.init();
 		fillingforms=scheduleB.getFillingForms();
 		
@@ -156,9 +154,15 @@ public class UIFormW2 extends Application {
 		Form1040ScheduleD scheduleD=new Form1040ScheduleD();
 		scheduleD.setFillingForms(fillingforms);
 		Map<String,Double> schD= new HashMap<String,Double>();
-		schD.put("9e", 3490d);
-		schD.put("9f", 3060d);
+//		schD.put("9e", 3490d);
+//		schD.put("9f", 3060d);
 		scheduleD.setForm(schD);
+		try {
+			scheduleD.load();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		scheduleD.init();
 		fillingforms=scheduleD.getFillingForms();

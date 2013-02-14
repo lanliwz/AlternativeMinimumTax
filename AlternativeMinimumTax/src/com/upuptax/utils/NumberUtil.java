@@ -70,6 +70,17 @@ public class NumberUtil {
 		}
 		return total;
 	}
+	public static double add(Double val1,Double val2){
+		double total=0;
+
+		if(val1!=null)		
+		  total=total+val1.doubleValue();
+		if(val2!=null)		
+			  total=total+val2.doubleValue();
+			
+
+		return total;
+	}
 	public static double multiply(Double val1,Double val2){
 		if(val1==null || val2==null)
 			return 0d;
