@@ -232,6 +232,12 @@ public class UIFormW2 extends Application {
 		Form6521 form6521 = new Form6521();
 		
 		form6521.setFillingForms(fillingforms);
+		try {
+			form6521.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		form6521.init();
 		
 
