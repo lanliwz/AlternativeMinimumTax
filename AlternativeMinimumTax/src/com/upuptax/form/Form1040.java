@@ -26,9 +26,10 @@ import com.upuptax.utils.NumberUtil;
 
 
 public class Form1040  implements Form{
+	private FillingStatus fillingStatus;
 	private String filedBy="wei_tax_test";
-	private double standardDeduction=11600d;
-	private double personExemption=3700;
+	private double standardDeduction;
+	private double personExemption;
 	private FillingFormsAndSchedules fillingForms;
 	private List<Map<String,Double>> w2Forms;
 	private Map<String,Double> form1040;
@@ -36,9 +37,12 @@ public class Form1040  implements Form{
 	private Map<String,Double> scheduleA;
 	private Map<String,Double> scheduleB;
 	private Map<String,Double> scheduleD;
-	//capital gain
+	private TaxComputationWorksheet taxcomputation; 
 	private  Map<String,Double> capitalGainWorksheet;
-	//alternative minimum tax
+
+	public Form1040(FillingStatus status){
+		this.fillingStatus=status;
+	}
 	
 	public void save() throws IOException{
 		FileUtil.save(getName(), filedBy, form1040);
@@ -62,7 +66,7 @@ public class Form1040  implements Form{
 		System.out.println("Test tax table"+taxtable.getTax(10500d));
 		FillingFormsAndSchedules fillingforms = FillingFormsAndSchedules.newInstance();
 		
-		Form1040 frm1040=new Form1040();
+		Form1040 frm1040=new Form1040(FillingStatus.JOIN);
 		Map<String,Double> form1040=new HashMap<String,Double>();
 		form1040.put("6d",2d);
 		form1040.put("10",716d);
@@ -267,6 +271,11 @@ public class Form1040  implements Form{
 	}
 
 	public void init(){
+		taxcomputation = new TaxComputationWorksheet(fillingStatus);
+		taxcomputation.init();
+		standardDeduction= taxcomputation.getDeduction(form1040.get("6d").intValue());
+		personExemption=taxcomputation.getExemption();
+		//capital gain
 		
 		double line7 =0;
 		double line62=0;
@@ -314,6 +323,8 @@ public class Form1040  implements Form{
 		
 		double line37=NumberUtil.substractWithPositiveReturn(form1040.get("22"), form1040.get("36"));
 		System.out.println("Adjusted Gross Income = "+line37);
+		
+		form1040.put("37", line37);
 		
 		form1040.put("38", line37);
 		scheduleA=fillingForms.getSchedule(TaxConstant.SCHEDULE_A);

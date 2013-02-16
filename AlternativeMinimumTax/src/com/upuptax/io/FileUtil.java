@@ -71,6 +71,9 @@ public class FileUtil {
 
 	public static Map<String,Double> load(String formName,String fillingBy,Map<String,Double> form) throws IOException{
 		Path file = Paths.get(System.getProperty("user.home"),fillingBy,formName+".properies");
+		if (form==null){
+			form=new HashMap<String,Double>();
+		}
 		if(Files.exists(file)){
 			Reader reader= Files.newBufferedReader(file, Charset.defaultCharset());		
 			Properties prop = new Properties();

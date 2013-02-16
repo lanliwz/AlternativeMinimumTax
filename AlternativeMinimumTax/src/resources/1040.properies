@@ -1,3 +1,12 @@
+1=1 Single
+2=2 Married filing jointly (even if only one had income)
+3=3 Married filing separately. Enter spouses SSN above and full name here
+4=4 Head of household (with qualifying person). (See instructions.) If the qualifying person is a child but not your dependent, enter this child's name here
+5=5 Qualifying widow(er) with dependent child
+6a=6 a Yourself. If someone can claim you as a dependent, do not check box 6a .....
+6b=6 b Spouse
+6c=6 c 
+6d=6 d Total number of exemptions claimed
 7=7 Wages, salaries, tips, etc. Attach Form(s) W-2
 8=8 a Taxable interest. Attach Schedule B if required
 8b=8 b Tax-exempt interest. Do not include on line 8a

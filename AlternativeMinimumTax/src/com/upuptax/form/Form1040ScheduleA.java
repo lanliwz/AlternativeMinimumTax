@@ -22,7 +22,7 @@ public class Form1040ScheduleA implements Form{
 		double line5=0;
 		if (w2Forms!=null){
 			for (Map<String,Double> w2:w2Forms){
-				line5=w2.get("17")+line5;
+				line5=NumberUtil.add(w2.get("17"),line5);
 			}
 
 

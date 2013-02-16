@@ -63,6 +63,7 @@ import javafx.util.Callback;
 
 
 public class UIFormW2 extends Application {
+	
 
 	public static void main(String[] args){
 
@@ -85,9 +86,10 @@ public class UIFormW2 extends Application {
 	}
 	
 	public List<Form> getListOfForm(){
+		FillingStatus fillingStatus=FillingStatus.JOIN;
 		FillingFormsAndSchedules fillingforms=FillingFormsAndSchedules.newInstance();
 		List<Form> formProcess = new ArrayList<Form>();
-		Form1040 frm1040=new Form1040();
+		Form1040 frm1040=new Form1040(fillingStatus);
 		Map<String,Double> form1040=new HashMap<String,Double>();
 
 		try {
@@ -197,20 +199,21 @@ public class UIFormW2 extends Application {
 		cptGain.setFillingForms(fillingforms);
 		
 		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet(FillingStatus.JOIN);
-		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
-		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
-		rules.add(r3);
-		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
-		rules.add(r4);
-		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
-		rules.add(r5);
-		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
-		rules.add(r6);
+//		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
+//		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
+//		rules.add(r3);
+//		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
+//		rules.add(r4);
+//		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
+//		rules.add(r5);
+//		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
+//		rules.add(r6);
 		
-		marriedJoin.setTaxRateRules(rules);
+//		marriedJoin.setTaxRateRules(rules);
+		marriedJoin.init();
 		cptGain.setTaxRate4income(marriedJoin);
 		
-	
+		frm1040.init();
 		cptGain.setForm1040(frm1040.getForm());
 		
 		
