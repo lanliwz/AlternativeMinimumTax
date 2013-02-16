@@ -13,8 +13,9 @@ import com.upuptax.utils.NumberUtil;
 
 public class Form6521 implements Form{
 	private String filedBy="wei_tax_test";
+	private FillingStatus fillingStatus;
 	private FillingFormsAndSchedules fillingForms;
-	private Form6521ExemptionWorksheet exemption=new Form6521ExemptionWorksheet(FillingStatus.JOIN);
+	private Form6521ExemptionWorksheet exemption;
 	private Map<String,Double> form1040;
 	private Map<String,Double> form6521=new HashMap<String,Double>();
 	private double medicalDentalRate=0.025;
@@ -24,6 +25,9 @@ public class Form6521 implements Form{
 	private double line31AboveAbstraction=3500d;
 	private double taxRate4capitalGain=0.15;
 	
+	public Form6521(FillingStatus status){
+		this.fillingStatus=status;
+	}
 	public FillingFormsAndSchedules getFillingForms() {
 		return fillingForms;
 	}
@@ -36,6 +40,8 @@ public class Form6521 implements Form{
 	}
 
 	public void init(){
+		exemption=new Form6521ExemptionWorksheet(fillingStatus);
+		exemption.load();
 		this.form1040=fillingForms.getForms().get(TaxConstant.FORM_1040);
 		Double line1=0d;
 		if (fillingForms.getSchedules()!=null && fillingForms.getSchedules().get(TaxConstant.SCHEDULE_A)!=null){

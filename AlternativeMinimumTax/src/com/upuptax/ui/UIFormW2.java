@@ -232,7 +232,7 @@ public class UIFormW2 extends Application {
 //		
 //		fillingforms.setForms(forms);
 		
-		Form6521 form6521 = new Form6521();
+		Form6521 form6521 = new Form6521(fillingStatus);
 		
 		form6521.setFillingForms(fillingforms);
 		try {

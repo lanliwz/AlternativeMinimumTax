@@ -14,11 +14,11 @@ public class Form6521ExemptionWorksheet {
 	private FillingStatus fillingStatus;
 	private Map<String,Double> worksheet = new HashMap<String,Double>();
 	private Map<String,Double> form6521;
-	private Double fillingStatusExemption=74450d;
+	private Double fillingStatusExemption;
 	
-	private Double phaseoutThreshhold=150000d;
+	private Double phaseoutThreshhold;
 	
-	private Double phaseoutRate=0.25d;
+	private Double phaseoutRate;
 	
 	public Form6521ExemptionWorksheet(FillingStatus status){
 		this.fillingStatus=status;
