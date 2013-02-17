@@ -39,6 +39,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -63,6 +64,10 @@ import javafx.util.Callback;
 
 
 public class UIFormW2 extends Application {
+	FillingStatus fillingStatus=FillingStatus.JOIN;
+	FillingFormsAndSchedules fillingforms=FillingFormsAndSchedules.newInstance();
+	List<Form> formProcess = new ArrayList<Form>();
+	List<InfoForm> info = new ArrayList<InfoForm>();
 	
 
 	public static void main(String[] args){
@@ -72,7 +77,7 @@ public class UIFormW2 extends Application {
 	}
 	
 	public List<InfoForm> getListOfInfoForm(){
-		List<InfoForm> info = new ArrayList<InfoForm>();
+		
 		FederalInfoWorksheet infowks = new FederalInfoWorksheet();
 		info.add(infowks);
 		try {
@@ -86,9 +91,9 @@ public class UIFormW2 extends Application {
 	}
 	
 	public List<Form> getListOfForm(){
-		FillingStatus fillingStatus=FillingStatus.JOIN;
-		FillingFormsAndSchedules fillingforms=FillingFormsAndSchedules.newInstance();
-		List<Form> formProcess = new ArrayList<Form>();
+
+		
+		
 		Form1040 frm1040=new Form1040(fillingStatus);
 		Map<String,Double> form1040=new HashMap<String,Double>();
 
@@ -98,9 +103,7 @@ public class UIFormW2 extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-//		List<Map<String,Double>> w2forms=new ArrayList<Map<String,Double>>();
+
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
 		Map<String,Double> w2tax2=new HashMap<String,Double>();
 
@@ -183,11 +186,7 @@ public class UIFormW2 extends Application {
 		scheduleA.init();
 		fillingforms=scheduleA.getFillingForms();
 		fillingforms.print();
-		
-		
-//		frm1040.setScheduleD(scheduleD.getForm());
-//		frm1040.setScheduleB(scheduleB.getForm());
-//		frm1040.setScheduleA(scheduleA.getForm());
+
 		frm1040.setFillingForms(fillingforms);
 		frm1040.init();
 		scheduleA.calculate(form1040);
@@ -199,17 +198,7 @@ public class UIFormW2 extends Application {
 		cptGain.setFillingForms(fillingforms);
 		
 		TaxComputationWorksheet marriedJoin = new TaxComputationWorksheet(FillingStatus.JOIN);
-//		List<TaxRateRule> rules = new ArrayList<TaxRateRule>();
-//		TaxRateRule r3=new TaxRateRule(0.25,70700,142700,7750);
-//		rules.add(r3);
-//		TaxRateRule r4=new TaxRateRule(0.28,142700,217450,11930.5);
-//		rules.add(r4);
-//		TaxRateRule r5=new TaxRateRule(0.33,217450,388350,22545.5);
-//		rules.add(r5);
-//		TaxRateRule r6=new TaxRateRule(0.35,388350,Double.POSITIVE_INFINITY,30128.5);
-//		rules.add(r6);
-		
-//		marriedJoin.setTaxRateRules(rules);
+
 		marriedJoin.init();
 		cptGain.setTaxRate4income(marriedJoin);
 		
@@ -261,7 +250,7 @@ public class UIFormW2 extends Application {
 
 
 	public void start(Stage stage) throws Exception {
-		stage.setTitle("W-2 Form");
+		stage.setTitle("Federal Tax");
 		Group root = new Group();
         Scene scene = new Scene(root, 1024, 768, Color.WHITE);
 		SplitPane splitPane = new SplitPane();
@@ -442,23 +431,7 @@ public class UIFormW2 extends Application {
 		leftArea.getChildren().add(leftLabel);
 		leftArea.getChildren().add(fillingformsView);
 		leftArea.getChildren().add(infoView);
-		
-//		fillingformsView.getSelectionModel().selectedItemProperty().addListener(
-//			new ChangeListener<Form>() {
-//			@Override
-//			public void changed(ObservableValue<? extends Form> observable,Form arg1, Form arg2){
-//				if (observable != null && observable.getValue() != null) {
-//			}
-//	                    forminputs.clear();
-////	                    Map<String,Double> inputs = observable.getValue().getForm();
-//	                    
-//	                    forminputs.addAll(transform(observable.getValue()));
-//	                }
-//
-//			
-//				
-//			}
-//        );
+
 		
 		leftArea.setAlignment(Pos.TOP_CENTER);
 
@@ -480,7 +453,17 @@ public class UIFormW2 extends Application {
 		    dividers.get(i).setPosition((i + 1.0) / 3);
 		}
 
-		HBox hbox = new HBox();
+		VBox hbox = new VBox();
+		HBox wfbox=new HBox();
+		Button stage1 = new Button("Personal information");
+		Button stage2 = new Button("Wage and Income");
+		Button stage3 = new Button("Credit and Deduction");
+		Button stage4 = new Button("Calculate Tax");
+		wfbox.getChildren().add(stage1);
+		wfbox.getChildren().add(stage2);
+		wfbox.getChildren().add(stage3);
+		wfbox.getChildren().add(stage4);
+		hbox.getChildren().add(wfbox);
 		hbox.getChildren().add(splitPane);
 		root.getChildren().add(hbox);
 		stage.setScene(scene);
@@ -524,15 +507,7 @@ public class UIFormW2 extends Application {
     		
 
     	}
-//    	for (String key:map.keySet()){
-//    		FormLineDetail detail = new FormLineDetail();
-//    		detail.setForm(form);
-//    		detail.setFormName(form.getName());
-//    		
-//    		detail.setLineNumber(key);
-//    		detail.setValue(String.valueOf(map.get(key)));
-//    		inputs.add(detail);
-//    	}
+
     	return inputs;
     }
     public ObservableList<FormLineDetail> transform(InfoForm form){
