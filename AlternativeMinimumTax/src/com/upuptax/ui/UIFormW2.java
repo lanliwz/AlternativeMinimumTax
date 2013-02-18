@@ -33,6 +33,7 @@ import javafx.scene.text.TextBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
@@ -317,24 +318,7 @@ public class UIFormW2 extends Application {
         	            }
         	        });
 
-//        lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
-//            @Override
-//            public void handle(CellEditEvent<FormLineDetail, String> t) {
-//            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
-//                System.out.println("old val:"+linedetail.getValue());
-//                
-//            	linedetail.setValue(t.getNewValue());
-//            	System.out.println("new val:"+linedetail.getValue());
-//            	if (linedetail.getForm()!=null){
-//            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
-//            		return;
-//            	}
-//            		
-//            	if (linedetail.getInfoForm()!=null)
-//            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
-//
-//            }
-//        });
+
 
         for (Form f:getListOfForm()){
         fillingforms.add(f);
@@ -459,6 +443,16 @@ public class UIFormW2 extends Application {
 		Button stage2 = new Button("Wage and Income");
 		Button stage3 = new Button("Credit and Deduction");
 		Button stage4 = new Button("Calculate Tax");
+
+		
+		stage4.addEventHandler(MouseEvent.MOUSE_CLICKED, 
+			    new EventHandler<MouseEvent>() {
+			        @Override public void handle(MouseEvent e) {
+			           for(Form fm:formProcess){
+			        	   fm.init();
+			           }
+			        }
+			});
 		wfbox.getChildren().add(stage1);
 		wfbox.getChildren().add(stage2);
 		wfbox.getChildren().add(stage3);
