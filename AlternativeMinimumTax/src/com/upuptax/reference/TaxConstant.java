@@ -10,6 +10,7 @@ public class TaxConstant {
 	public static String SCHEDULE_D="SCHEDULE D";
 	public static String SCHEDULE_A="SCHEDULE A";
 	public static String SCHEDULE_B="SCHEDULE B";
+	public static String SCHEDULE_E="SCHEDULE E";
 	//worksheet
 	public static String WKS_CAPITAL_GAIN="QUALIFIED DIVIDENDS AND CAPITAL GAIN TAX WORKSHEET";
 	public static String WKS_FED_INFO="FEDERAL INFORMATION WORKSHEET";

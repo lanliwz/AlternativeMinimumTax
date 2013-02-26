@@ -13,6 +13,7 @@ import com.upuptax.form.Form1040;
 import com.upuptax.form.Form1040ScheduleA;
 import com.upuptax.form.Form1040ScheduleB;
 import com.upuptax.form.Form1040ScheduleD;
+import com.upuptax.form.Form1040ScheduleE;
 import com.upuptax.form.Form6521;
 import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.FormW2;
@@ -187,6 +188,8 @@ public class UIFormW2 extends Application {
 		scheduleA.init();
 		fillingforms=scheduleA.getFillingForms();
 		fillingforms.print();
+		
+		
 
 		frm1040.setFillingForms(fillingforms);
 		frm1040.init();
@@ -194,6 +197,15 @@ public class UIFormW2 extends Application {
 		fillingforms=scheduleA.getFillingForms();
 		fillingforms.print();
 
+		Form1040ScheduleE scheduleE = new Form1040ScheduleE();
+		scheduleE.setFillingForms(fillingforms);
+		try {
+			scheduleE.load();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		scheduleE.init();
 		
 		CapitalGainWorksheet cptGain=new CapitalGainWorksheet();
 		cptGain.setFillingForms(fillingforms);
@@ -243,6 +255,7 @@ public class UIFormW2 extends Application {
 		formProcess.add(scheduleA);
 		formProcess.add(scheduleD);
 		formProcess.add(scheduleB);
+		formProcess.add(scheduleE);
 	    formProcess.add(cptGain);
 	    formProcess.add(w2f2);
 	    formProcess.add(w2f1);
