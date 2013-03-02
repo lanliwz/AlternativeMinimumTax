@@ -18,6 +18,8 @@ public class TaxConstant {
 	//reference
 	public static String QUALIFIED_DIVIDENDS="QUALIFIED DIVIDENDS";
 	
+	public static String TAX_REPORT="TAX REPORT";
+	
 	public double SINGLE_MAX_EXCEPTION_AMT=48450;
 	public double MARRIED_JOIN_MAX_EXCEPTION_AMT=74450;
 	public double MARRIED_SEPERATE_MAX_EXCEPTION_AMT=37225;

@@ -18,6 +18,7 @@ import com.upuptax.form.Form6521;
 import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.FormW2;
 import com.upuptax.form.InfoForm;
+import com.upuptax.form.TaxReport;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxComputationWorksheet;
@@ -249,6 +250,11 @@ public class UIFormW2 extends Application {
 		frm1040.setForm6521(form6521.getForm6521());
 		frm1040.init();
 		
+		TaxReport taxreport = new TaxReport();
+		taxreport.setFillingForms(fillingforms);
+		taxreport.init();
+		
+		
 		fillingforms.print();
 		formProcess.add(frm1040);
 		formProcess.add(form6521);
@@ -259,6 +265,7 @@ public class UIFormW2 extends Application {
 	    formProcess.add(cptGain);
 	    formProcess.add(w2f2);
 	    formProcess.add(w2f1);
+	    formProcess.add(taxreport);
 		return formProcess;
 	}
 
