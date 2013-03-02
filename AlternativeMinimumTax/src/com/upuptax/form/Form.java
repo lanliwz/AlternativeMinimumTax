@@ -14,7 +14,9 @@ public interface Form {
 	public String getName();
 	public String getDescription();
 	public Map<String,Double> getForm();
+	public Map<String,String> getInfoForm();
 	public void setForm(Map<String,Double> form);
+	public void setInfoForm(Map<String,String> info);
 	public void setFillingForms(FillingFormsAndSchedules forms);
 	public FillingFormsAndSchedules getFillingForms();
 	public void save() throws IOException;

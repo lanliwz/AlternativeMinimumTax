@@ -97,4 +97,16 @@ public class Form1040ScheduleB implements Form{
 		return lineDetails;
 	}
 
+	@Override
+	public Map<String, String> getInfoForm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setInfoForm(Map<String, String> info) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
