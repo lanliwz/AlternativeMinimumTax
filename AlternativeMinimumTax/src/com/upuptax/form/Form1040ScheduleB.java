@@ -8,7 +8,7 @@ import java.util.Map;
 import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
-import com.upuptax.utils.NumberUtil;
+import com.upuptax.utils.TaxNumberUtil;
 
 public class Form1040ScheduleB implements Form{
 	private String filedBy="wei_tax_test";
@@ -19,13 +19,13 @@ public class Form1040ScheduleB implements Form{
 	private FillingFormsAndSchedules fillingForms;
 	
 	public void init(){
-		double line2=NumberUtil.add(interests);
+		double line2=TaxNumberUtil.add(interests);
 		scheduleB.put("2", line2);
-		scheduleB.put("4", NumberUtil.substractWithPositiveReturn(scheduleB.get("2"), scheduleB.get("3")));
-		double line6=NumberUtil.add(ordinaryDividends);
+		scheduleB.put("4", TaxNumberUtil.substractWithPositiveReturn(scheduleB.get("2"), scheduleB.get("3")));
+		double line6=TaxNumberUtil.add(ordinaryDividends);
 		scheduleB.put("6", line6);
 		
-		double qualifiedDivendend = NumberUtil.add(qualifiedDividends);
+		double qualifiedDivendend = TaxNumberUtil.add(qualifiedDividends);
 		scheduleB.put(TaxConstant.QUALIFIED_DIVIDENDS, qualifiedDivendend);
 		if (fillingForms==null){
 			fillingForms=new FillingFormsAndSchedules();

@@ -7,7 +7,7 @@ import java.util.Map;
 import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
-import com.upuptax.utils.NumberUtil;
+import com.upuptax.utils.TaxNumberUtil;
 
 public class Form1040ScheduleD implements Form {
 	private String filedBy="wei_tax_test";
@@ -15,29 +15,29 @@ public class Form1040ScheduleD implements Form {
 	private FillingFormsAndSchedules fillingForms;
 	
 	public void init(){
-		double line1h = NumberUtil.substract(scheduleD.get("1d"),scheduleD.get("1e"));
+		double line1h = TaxNumberUtil.substract(scheduleD.get("1d"),scheduleD.get("1e"));
 		scheduleD.put("1h", line1h);
-		scheduleD.put("1", NumberUtil.add(line1h,scheduleD.get("1g")));
-		double line2h = NumberUtil.substract(scheduleD.get("2d"),scheduleD.get("2e"));
+		scheduleD.put("1", TaxNumberUtil.add(line1h,scheduleD.get("1g")));
+		double line2h = TaxNumberUtil.substract(scheduleD.get("2d"),scheduleD.get("2e"));
 		scheduleD.put("2h", line2h);
-		scheduleD.put("2", NumberUtil.add(line2h,scheduleD.get("2g")));
-		double line3h = NumberUtil.substract(scheduleD.get("3d"),scheduleD.get("3e"));
+		scheduleD.put("2", TaxNumberUtil.add(line2h,scheduleD.get("2g")));
+		double line3h = TaxNumberUtil.substract(scheduleD.get("3d"),scheduleD.get("3e"));
 		scheduleD.put("3h", line3h);
-		scheduleD.put("3", NumberUtil.add(line3h,scheduleD.get("3g")));
+		scheduleD.put("3", TaxNumberUtil.add(line3h,scheduleD.get("3g")));
 		
-		scheduleD.put("7", NumberUtil.add(1,6, scheduleD));
-		double line8h = NumberUtil.substract(scheduleD.get("8d"),scheduleD.get("8e"));
+		scheduleD.put("7", TaxNumberUtil.add(1,6, scheduleD));
+		double line8h = TaxNumberUtil.substract(scheduleD.get("8d"),scheduleD.get("8e"));
 		scheduleD.put("8h", line8h);
-		scheduleD.put("8", NumberUtil.add(line8h,scheduleD.get("8g")));
-		double line9h = NumberUtil.substract(scheduleD.get("9d"),scheduleD.get("9e"));
+		scheduleD.put("8", TaxNumberUtil.add(line8h,scheduleD.get("8g")));
+		double line9h = TaxNumberUtil.substract(scheduleD.get("9d"),scheduleD.get("9e"));
 		scheduleD.put("9h", line9h);
-		scheduleD.put("9", NumberUtil.add(line9h,scheduleD.get("9g")));
-		double line10h = NumberUtil.substract(scheduleD.get("10d"),scheduleD.get("10e"));
+		scheduleD.put("9", TaxNumberUtil.add(line9h,scheduleD.get("9g")));
+		double line10h = TaxNumberUtil.substract(scheduleD.get("10d"),scheduleD.get("10e"));
 		scheduleD.put("10h", line10h);
-		scheduleD.put("10", NumberUtil.add(line10h,scheduleD.get("10g")));
-		scheduleD.put("15", NumberUtil.add(8,14, scheduleD));
+		scheduleD.put("10", TaxNumberUtil.add(line10h,scheduleD.get("10g")));
+		scheduleD.put("15", TaxNumberUtil.add(8,14, scheduleD));
 		Double[] line16={scheduleD.get("7"),scheduleD.get("15")};
-		scheduleD.put("16", NumberUtil.add(line16));
+		scheduleD.put("16", TaxNumberUtil.add(line16));
 		
 		
 		if ((scheduleD.get("16")!=null && scheduleD.get("16")>=0)|| scheduleD.get("16")==null){

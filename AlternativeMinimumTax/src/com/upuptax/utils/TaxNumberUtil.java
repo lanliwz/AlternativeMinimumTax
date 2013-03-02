@@ -2,7 +2,7 @@ package com.upuptax.utils;
 
 import java.util.Map;
 
-public class NumberUtil {
+public class TaxNumberUtil {
 	public static double getSmaller(Double[] values){
 		Double min=Double.POSITIVE_INFINITY;
 		for (Double val:values){

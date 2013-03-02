@@ -11,7 +11,7 @@ import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
-import com.upuptax.utils.NumberUtil;
+import com.upuptax.utils.TaxNumberUtil;
 
 public class CapitalGainWorksheet implements Form{
 	private List<FormLineDetail> lineDetails;
@@ -122,7 +122,7 @@ public class CapitalGainWorksheet implements Form{
 		//capital gain
 		if (fillingforms.getSchedules().get(TaxConstant.SCHEDULE_D) != null){
 			Map<String,Double> scheduleD=fillingforms.getSchedules().get(TaxConstant.SCHEDULE_D);
-			double line3 = NumberUtil.getSmaller(scheduleD.get("15"), scheduleD.get("16"));
+			double line3 = TaxNumberUtil.getSmaller(scheduleD.get("15"), scheduleD.get("16"));
 			worksheet.put("3",line3);
 		}else{
 			double line3=form1040.get("13").doubleValue();
@@ -134,30 +134,30 @@ public class CapitalGainWorksheet implements Form{
 			//form 4959 line 4g
 			worksheet.put("5", 0d);
 			
-			double line6=NumberUtil.substractWithPositiveReturn(worksheet.get("4"), worksheet.get("5"));
+			double line6=TaxNumberUtil.substractWithPositiveReturn(worksheet.get("4"), worksheet.get("5"));
 			
 			worksheet.put("6", line6);
 			
-			double line7=NumberUtil.substractWithPositiveReturn(worksheet.get("1"), worksheet.get("6"));
+			double line7=TaxNumberUtil.substractWithPositiveReturn(worksheet.get("1"), worksheet.get("6"));
 			worksheet.put("7", line7);
 			
 			worksheet.put("8", deductAmt);
 			
-			double line9 = NumberUtil.getSmaller(worksheet.get("1"), worksheet.get("8"));
+			double line9 = TaxNumberUtil.getSmaller(worksheet.get("1"), worksheet.get("8"));
 			worksheet.put("9", line9);
 			
-			double line10 = NumberUtil.getSmaller(worksheet.get("7"), worksheet.get("9"));
+			double line10 = TaxNumberUtil.getSmaller(worksheet.get("7"), worksheet.get("9"));
 			worksheet.put("10", line10);
 			
-			double line11=NumberUtil.substractWithPositiveReturn(worksheet.get("9"), worksheet.get("10"));
+			double line11=TaxNumberUtil.substractWithPositiveReturn(worksheet.get("9"), worksheet.get("10"));
 			worksheet.put("11", line11);
 			
-			double line12 = NumberUtil.getSmaller(worksheet.get("1"), worksheet.get("6"));
+			double line12 = TaxNumberUtil.getSmaller(worksheet.get("1"), worksheet.get("6"));
 			worksheet.put("12", line12);
 			
 			worksheet.put("13", line11);
 			
-			double line14=NumberUtil.substractWithPositiveReturn(worksheet.get("12"), worksheet.get("13"));
+			double line14=TaxNumberUtil.substractWithPositiveReturn(worksheet.get("12"), worksheet.get("13"));
 			worksheet.put("14", line14);
 			
 			double line15=getCapitalGainTax(line14);
@@ -182,7 +182,7 @@ public class CapitalGainWorksheet implements Form{
 			System.out.println("Total Tax based on Taxable Income = "+worksheet.get("18"));
 			
 			
-			double line19 = NumberUtil.getSmaller(worksheet.get("17"), worksheet.get("18"));
+			double line19 = TaxNumberUtil.getSmaller(worksheet.get("17"), worksheet.get("18"));
 			worksheet.put("19", line19);
 			
 			System.out.println("Final Tax = "+worksheet.get("19"));

@@ -22,7 +22,7 @@ import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxComputationWorksheet;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.reference.TaxRateRule;
-import com.upuptax.utils.NumberUtil;
+import com.upuptax.utils.TaxNumberUtil;
 
 
 public class Form1040  implements Form{
@@ -125,14 +125,14 @@ public class Form1040  implements Form{
 			form1040.put("13", scheduleD.get("22"));
 		}
 		
-		double line22 = NumberUtil.add(7,21,form1040);
+		double line22 = TaxNumberUtil.add(7,21,form1040);
 		form1040.put("22", line22);
 		System.out.println("Total Income = "+line22);
 		
-		double line36 = NumberUtil.add(23,35,form1040);
+		double line36 = TaxNumberUtil.add(23,35,form1040);
 		form1040.put("36", line36);
 		
-		double line37=NumberUtil.substractWithPositiveReturn(form1040.get("22"), form1040.get("36"));
+		double line37=TaxNumberUtil.substractWithPositiveReturn(form1040.get("22"), form1040.get("36"));
 		System.out.println("Adjusted Gross Income = "+line37);
 		
 		form1040.put("37", line37);
@@ -153,14 +153,14 @@ public class Form1040  implements Form{
 			
 		}
 		
-		form1040.put("41", NumberUtil.substractWithPositiveReturn(form1040.get("38"),form1040.get("40") ));
+		form1040.put("41", TaxNumberUtil.substractWithPositiveReturn(form1040.get("38"),form1040.get("40") ));
 		
-		double line42 = NumberUtil.multiply(form1040.get("6d"),personExemption);
+		double line42 = TaxNumberUtil.multiply(form1040.get("6d"),personExemption);
 		form1040.put("42", line42);
 		
 		System.out.println("Exemption Amount = "+line42);
 		
-		double line43= NumberUtil.substractWithPositiveReturn(form1040.get("41"),form1040.get("42"));
+		double line43= TaxNumberUtil.substractWithPositiveReturn(form1040.get("41"),form1040.get("42"));
 		form1040.put("43", line43);
 		System.out.println("Taxable Income = "+line43);
 		
@@ -172,30 +172,30 @@ public class Form1040  implements Form{
 		if (form6521!=null){
 			form1040.put("45", form6521.get("35"));
 		}
-		double line46 = NumberUtil.add(44, 45, form1040);
+		double line46 = TaxNumberUtil.add(44, 45, form1040);
 		form1040.put("46",line46);
 		
-		double line54=NumberUtil.add(47, 53, form1040);
+		double line54=TaxNumberUtil.add(47, 53, form1040);
 		form1040.put("54", line54);
 		
 		System.out.println("Total Credits = "+line54);
 		
-		form1040.put("55", NumberUtil.substractWithPositiveReturn(form1040.get("46"),form1040.get("54")));
-		double line61= NumberUtil.add(55, 60, form1040);
+		form1040.put("55", TaxNumberUtil.substractWithPositiveReturn(form1040.get("46"),form1040.get("54")));
+		double line61= TaxNumberUtil.add(55, 60, form1040);
 		form1040.put("61", line61);
 		System.out.println("total tax = "+form1040.get("61"));
 		
 		
-		form1040.put("72", NumberUtil.add(62,71,form1040));
+		form1040.put("72", TaxNumberUtil.add(62,71,form1040));
 		System.out.println("total Payments = "+form1040.get("72"));
 		
-		double line73 = NumberUtil.substractWithPositiveReturn(form1040.get("72"), form1040.get("61"));
+		double line73 = TaxNumberUtil.substractWithPositiveReturn(form1040.get("72"), form1040.get("61"));
 		form1040.put("73", line73);
 		System.out.println("Overpaid Tax = "+line73);
 		
-		double line76 = NumberUtil.substractWithPositiveReturn(form1040.get("61"), form1040.get("72"));
+		double line76 = TaxNumberUtil.substractWithPositiveReturn(form1040.get("61"), form1040.get("72"));
 		//add penalty line77
-		line76=NumberUtil.add(line76,form1040.get("77"));
+		line76=TaxNumberUtil.add(line76,form1040.get("77"));
 		
 		form1040.put("76", line76);
 		System.out.println("Tax you own = "+line76);

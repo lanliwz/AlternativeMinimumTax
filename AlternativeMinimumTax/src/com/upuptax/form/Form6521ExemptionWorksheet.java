@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingStatus;
-import com.upuptax.utils.NumberUtil;
+import com.upuptax.utils.TaxNumberUtil;
 
 public class Form6521ExemptionWorksheet {
 	
@@ -82,11 +82,11 @@ public class Form6521ExemptionWorksheet {
 		System.out.println("AMT Standard Exemption = "+fillingStatusExemption);
 		worksheet.put("2",form6521.get("28"));
 		worksheet.put("3",phaseoutThreshhold);
-		double line4=NumberUtil.substractWithPositiveReturn(worksheet.get("2"),worksheet.get("3"));
+		double line4=TaxNumberUtil.substractWithPositiveReturn(worksheet.get("2"),worksheet.get("3"));
 		worksheet.put("4", line4);
 		double line5=line4*phaseoutRate;
 		worksheet.put("5", line5);
-		double line6=NumberUtil.substractWithPositiveReturn(worksheet.get("1"),line5);
+		double line6=TaxNumberUtil.substractWithPositiveReturn(worksheet.get("1"),line5);
 		System.out.println("Your AMT Exemption = " + line6);
 		worksheet.put("6", line6);
 		

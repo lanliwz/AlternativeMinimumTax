@@ -7,7 +7,7 @@ import java.util.Map;
 import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
-import com.upuptax.utils.NumberUtil;
+import com.upuptax.utils.TaxNumberUtil;
 
 public class Form1040ScheduleA implements Form{
 	private String filedBy="wei_tax_test";
@@ -22,18 +22,18 @@ public class Form1040ScheduleA implements Form{
 		double line5=0;
 		if (w2Forms!=null){
 			for (Map<String,Double> w2:w2Forms){
-				line5=NumberUtil.add(w2.get("17"),line5);
+				line5=TaxNumberUtil.add(w2.get("17"),line5);
 			}
 
 
 		}
 		scheduleA.put("5", line5);
-		scheduleA.put("9", NumberUtil.add(1,8,scheduleA));
-		scheduleA.put("15", NumberUtil.add(10,14,scheduleA));
-		scheduleA.put("19", NumberUtil.add(16,18,scheduleA));
-		scheduleA.put("24", NumberUtil.add(21,23,scheduleA));
+		scheduleA.put("9", TaxNumberUtil.add(1,8,scheduleA));
+		scheduleA.put("15", TaxNumberUtil.add(10,14,scheduleA));
+		scheduleA.put("19", TaxNumberUtil.add(16,18,scheduleA));
+		scheduleA.put("24", TaxNumberUtil.add(21,23,scheduleA));
 		Double[] l29 = {scheduleA.get("4"),scheduleA.get("9"),scheduleA.get("15"),scheduleA.get("19"),scheduleA.get("20"),scheduleA.get("27"),scheduleA.get("28")};
-		scheduleA.put("29", NumberUtil.add(l29));
+		scheduleA.put("29", TaxNumberUtil.add(l29));
 		if (fillingForms==null){
 			fillingForms=new FillingFormsAndSchedules();
 		}
@@ -43,10 +43,10 @@ public class Form1040ScheduleA implements Form{
 	public void calculate(Map<String,Double> form1040){
 		scheduleA.put("25", form1040.get("38"));
 		scheduleA.put("26", jobExpenseRate*(form1040.get("38")==null?0d:form1040.get("38")));
-		double line27 = NumberUtil.substractWithPositiveReturn(scheduleA.get("24"), scheduleA.get("26"));
+		double line27 = TaxNumberUtil.substractWithPositiveReturn(scheduleA.get("24"), scheduleA.get("26"));
 		scheduleA.put("27", line27);
 		Double[] l29 = {scheduleA.get("4"),scheduleA.get("9"),scheduleA.get("15"),scheduleA.get("19"),scheduleA.get("20"),scheduleA.get("27"),scheduleA.get("28")};
-		scheduleA.put("29", NumberUtil.add(l29));
+		scheduleA.put("29", TaxNumberUtil.add(l29));
 		fillingForms.putSchedule(TaxConstant.SCHEDULE_A, scheduleA);
 	}
 	public Map<String, Double> getForm() {
