@@ -5,6 +5,8 @@ public class TaxConstant {
 	public static String FORM_1040="1040";
 	public static String FORM_6251="6251";
 	public static String FORM_W2="W-2";
+	public static String FORM_1099_DIV="1099 DIV";
+	public static String FORM_1099_INT="1099 INT";
 	
 	//tax schedule
 	public static String SCHEDULE_D="SCHEDULE D";

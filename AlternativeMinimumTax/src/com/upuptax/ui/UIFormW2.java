@@ -14,6 +14,8 @@ import com.upuptax.form.Form1040ScheduleA;
 import com.upuptax.form.Form1040ScheduleB;
 import com.upuptax.form.Form1040ScheduleD;
 import com.upuptax.form.Form1040ScheduleE;
+import com.upuptax.form.Form1099DIV;
+import com.upuptax.form.Form1099INT;
 import com.upuptax.form.Form6521;
 import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.FormW2;
@@ -137,6 +139,49 @@ public class UIFormW2 extends Application {
 		
 		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
 		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
+		
+		
+		Form1099DIV f1099div01=new Form1099DIV();
+		f1099div01.setName("ETrade");
+		try {
+			f1099div01.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099div01.init();
+		
+		Form1099DIV f1099div02=new Form1099DIV();
+		f1099div02.setName("ETrade TW");
+		try {
+			f1099div02.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099div02.init();
+
+		Form1099INT f1099int01=new Form1099INT();
+		f1099int01.setName("ETrade Wei");
+		try {
+			f1099int01.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099int01.init();
+
+		Form1099INT f1099int02=new Form1099INT();
+		f1099int02.setName("Citibank Wei");
+		try {
+			f1099int02.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099int02.init();
+
+		//		fillingforms.putForm(f1099div01.getName(),f1099div01);
 
 		
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
@@ -266,6 +311,10 @@ public class UIFormW2 extends Application {
 	    formProcess.add(w2f2);
 	    formProcess.add(w2f1);
 	    formProcess.add(taxreport);
+	    formProcess.add(f1099div01);
+	    formProcess.add(f1099div02);
+	    formProcess.add(f1099int01);
+	    formProcess.add(f1099int02);
 		return formProcess;
 	}
 
