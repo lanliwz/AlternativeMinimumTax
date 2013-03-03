@@ -187,10 +187,15 @@ public class UIFormW2 extends Application {
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
 		scheduleB.setFillingForms(fillingforms);
 		Map<String,Double> interests = new HashMap<String,Double>();
+		interests.put(f1099int01.getName(), f1099int01.getForm().get("1"));
+		interests.put(f1099int02.getName(), f1099int02.getForm().get("1"));
 		scheduleB.setInterests(interests);
 		Map<String,Double> dividends = new HashMap<String,Double>();
+		dividends.put(f1099div01.getName(), f1099div01.getForm().get("1a"));
+		dividends.put(f1099div02.getName(), f1099div02.getForm().get("1a"));
 		Map<String,Double> qdividends = new HashMap<String,Double>();
-		
+		qdividends.put(f1099div01.getName(), f1099div01.getForm().get("1b"));
+		qdividends.put(f1099div02.getName(), f1099div02.getForm().get("1b"));
 		scheduleB.setOrdinaryDividends(dividends);
 		scheduleB.setQualifiedDividends(qdividends);
 		try {

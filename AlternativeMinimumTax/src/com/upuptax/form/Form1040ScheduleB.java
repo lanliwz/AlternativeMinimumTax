@@ -11,6 +11,7 @@ import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.TaxNumberUtil;
 
 public class Form1040ScheduleB implements Form{
+	
 	private String filedBy="wei_tax_test";
 	private Map<String,Double> interests;
 	private Map<String,Double> ordinaryDividends;

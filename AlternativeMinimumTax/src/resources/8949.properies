@@ -1,0 +1,21 @@
+A=(A) Short-term transactions reported on Form(s) 1099-B showing basis was reported to the IRS
+B=(B) Short-term transactions reported on Form(s) 1099-B showing basis was not reported to the IRS
+C=(C) Short-term transactions not reported to you on Form 1099-B
+1a=1 (a) Description of property (Example: 100 sh. XYZ Co.)
+1b=1 (b) Date acquired (Mo., day, yr.)
+1c=1 (c) Date sold or disposed (Mo., day, yr.)
+1d=1 (d) Proceeds (sales price) (see instructions)
+1e=1 (e) Cost or other basis. See the Note below and see Column (e) in the separate instructions
+1f=1 (f) Code(s) from instructions
+1g=1 (g) Amount of adjustment
+1h=1 (h) Gain or (loss). Subtract column (e) from column (d) and combine the result with column (g)
+2=2 Totals. Add the amounts in columns (d), (e), (g), and (h) (subtract negative amounts). Enter each total here and include on your Schedule D, line 1 (if Box A above is checked), line 2 (if Box B above is checked), or line 3 (if Box C above is checked)
+3a=3 (a) Description of property (Example: 100 sh. XYZ Co.)
+3b=3 (b) Date acquired (Mo., day, yr.)
+3c=3 (c) Date sold or disposed (Mo., day, yr.)
+3d=3 (d) Proceeds (sales price) (see instructions)
+3e=3 (e) Cost or other basis. See the Note below and see Column (e) in the separate instructions
+3f=3 (f) Code(s) from instructions
+3g=3 (g) Amount of adjustment
+3h 3 (h) Gain or (loss). Subtract column (e) from column (d) and combine the result with column (g)
+4=4 Totals. Add the amounts in columns (d), (e), (g), and (h) (subtract negative amounts). Enter each total here and include on your Schedule D, line 8 (if Box A above is checked), line 9 (if Box B above is checked), or line 10 (if Box C above is checked)
