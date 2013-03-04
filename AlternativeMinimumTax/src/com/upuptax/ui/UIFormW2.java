@@ -357,8 +357,6 @@ public class UIFormW2 extends Application {
         ObservableList<Form> fillingforms = FXCollections.observableArrayList();
         final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
         
-        ObservableList<InfoForm> infoforms=FXCollections.observableArrayList();
-        final ListView<InfoForm> infoView = new ListView<InfoForm>(infoforms);
         
         
         ObservableMap<String,Double> form = FXCollections.observableHashMap();
@@ -420,16 +418,11 @@ public class UIFormW2 extends Application {
         fillingforms.add(f);
         }
         
-        for(InfoForm f:getListOfInfoForm()){
-        	infoforms.add(f);
-        }
                 
         
         fillingformsView.setPrefWidth(150);
         fillingformsView.setPrefHeight(scene.getHeight());
         
-        infoView.setPrefHeight(scene.getHeight());
-        infoView.setPrefWidth(150);
         
         // display first and last name with tooltip using alias
         fillingformsView.setCellFactory(new Callback<ListView<Form>, ListCell<Form>>() {
@@ -469,48 +462,12 @@ public class UIFormW2 extends Application {
             }
         }); // setCellFactory
 
-        infoView.setCellFactory(new Callback<ListView<InfoForm>, ListCell<InfoForm>>() {
-
-            public ListCell<InfoForm> call(ListView<InfoForm> param) {
-                final Label leadLbl = new Label();
-                final Tooltip tooltip = new Tooltip();
-                    final ListCell<InfoForm> cell = new ListCell<InfoForm>() {
-                        @Override 
-                        public void updateItem(InfoForm item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (item != null) {
-                                    leadLbl.setText(item.getName());
-                                    setText(item.getName());
-                                    tooltip.setText(item.getDescription());
-                                    setTooltip(tooltip);
-                                }
-                        }
-                    }; // ListCell
-                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-
-						@Override
-						public void handle(MouseEvent event) {
-							if(infoView.getSelectionModel().getSelectedItem()!=null){
-								forminputs.clear();
-			                    
-			                    forminputs.addAll(transform(infoView.getSelectionModel().getSelectedItem()));
-			
-							}
-							
-						}
-                    	
-                    });
-                    return cell;
-            
-            }
-        }); // setCellFactory
-       
         
 		VBox leftArea = new VBox(10);
 		Label leftLabel = new Label("Filling Forms");
 		leftArea.getChildren().add(leftLabel);
 		leftArea.getChildren().add(fillingformsView);
-		leftArea.getChildren().add(infoView);
+
 
 		
 		leftArea.setAlignment(Pos.TOP_CENTER);
@@ -795,7 +752,7 @@ public class UIFormW2 extends Application {
           .tabs(
             TabBuilder.create()
               .text("Personal Information")
-              .content(createTableDemoNode())
+              .content(createPersonalInfoNode())
               .closable(false)
               .build(),
             TabBuilder.create()
@@ -847,7 +804,7 @@ public class UIFormW2 extends Application {
     
        return tabPane;
       }   
-    public Node createTableDemoNode() {
+    public Node createPersonalInfoNode() {
 		SplitPane splitPane = new SplitPane();
 		
         
@@ -983,6 +940,15 @@ public class UIFormW2 extends Application {
 		    dividers.get(i).setPosition((i + 1.0) / 3);
 		}
 
+
+        
+        return splitPane;
+      } 
+    
+
+
+    public Node createTableDemoNode() {
+		SplitPane splitPane = new SplitPane();
 
         
         return splitPane;
