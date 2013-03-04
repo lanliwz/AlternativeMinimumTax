@@ -94,7 +94,7 @@ public class UIFormW2 extends Application {
 	FillingFormsAndSchedules fillingforms=FillingFormsAndSchedules.newInstance();
 	List<Form> formProcess = new ArrayList<Form>();
 	List<InfoForm> info = new ArrayList<InfoForm>();
-	
+	List<Form> wagesAndIncomes = new ArrayList<Form>();
 
 	public static void main(String[] args){
 
@@ -344,151 +344,99 @@ public class UIFormW2 extends Application {
 		return formProcess;
 	}
 
+	public List<Form> getWagesAndIncomeForms(){
+
+		
+		
+		Map<String,Double> w2tax1=new HashMap<String,Double>();
+		Map<String,Double> w2tax2=new HashMap<String,Double>();
+
+		
+		FormW2 w2f1=new FormW2();
+		w2f1.setForm(w2tax1);
+		w2f1.setName("f1");
+		try {
+			w2f1.load();
+			w2tax1=w2f1.getForm();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FormW2 w2f2=new FormW2();
+		w2f2.setForm(w2tax2);
+		w2f2.setName("f2");
+		try {
+			w2f2.load();
+			w2tax2=w2f2.getForm();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
+		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
+		
+		
+		Form1099DIV f1099div01=new Form1099DIV();
+		f1099div01.setName("ETrade");
+		try {
+			f1099div01.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099div01.init();
+		
+		Form1099DIV f1099div02=new Form1099DIV();
+		f1099div02.setName("ETrade TW");
+		try {
+			f1099div02.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099div02.init();
+
+		Form1099INT f1099int01=new Form1099INT();
+		f1099int01.setName("ETrade Wei");
+		try {
+			f1099int01.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099int01.init();
+
+		Form1099INT f1099int02=new Form1099INT();
+		f1099int02.setName("Citibank Wei");
+		try {
+			f1099int02.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		f1099int02.init();
+
+		//		fillingforms.putForm(f1099div01.getName(),f1099div01);
+
+	    wagesAndIncomes.add(w2f2);
+	    wagesAndIncomes.add(w2f1);
+	    wagesAndIncomes.add(f1099div01);
+	    wagesAndIncomes.add(f1099div02);
+	    wagesAndIncomes.add(f1099int01);
+	    wagesAndIncomes.add(f1099int02);
+		return wagesAndIncomes;
+	}
+
 
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Federal Tax");
 		Group root = new Group();
         Scene scene = new Scene(root, 1024, 768, Color.WHITE);
         
-		SplitPane splitPane = new SplitPane();
-		splitPane.prefWidthProperty().bind(scene.widthProperty());
-		splitPane.prefHeightProperty().bind(scene.heightProperty());
-		
-        ObservableList<Form> fillingforms = FXCollections.observableArrayList();
-        final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
-        
-        
-        
-        ObservableMap<String,Double> form = FXCollections.observableHashMap();
-        
-        TableColumn<FormLineDetail,String> linenumber = new TableColumn<FormLineDetail,String>("Line Number");
-        linenumber.setPrefWidth(500);
-        
-        
-        TableColumn<FormLineDetail,String> lineinput = new TableColumn<FormLineDetail,String>("Value");
-        lineinput.setPrefWidth(200);
-        
-        TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
-        formInputView.prefHeightProperty().bind(scene.heightProperty());
-        final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
-        formInputView.setItems(forminputs);
-        formInputView.getColumns().addAll(linenumber,lineinput);
-        formInputView.setEditable(true);
-        linenumber.setEditable(false);
-        linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
-        lineinput.setEditable(true);
-        lineinput.setCellFactory(cellFactory);
-//        lineinput.setCellFactory(TextFieldTableCell.forTableColumn());
-        lineinput.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("value"));
-        lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
-        	            @Override
-        	            public void handle(CellEditEvent<FormLineDetail, String> t) {
-        	            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
-        	                System.out.println("old val:"+linedetail.getValue());
-        	                
-        	            	linedetail.setValue(t.getNewValue());
-        	            	System.out.println("new val:"+linedetail.getValue());
-        	            	if (linedetail.getForm()!=null){
-        	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
-        	            		try {
-									linedetail.getForm().save();
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-        	            		return;
-        	            	}
-        	            		
-        	            	if (linedetail.getInfoForm()!=null){
-        	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
-        	            		try {
-									linedetail.getInfoForm().save();
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-        	            	}
-
-        	            }
-        	        });
-
-
-
-        for (Form f:getListOfForm()){
-        fillingforms.add(f);
-        }
-        
-                
-        
-        fillingformsView.setPrefWidth(150);
-        fillingformsView.setPrefHeight(scene.getHeight());
-        
-        
-        // display first and last name with tooltip using alias
-        fillingformsView.setCellFactory(new Callback<ListView<Form>, ListCell<Form>>() {
-
-            public ListCell<Form> call(ListView<Form> param) {
-                final Label leadLbl = new Label();
-                final Tooltip tooltip = new Tooltip();
-                    final ListCell<Form> cell = new ListCell<Form>() {
-                        @Override 
-                        public void updateItem(Form item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (item != null) {
-                                    leadLbl.setText(item.getName());
-                                    setText(item.getName());
-                                    tooltip.setText(item.getDescription());
-                                    setTooltip(tooltip);
-                                }
-                        }
-                    }; // ListCell
-                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-
-						@Override
-						public void handle(MouseEvent event) {
-							if(fillingformsView.getSelectionModel().getSelectedItem()!=null){
-								forminputs.clear();
-			                    
-			                    forminputs.addAll(transform(fillingformsView.getSelectionModel().getSelectedItem()));
-			
-							}
-							
-						}
-                    	
-                    });
-
-                    return cell;
-            
-            }
-        }); // setCellFactory
-
-        
-		VBox leftArea = new VBox(10);
-		Label leftLabel = new Label("Filling Forms");
-		leftArea.getChildren().add(leftLabel);
-		leftArea.getChildren().add(fillingformsView);
-
-
-		
-		leftArea.setAlignment(Pos.TOP_CENTER);
-
-		// Upper and lower split pane
-		VBox rightArea = new VBox();
-//		rightArea.getChildren().add(e)
-		
-		rightArea.setAlignment(Pos.TOP_CENTER);
-		rightArea.getChildren().add(formInputView);
-
-		// add left area
-		splitPane.getItems().add(leftArea);
-		splitPane.getItems().add(rightArea);
-
-
-		// evenly position divider
-		ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
-		for (int i = 0; i < dividers.size(); i++) {
-		    dividers.get(i).setPosition((i + 1.0) / 3);
-		}
 
 		VBox hbox = new VBox();
 		HBox wfbox=new HBox();
@@ -512,9 +460,9 @@ public class UIFormW2 extends Application {
 		wfbox.getChildren().add(stage4);
 		hbox.getChildren().add(createMenus());
 		hbox.getChildren().add(createToolBar());
-		hbox.getChildren().add(createTabs());
+		hbox.getChildren().add(createTabs(scene));
 //		hbox.getChildren().add(wfbox);
-		hbox.getChildren().add(splitPane);
+//		hbox.getChildren().add(splitPane);
 		
 		root.getChildren().add(hbox);
 		
@@ -746,65 +694,31 @@ public class UIFormW2 extends Application {
     
        return toolBar;
       } 
-    public TabPane createTabs() {
+    public TabPane createTabs(Scene scene) {
         final WebView webView;
         TabPane tabPane = TabPaneBuilder.create()
           .tabs(
             TabBuilder.create()
               .text("Personal Information")
-              .content(createPersonalInfoNode())
+              .content(createPersonalInfoNode(scene))
               .closable(false)
               .build(),
             TabBuilder.create()
               .text("Wages and Incomes")
-              .content(createTableDemoNode())
+              .content(createWagesAndIncomesNode(scene))
               .closable(false)
               .build(),           
               TabBuilder.create()
               .text("Federal Tax")
-              .content(createTableDemoNode())
+              .content(createFederalTaxNode(scene))
               .closable(false)
               .build())
 
-//            TabBuilder.create()
-//              .text("SplitPane/TreeView/ListView")
-//              .content(createSplitTreeListDemoNode())
-//              .closable(false)
-//              .build(),
-//            TabBuilder.create()
-//              .text("ScrollPane/Miscellaneous")
-//              .content(createScrollMiscDemoNode())
-//              .closable(false)
-//              .build(),
-//            TabBuilder.create()
-//              .text("HTMLEditor")
-//              .content(createHtmlEditorDemoNode())
-//              .closable(false)
-//              .build(),
-//            webViewTab = TabBuilder.create()
-//              .text("WebView")
-//              .content(
-//                webView = WebViewBuilder.create()
-//                  .build()
-//              )
-//              .closable(false)
-//              .onSelectionChanged(new EventHandler<Event>() {
-//                public void handle(Event evt) {
-//                  String randomWebSite = model.getRandomWebSite();
-//                  if (webViewTab.isSelected()) {
-//                    webView.getEngine().load(randomWebSite);
-//                    System.out.println("WebView tab is selected, loading: " 
-//                                      + randomWebSite);
-//                  }
-//                }
-//              })
-//              .build()
-//          )
           .build();
     
        return tabPane;
       }   
-    public Node createPersonalInfoNode() {
+    public Node createPersonalInfoNode(Scene scene) {
 		SplitPane splitPane = new SplitPane();
 		
         
@@ -818,10 +732,13 @@ public class UIFormW2 extends Application {
         linenumber.setPrefWidth(500);
         
         
+        
+        
         TableColumn<FormLineDetail,String> lineinput = new TableColumn<FormLineDetail,String>("Value");
         lineinput.setPrefWidth(200);
         
         TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
+        formInputView.setPrefHeight(scene.getHeight());
         final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
         formInputView.setItems(forminputs);
         formInputView.getColumns().addAll(linenumber,lineinput);
@@ -875,6 +792,7 @@ public class UIFormW2 extends Application {
         
 
         infoView.setPrefWidth(150);
+        infoView.setPrefHeight(scene.getHeight());
         
         // display first and last name with tooltip using alias
         infoView.setCellFactory(new Callback<ListView<InfoForm>, ListCell<InfoForm>>() {
@@ -947,13 +865,299 @@ public class UIFormW2 extends Application {
     
 
 
-    public Node createTableDemoNode() {
+    public Node createWagesAndIncomesNode(Scene scene) {
 		SplitPane splitPane = new SplitPane();
+		splitPane.prefWidthProperty().bind(scene.widthProperty());
+		splitPane.prefHeightProperty().bind(scene.heightProperty());
+
+		
+        ObservableList<Form> fillingforms = FXCollections.observableArrayList();
+        final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
+        
+        
+        
+        ObservableMap<String,Double> form = FXCollections.observableHashMap();
+        
+        TableColumn<FormLineDetail,String> linenumber = new TableColumn<FormLineDetail,String>("Line Number");
+        linenumber.setPrefWidth(500);
+        
+        
+        TableColumn<FormLineDetail,String> lineinput = new TableColumn<FormLineDetail,String>("Value");
+        lineinput.setPrefWidth(200);
+        
+        TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
+        formInputView.prefHeightProperty().bind(scene.heightProperty());
+        final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
+        formInputView.setItems(forminputs);
+        formInputView.getColumns().addAll(linenumber,lineinput);
+        formInputView.setEditable(true);
+        linenumber.setEditable(false);
+        linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
+        lineinput.setEditable(true);
+        lineinput.setCellFactory(cellFactory);
+//        lineinput.setCellFactory(TextFieldTableCell.forTableColumn());
+        lineinput.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("value"));
+        lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
+        	            @Override
+        	            public void handle(CellEditEvent<FormLineDetail, String> t) {
+        	            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
+        	                System.out.println("old val:"+linedetail.getValue());
+        	                
+        	            	linedetail.setValue(t.getNewValue());
+        	            	System.out.println("new val:"+linedetail.getValue());
+        	            	if (linedetail.getForm()!=null){
+        	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            		try {
+									linedetail.getForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            		return;
+        	            	}
+        	            		
+        	            	if (linedetail.getInfoForm()!=null){
+        	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
+        	            		try {
+									linedetail.getInfoForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            	}
+
+        	            }
+        	        });
+
+
+
+        for (Form f:getWagesAndIncomeForms()){
+        fillingforms.add(f);
+        }
+        
+                
+        
+        fillingformsView.setPrefWidth(150);
+        fillingformsView.setPrefHeight(scene.getHeight());
+        
+        
+        // display first and last name with tooltip using alias
+        fillingformsView.setCellFactory(new Callback<ListView<Form>, ListCell<Form>>() {
+
+            public ListCell<Form> call(ListView<Form> param) {
+                final Label leadLbl = new Label();
+                final Tooltip tooltip = new Tooltip();
+                    final ListCell<Form> cell = new ListCell<Form>() {
+                        @Override 
+                        public void updateItem(Form item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    leadLbl.setText(item.getName());
+                                    setText(item.getName());
+                                    tooltip.setText(item.getDescription());
+                                    setTooltip(tooltip);
+                                }
+                        }
+                    }; // ListCell
+                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+
+						@Override
+						public void handle(MouseEvent event) {
+							if(fillingformsView.getSelectionModel().getSelectedItem()!=null){
+								forminputs.clear();
+			                    
+			                    forminputs.addAll(transform(fillingformsView.getSelectionModel().getSelectedItem()));
+			
+							}
+							
+						}
+                    	
+                    });
+
+                    return cell;
+            
+            }
+        }); // setCellFactory
+
+        
+		VBox leftArea = new VBox(10);
+		Label leftLabel = new Label("Filling Forms");
+		leftArea.getChildren().add(leftLabel);
+		leftArea.getChildren().add(fillingformsView);
+
+
+		
+		leftArea.setAlignment(Pos.TOP_CENTER);
+
+		// Upper and lower split pane
+		VBox rightArea = new VBox();
+//		rightArea.getChildren().add(e)
+		
+		rightArea.setAlignment(Pos.TOP_CENTER);
+		rightArea.getChildren().add(formInputView);
+
+		// add left area
+		splitPane.getItems().add(leftArea);
+		splitPane.getItems().add(rightArea);
+
+
+		// evenly position divider
+		ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
+		for (int i = 0; i < dividers.size(); i++) {
+		    dividers.get(i).setPosition((i + 1.0) / 3);
+		}
+
 
         
         return splitPane;
       } 
     
+    public Node createFederalTaxNode(Scene scene) {
+		SplitPane splitPane = new SplitPane();
+		splitPane.prefWidthProperty().bind(scene.widthProperty());
+		splitPane.prefHeightProperty().bind(scene.heightProperty());
+
+		
+        ObservableList<Form> fillingforms = FXCollections.observableArrayList();
+        final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
+        
+        
+        
+        ObservableMap<String,Double> form = FXCollections.observableHashMap();
+        
+        TableColumn<FormLineDetail,String> linenumber = new TableColumn<FormLineDetail,String>("Line Number");
+        linenumber.setPrefWidth(500);
+        
+        
+        TableColumn<FormLineDetail,String> lineinput = new TableColumn<FormLineDetail,String>("Value");
+        lineinput.setPrefWidth(200);
+        
+        TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
+        formInputView.prefHeightProperty().bind(scene.heightProperty());
+        final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
+        formInputView.setItems(forminputs);
+        formInputView.getColumns().addAll(linenumber,lineinput);
+        formInputView.setEditable(true);
+        linenumber.setEditable(false);
+        linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
+        lineinput.setEditable(true);
+        lineinput.setCellFactory(cellFactory);
+//        lineinput.setCellFactory(TextFieldTableCell.forTableColumn());
+        lineinput.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("value"));
+        lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
+        	            @Override
+        	            public void handle(CellEditEvent<FormLineDetail, String> t) {
+        	            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
+        	                System.out.println("old val:"+linedetail.getValue());
+        	                
+        	            	linedetail.setValue(t.getNewValue());
+        	            	System.out.println("new val:"+linedetail.getValue());
+        	            	if (linedetail.getForm()!=null){
+        	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            		try {
+									linedetail.getForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            		return;
+        	            	}
+        	            		
+        	            	if (linedetail.getInfoForm()!=null){
+        	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
+        	            		try {
+									linedetail.getInfoForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            	}
+
+        	            }
+        	        });
+
+
+
+        for (Form f:getListOfForm()){
+        fillingforms.add(f);
+        }
+        
+                
+        
+        fillingformsView.setPrefWidth(150);
+        fillingformsView.setPrefHeight(scene.getHeight());
+        
+        
+        // display first and last name with tooltip using alias
+        fillingformsView.setCellFactory(new Callback<ListView<Form>, ListCell<Form>>() {
+
+            public ListCell<Form> call(ListView<Form> param) {
+                final Label leadLbl = new Label();
+                final Tooltip tooltip = new Tooltip();
+                    final ListCell<Form> cell = new ListCell<Form>() {
+                        @Override 
+                        public void updateItem(Form item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    leadLbl.setText(item.getName());
+                                    setText(item.getName());
+                                    tooltip.setText(item.getDescription());
+                                    setTooltip(tooltip);
+                                }
+                        }
+                    }; // ListCell
+                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+
+						@Override
+						public void handle(MouseEvent event) {
+							if(fillingformsView.getSelectionModel().getSelectedItem()!=null){
+								forminputs.clear();
+			                    
+			                    forminputs.addAll(transform(fillingformsView.getSelectionModel().getSelectedItem()));
+			
+							}
+							
+						}
+                    	
+                    });
+
+                    return cell;
+            
+            }
+        }); // setCellFactory
+
+        
+		VBox leftArea = new VBox(10);
+		Label leftLabel = new Label("Filling Forms");
+		leftArea.getChildren().add(leftLabel);
+		leftArea.getChildren().add(fillingformsView);
+
+
+		
+		leftArea.setAlignment(Pos.TOP_CENTER);
+
+		// Upper and lower split pane
+		VBox rightArea = new VBox();
+//		rightArea.getChildren().add(e)
+		
+		rightArea.setAlignment(Pos.TOP_CENTER);
+		rightArea.getChildren().add(formInputView);
+
+		// add left area
+		splitPane.getItems().add(leftArea);
+		splitPane.getItems().add(rightArea);
+
+
+		// evenly position divider
+		ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
+		for (int i = 0; i < dividers.size(); i++) {
+		    dividers.get(i).setPosition((i + 1.0) / 3);
+		}
+
+
+        
+        return splitPane;
+      } 
 
 
 
