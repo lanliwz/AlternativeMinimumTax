@@ -33,6 +33,7 @@ import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.effect.InnerShadowBuilder;
+import javafx.scene.shape.CircleBuilder;
 import javafx.scene.text.TextBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,20 +44,39 @@ import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuBarBuilder;
+import javafx.scene.control.MenuBuilder;
+import javafx.scene.control.MenuItemBuilder;
+import javafx.scene.control.Separator;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabBuilder;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPaneBuilder;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableViewBuilder;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleButtonBuilder;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ToolBar;
+import javafx.scene.control.ToolBarBuilder;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -64,6 +84,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -328,6 +349,7 @@ public class UIFormW2 extends Application {
 		stage.setTitle("Federal Tax");
 		Group root = new Group();
         Scene scene = new Scene(root, 1024, 768, Color.WHITE);
+        
 		SplitPane splitPane = new SplitPane();
 		splitPane.prefWidthProperty().bind(scene.widthProperty());
 		splitPane.prefHeightProperty().bind(scene.heightProperty());
@@ -531,9 +553,14 @@ public class UIFormW2 extends Application {
 		wfbox.getChildren().add(stage2);
 		wfbox.getChildren().add(stage3);
 		wfbox.getChildren().add(stage4);
-		hbox.getChildren().add(wfbox);
+		hbox.getChildren().add(createMenus());
+		hbox.getChildren().add(createToolBar());
+		hbox.getChildren().add(createTabs());
+//		hbox.getChildren().add(wfbox);
 		hbox.getChildren().add(splitPane);
+		
 		root.getChildren().add(hbox);
+		
 		stage.setScene(scene);
 		stage.show();
 		
@@ -598,6 +625,370 @@ public class UIFormW2 extends Application {
     	}
     	return inputs;
     }
+    
+    public MenuBar createMenus() {
+        MenuBar menuBar = MenuBarBuilder.create()
+          .menus(
+            MenuBuilder.create()
+              .text("File")
+              .items(
+                MenuItemBuilder.create()
+                  .text("New...")
+//                  .graphic((new ImageView(
+//                    new Image(getClass().getResourceAsStream("images/paper.png"))))
+//                  )
+                  .accelerator(KeyCombination.keyCombination("Ctrl+N"))
+                  .onAction(new EventHandler<ActionEvent>() {
+                      @Override public void handle(ActionEvent e) {
+                        System.out.println(e.getEventType() + 
+                                          " occurred on MenuItem New");
+                      }
+                    }
+                  )
+                  .build(),
+                MenuItemBuilder.create()
+                  .text("Save")
+                  .build()
+              ).build(),
+              MenuBuilder.create()
+              .text("Edit")
+              .items(
+                MenuItemBuilder.create()
+                  .text("Cut")
+                  .build(),
+                MenuItemBuilder.create()
+                  .text("Copy")
+                  .build(),
+                MenuItemBuilder.create()
+                  .text("Paste")
+                  .build()
+              )
+    
+             .build()
+          )
+          .build();
+    
+       return menuBar;
+      }
+    public ToolBar createToolBar() {
+        final ToggleGroup alignToggleGroup = new ToggleGroup();
+        ToolBar toolBar = ToolBarBuilder.create()
+          .items(
+            ButtonBuilder.create()
+              .id("newButton")
+//              .graphic(new ImageView(
+//                new Image(getClass().getResourceAsStream("images/paper.png")))
+//              )
+              .tooltip(new Tooltip("New Document... Ctrl+N"))
+              .onAction(new EventHandler<ActionEvent>() {
+                  @Override public void handle(ActionEvent e) {
+                    System.out.println("New toolbar button clicked");
+                  }
+                })
+              .build(),
+              ButtonBuilder.create()
+              .id("editButton")
+              .graphic(
+                CircleBuilder.create()
+                  .fill(Color.GREEN)
+                  .radius(8)
+                  .build()
+              )
+              .build(),
+            ButtonBuilder.create()
+              .id("deleteButton")
+              .graphic(
+                CircleBuilder.create()
+                  .fill(Color.BLUE)
+                  .radius(8)
+                  .build()
+              )
+              .build(),
+            new Separator(Orientation.VERTICAL),
+            ToggleButtonBuilder.create()
+              .id("boldButton")
+              .graphic(
+                CircleBuilder.create()
+                  .fill(Color.MAROON)
+                  .radius(8)
+                  .build()
+              )
+              .onAction(new EventHandler<ActionEvent>() {
+                  @Override public void handle(ActionEvent e) {
+                    ToggleButton tb = ((ToggleButton)e.getTarget());
+                    System.out.print(e.getEventType() + " occurred on ToggleButton " 
+                                    + tb.getId());
+    
+                   System.out.print(", and selectedProperty is: ");
+                    System.out.println(tb.selectedProperty().getValue());
+                  }
+                })
+              .build(),
+            ToggleButtonBuilder.create()
+              .id("italicButton")
+              .graphic(
+                CircleBuilder.create()
+                  .fill(Color.YELLOW)
+                  .radius(8)
+                  .build()
+              )
+              .onAction(new EventHandler<ActionEvent>() {
+                  @Override public void handle(ActionEvent e) {
+                    ToggleButton tb = ((ToggleButton)e.getTarget());
+                    System.out.print(e.getEventType() + " occurred on ToggleButton " 
+                                    + tb.getId());
+                    System.out.print(", and selectedProperty is: ");
+                    System.out.println(tb.selectedProperty().getValue());
+                  }
+                })
+              .build(),
+            new Separator(Orientation.VERTICAL),
+            ToggleButtonBuilder.create()
+              .id("leftAlignButton")
+              .toggleGroup(alignToggleGroup)
+              .graphic(
+                CircleBuilder.create()
+                  .fill(Color.PURPLE)
+                  .radius(8)
+                  .build()
+              )
+              .build(),
+            ToggleButtonBuilder.create()
+              .id("centerAlignButton")
+              .toggleGroup(alignToggleGroup)
+              .graphic(
+                CircleBuilder.create()
+                  .fill(Color.ORANGE)
+                  .radius(8)
+                  .build()
+              )
+              .build(),
+            ToggleButtonBuilder.create()
+              .id("rightAlignButton")
+              .toggleGroup(alignToggleGroup)
+              .graphic(
+    
+               CircleBuilder.create()
+                  .fill(Color.CYAN)
+                  .radius(8)
+                  .build()
+              )
+              .build()
+          )
+          .build();
+    
+       alignToggleGroup.selectToggle(alignToggleGroup.getToggles().get(0));
+        alignToggleGroup.selectedToggleProperty().addListener(new ChangeListener() {
+          public void changed(ObservableValue ov, Object oldValue, Object newValue) {
+            ToggleButton tb = ((ToggleButton)alignToggleGroup.getSelectedToggle());
+            if (tb != null) {
+                System.out.println(tb.getId() + " selected");
+            }
+          }
+        });
+    
+       return toolBar;
+      } 
+    public TabPane createTabs() {
+        final WebView webView;
+        TabPane tabPane = TabPaneBuilder.create()
+          .tabs(
+            TabBuilder.create()
+              .text("Personal Information")
+              .content(createTableDemoNode())
+              .closable(false)
+              .build(),
+            TabBuilder.create()
+              .text("Wages and Incomes")
+              .content(createTableDemoNode())
+              .closable(false)
+              .build(),           
+              TabBuilder.create()
+              .text("Federal Tax")
+              .content(createTableDemoNode())
+              .closable(false)
+              .build())
+
+//            TabBuilder.create()
+//              .text("SplitPane/TreeView/ListView")
+//              .content(createSplitTreeListDemoNode())
+//              .closable(false)
+//              .build(),
+//            TabBuilder.create()
+//              .text("ScrollPane/Miscellaneous")
+//              .content(createScrollMiscDemoNode())
+//              .closable(false)
+//              .build(),
+//            TabBuilder.create()
+//              .text("HTMLEditor")
+//              .content(createHtmlEditorDemoNode())
+//              .closable(false)
+//              .build(),
+//            webViewTab = TabBuilder.create()
+//              .text("WebView")
+//              .content(
+//                webView = WebViewBuilder.create()
+//                  .build()
+//              )
+//              .closable(false)
+//              .onSelectionChanged(new EventHandler<Event>() {
+//                public void handle(Event evt) {
+//                  String randomWebSite = model.getRandomWebSite();
+//                  if (webViewTab.isSelected()) {
+//                    webView.getEngine().load(randomWebSite);
+//                    System.out.println("WebView tab is selected, loading: " 
+//                                      + randomWebSite);
+//                  }
+//                }
+//              })
+//              .build()
+//          )
+          .build();
+    
+       return tabPane;
+      }   
+    public Node createTableDemoNode() {
+		SplitPane splitPane = new SplitPane();
+		
+        
+        ObservableList<InfoForm> infoforms=FXCollections.observableArrayList();
+        final ListView<InfoForm> infoView = new ListView<InfoForm>(infoforms);
+        
+        
+        ObservableMap<String,Double> form = FXCollections.observableHashMap();
+        
+        TableColumn<FormLineDetail,String> linenumber = new TableColumn<FormLineDetail,String>("Line Number");
+        linenumber.setPrefWidth(500);
+        
+        
+        TableColumn<FormLineDetail,String> lineinput = new TableColumn<FormLineDetail,String>("Value");
+        lineinput.setPrefWidth(200);
+        
+        TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
+        final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
+        formInputView.setItems(forminputs);
+        formInputView.getColumns().addAll(linenumber,lineinput);
+        formInputView.setEditable(true);
+        linenumber.setEditable(false);
+        linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
+        lineinput.setEditable(true);
+        lineinput.setCellFactory(cellFactory);
+//        lineinput.setCellFactory(TextFieldTableCell.forTableColumn());
+        lineinput.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("value"));
+        lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
+        	            @Override
+        	            public void handle(CellEditEvent<FormLineDetail, String> t) {
+        	            	FormLineDetail linedetail=(FormLineDetail) t.getTableView().getItems().get(t.getTablePosition().getRow());
+        	                System.out.println("old val:"+linedetail.getValue());
+        	                
+        	            	linedetail.setValue(t.getNewValue());
+        	            	System.out.println("new val:"+linedetail.getValue());
+        	            	if (linedetail.getForm()!=null){
+        	            		linedetail.getForm().getForm().put(linedetail.getLineNumber(), Double.valueOf(linedetail.getValue()));
+        	            		try {
+									linedetail.getForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            		return;
+        	            	}
+        	            		
+        	            	if (linedetail.getInfoForm()!=null){
+        	            		linedetail.getInfoForm().getForm().put(linedetail.getLineNumber(),linedetail.getValue());
+        	            		try {
+									linedetail.getInfoForm().save();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        	            	}
+
+        	            }
+        	        });
+
+
+
+        
+        for(InfoForm f:getListOfInfoForm()){
+        	infoforms.add(f);
+        }
+                
+        
+        
+
+        infoView.setPrefWidth(150);
+        
+        // display first and last name with tooltip using alias
+        infoView.setCellFactory(new Callback<ListView<InfoForm>, ListCell<InfoForm>>() {
+
+            public ListCell<InfoForm> call(ListView<InfoForm> param) {
+                final Label leadLbl = new Label();
+                final Tooltip tooltip = new Tooltip();
+                    final ListCell<InfoForm> cell = new ListCell<InfoForm>() {
+                        @Override 
+                        public void updateItem(InfoForm item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    leadLbl.setText(item.getName());
+                                    setText(item.getName());
+                                    tooltip.setText(item.getDescription());
+                                    setTooltip(tooltip);
+                                }
+                        }
+                    }; // ListCell
+                    cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+
+						@Override
+						public void handle(MouseEvent event) {
+							if(infoView.getSelectionModel().getSelectedItem()!=null){
+								forminputs.clear();
+			                    
+			                    forminputs.addAll(transform(infoView.getSelectionModel().getSelectedItem()));
+			
+							}
+							
+						}
+                    	
+                    });
+                    return cell;
+            
+            }
+        }); // setCellFactory
+       
+        
+		VBox leftArea = new VBox(10);
+		Label leftLabel = new Label("Filling Forms");
+		leftArea.getChildren().add(leftLabel);
+		leftArea.getChildren().add(infoView);
+
+		
+		leftArea.setAlignment(Pos.TOP_CENTER);
+
+		// Upper and lower split pane
+		VBox rightArea = new VBox();
+//		rightArea.getChildren().add(e)
+		
+		rightArea.setAlignment(Pos.TOP_CENTER);
+		rightArea.getChildren().add(formInputView);
+
+		// add left area
+		splitPane.getItems().add(leftArea);
+		splitPane.getItems().add(rightArea);
+
+
+		// evenly position divider
+		ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
+		for (int i = 0; i < dividers.size(); i++) {
+		    dividers.get(i).setPosition((i + 1.0) / 3);
+		}
+
+
+        
+        return splitPane;
+      } 
+    
+
 
 
 }
