@@ -119,7 +119,7 @@ public class UIFormW2 extends Application {
 	public List<Form> getListOfForm(){
 
 		
-		
+		formProcess.clear();
 		Form1040 frm1040=new Form1040(fillingStatus);
 		Map<String,Double> form1040=new HashMap<String,Double>();
 
@@ -129,78 +129,87 @@ public class UIFormW2 extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 
-		Map<String,Double> w2tax1=new HashMap<String,Double>();
-		Map<String,Double> w2tax2=new HashMap<String,Double>();
+//		Map<String,Double> w2tax1=new HashMap<String,Double>();
+//		Map<String,Double> w2tax2=new HashMap<String,Double>();
+//
+//		
+//		FormW2 w2f1=new FormW2();
+//		w2f1.setForm(w2tax1);
+//		w2f1.setName("f1");
+//		try {
+//			w2f1.load();
+//			w2tax1=w2f1.getForm();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		FormW2 w2f2=new FormW2();
+//		w2f2.setForm(w2tax2);
+//		w2f2.setName("f2");
+//		try {
+//			w2f2.load();
+//			w2tax2=w2f2.getForm();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+		if(wagesAndIncomes!=null)
+		for (Form f:wagesAndIncomes){
+			if(f.getName().contains(TaxConstant.FORM_W2))
+				fillingforms.putForm(f.getName(), f.getForm());
+			
+
+		}
 
 		
-		FormW2 w2f1=new FormW2();
-		w2f1.setForm(w2tax1);
-		w2f1.setName("f1");
-		try {
-			w2f1.load();
-			w2tax1=w2f1.getForm();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		FormW2 w2f2=new FormW2();
-		w2f2.setForm(w2tax2);
-		w2f2.setName("f2");
-		try {
-			w2f2.load();
-			w2tax2=w2f2.getForm();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+//		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
+//		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
 		
 		
-		
-		
-		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
-		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
-		
-		
-		Form1099DIV f1099div01=new Form1099DIV();
-		f1099div01.setName("ETrade");
-		try {
-			f1099div01.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099div01.init();
-		
-		Form1099DIV f1099div02=new Form1099DIV();
-		f1099div02.setName("ETrade TW");
-		try {
-			f1099div02.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099div02.init();
-
-		Form1099INT f1099int01=new Form1099INT();
-		f1099int01.setName("ETrade Wei");
-		try {
-			f1099int01.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099int01.init();
-
-		Form1099INT f1099int02=new Form1099INT();
-		f1099int02.setName("Citibank Wei");
-		try {
-			f1099int02.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099int02.init();
+//		Form1099DIV f1099div01=new Form1099DIV();
+//		f1099div01.setName("ETrade");
+//		try {
+//			f1099div01.load();
+//		} catch (IOException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//		f1099div01.init();
+//		
+//		Form1099DIV f1099div02=new Form1099DIV();
+//		f1099div02.setName("ETrade TW");
+//		try {
+//			f1099div02.load();
+//		} catch (IOException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//		f1099div02.init();
+//
+//		Form1099INT f1099int01=new Form1099INT();
+//		f1099int01.setName("ETrade Wei");
+//		try {
+//			f1099int01.load();
+//		} catch (IOException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//		f1099int01.init();
+//
+//		Form1099INT f1099int02=new Form1099INT();
+//		f1099int02.setName("Citibank Wei");
+//		try {
+//			f1099int02.load();
+//		} catch (IOException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//		f1099int02.init();
 
 		//		fillingforms.putForm(f1099div01.getName(),f1099div01);
 
@@ -208,15 +217,30 @@ public class UIFormW2 extends Application {
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
 		scheduleB.setFillingForms(fillingforms);
 		Map<String,Double> interests = new HashMap<String,Double>();
-		interests.put(f1099int01.getName(), f1099int01.getForm().get("1"));
-		interests.put(f1099int02.getName(), f1099int02.getForm().get("1"));
-		scheduleB.setInterests(interests);
 		Map<String,Double> dividends = new HashMap<String,Double>();
-		dividends.put(f1099div01.getName(), f1099div01.getForm().get("1a"));
-		dividends.put(f1099div02.getName(), f1099div02.getForm().get("1a"));
 		Map<String,Double> qdividends = new HashMap<String,Double>();
-		qdividends.put(f1099div01.getName(), f1099div01.getForm().get("1b"));
-		qdividends.put(f1099div02.getName(), f1099div02.getForm().get("1b"));
+		if(wagesAndIncomes!=null)
+		for (Form f:wagesAndIncomes){
+			if(f.getName().contains(TaxConstant.FORM_1099_INT))
+				interests.put(f.getName(), f.getForm().get("1"));
+			if(f.getName().contains(TaxConstant.FORM_1099_DIV))
+			{
+				dividends.put(f.getName(), f.getForm().get("1a"));
+				qdividends.put(f.getName(), f.getForm().get("1b"));	
+			}
+			
+
+		}
+//		interests.put(f1099int01.getName(), f1099int01.getForm().get("1"));
+//		interests.put(f1099int02.getName(), f1099int02.getForm().get("1"));
+		scheduleB.setInterests(interests);
+
+
+//		dividends.put(f1099div01.getName(), f1099div01.getForm().get("1a"));
+//		dividends.put(f1099div02.getName(), f1099div02.getForm().get("1a"));
+//
+//		qdividends.put(f1099div01.getName(), f1099div01.getForm().get("1b"));
+//		qdividends.put(f1099div02.getName(), f1099div02.getForm().get("1b"));
 		scheduleB.setOrdinaryDividends(dividends);
 		scheduleB.setQualifiedDividends(qdividends);
 		try {
@@ -334,13 +358,13 @@ public class UIFormW2 extends Application {
 		formProcess.add(scheduleB);
 		formProcess.add(scheduleE);
 	    formProcess.add(cptGain);
-	    formProcess.add(w2f2);
-	    formProcess.add(w2f1);
+//	    formProcess.add(w2f2);
+//	    formProcess.add(w2f1);
 	    formProcess.add(taxreport);
-	    formProcess.add(f1099div01);
-	    formProcess.add(f1099div02);
-	    formProcess.add(f1099int01);
-	    formProcess.add(f1099int02);
+//	    formProcess.add(f1099div01);
+//	    formProcess.add(f1099div02);
+//	    formProcess.add(f1099int01);
+//	    formProcess.add(f1099int02);
 		return formProcess;
 	}
 
@@ -376,8 +400,8 @@ public class UIFormW2 extends Application {
 		
 		
 		
-		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
-		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
+//		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
+//		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
 		
 		
 		Form1099DIV f1099div01=new Form1099DIV();
@@ -1018,7 +1042,7 @@ public class UIFormW2 extends Application {
 		splitPane.prefHeightProperty().bind(scene.heightProperty());
 
 		
-        ObservableList<Form> fillingforms = FXCollections.observableArrayList();
+        final ObservableList<Form> fillingforms = FXCollections.observableArrayList();
         final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
         
         
@@ -1130,6 +1154,18 @@ public class UIFormW2 extends Application {
 		VBox leftArea = new VBox(10);
 		Label leftLabel = new Label("Filling Forms");
 		leftArea.getChildren().add(leftLabel);
+		Button refresh = new Button("Refresh");
+		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, 
+			    new EventHandler<MouseEvent>() {
+	        @Override public void handle(MouseEvent e) {
+	        	fillingforms.clear();
+	        	
+	        	for(Form fm:getListOfForm()){
+	        	   fillingforms.add(fm);
+	           }
+	        }
+	});
+		leftArea.getChildren().add(refresh);
 		leftArea.getChildren().add(fillingformsView);
 
 
