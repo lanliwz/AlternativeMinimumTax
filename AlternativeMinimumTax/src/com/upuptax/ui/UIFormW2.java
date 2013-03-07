@@ -94,7 +94,7 @@ import javafx.util.Callback;
 public class UIFormW2 extends Application {
 	FillingStatus fillingStatus=FillingStatus.JOIN;
 	FillingFormsAndSchedules fillingforms=FillingFormsAndSchedules.newInstance();
-	List<Form> formProcess = new ArrayList<Form>();
+	List<Form> ferderaforms = new ArrayList<Form>();
 	List<InfoForm> info = new ArrayList<InfoForm>();
 	List<Form> wagesAndIncomes = new ArrayList<Form>();
 	List<String> filenames;
@@ -122,7 +122,7 @@ public class UIFormW2 extends Application {
 	public List<Form> getListOfForm(){
 
 		
-		formProcess.clear();
+		ferderaforms.clear();
 		Form1040 frm1040=new Form1040(fillingStatus);
 		Map<String,Double> form1040=new HashMap<String,Double>();
 
@@ -354,21 +354,21 @@ public class UIFormW2 extends Application {
 		
 		
 		fillingforms.print();
-		formProcess.add(frm1040);
-		formProcess.add(form6521);
-		formProcess.add(scheduleA);
-		formProcess.add(scheduleD);
-		formProcess.add(scheduleB);
-		formProcess.add(scheduleE);
-	    formProcess.add(cptGain);
+		ferderaforms.add(frm1040);
+		ferderaforms.add(form6521);
+		ferderaforms.add(scheduleA);
+		ferderaforms.add(scheduleD);
+		ferderaforms.add(scheduleB);
+		ferderaforms.add(scheduleE);
+	    ferderaforms.add(cptGain);
 //	    formProcess.add(w2f2);
 //	    formProcess.add(w2f1);
-	    formProcess.add(taxreport);
+	    ferderaforms.add(taxreport);
 //	    formProcess.add(f1099div01);
 //	    formProcess.add(f1099div02);
 //	    formProcess.add(f1099int01);
 //	    formProcess.add(f1099int02);
-		return formProcess;
+		return ferderaforms;
 	}
 
 	
@@ -463,7 +463,7 @@ public class UIFormW2 extends Application {
 		stage4.addEventHandler(MouseEvent.MOUSE_CLICKED, 
 			    new EventHandler<MouseEvent>() {
 			        @Override public void handle(MouseEvent e) {
-			           for(Form fm:formProcess){
+			           for(Form fm:ferderaforms){
 			        	   fm.init();
 			           }
 			        }
