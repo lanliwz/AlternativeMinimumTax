@@ -65,6 +65,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableViewBuilder;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleButtonBuilder;
 import javafx.scene.control.ToggleGroup;
@@ -366,6 +367,43 @@ public class UIFormW2 extends Application {
 //	    formProcess.add(f1099int01);
 //	    formProcess.add(f1099int02);
 		return formProcess;
+	}
+
+	
+	public Form createW2Form(String name) throws IOException {
+		Map<String,Double> w2tax1=new HashMap<String,Double>();
+		FormW2 w2f1=new FormW2();
+		w2f1.setForm(w2tax1);
+		w2f1.setName("name");
+		w2f1.load();
+		return w2f1;
+			
+
+	}
+	public Form create1099DivForm(String name) throws IOException {
+		Form1099DIV f1099div01=new Form1099DIV();
+		f1099div01.setName(name);
+		
+		f1099div01.load();
+		
+		f1099div01.init();
+		
+		return f1099div01;
+			
+
+	}
+
+	public Form create1099IntForm(String name) throws IOException {
+		Form1099INT f1099=new Form1099INT();
+		f1099.setName(name);
+		
+		f1099.load();
+		
+		f1099.init();
+		
+		return f1099;
+			
+
 	}
 
 	public List<Form> getWagesAndIncomeForms(){
@@ -895,7 +933,7 @@ public class UIFormW2 extends Application {
 		splitPane.prefHeightProperty().bind(scene.heightProperty());
 
 		
-        ObservableList<Form> fillingforms = FXCollections.observableArrayList();
+        final ObservableList<Form> fillingforms = FXCollections.observableArrayList();
         final ListView<Form> fillingformsView = new ListView<Form>(fillingforms);
         
         
@@ -1007,6 +1045,30 @@ public class UIFormW2 extends Application {
 		VBox leftArea = new VBox(10);
 		Label leftLabel = new Label("Filling Forms");
 		leftArea.getChildren().add(leftLabel);
+		final TextArea fname = new TextArea("Type your form name here");
+		leftArea.getChildren().add(fname);
+		Button addW2 = new Button("Add New W-2");
+		leftArea.getChildren().add(addW2);
+		Button add1099Div = new Button("Add New 1099 DIV");
+		leftArea.getChildren().add(add1099Div);
+		Button add1099Int = new Button("Add New 1099 INT");
+		add1099Int.addEventHandler(MouseEvent.MOUSE_CLICKED, 
+			    new EventHandler<MouseEvent>() {
+	        @Override public void handle(MouseEvent e) {
+	        	try {
+					Form nform = create1099IntForm(fname.getText());
+					fillingforms.add(nform);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	        	
+	        	
+	        	   
+	           
+	        }}
+	        );
+		leftArea.getChildren().add(add1099Int);
 		leftArea.getChildren().add(fillingformsView);
 
 
