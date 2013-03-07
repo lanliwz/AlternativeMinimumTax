@@ -27,7 +27,8 @@ public class Form1099DIV implements Form {
 	@Override
 	public String getName() {
 		
-		return TaxConstant.FORM_1099_DIV+name;
+//		return TaxConstant.FORM_1099_DIV+name;
+		return name;
 	}
 
 	@Override

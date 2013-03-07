@@ -21,6 +21,7 @@ import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.FormW2;
 import com.upuptax.form.InfoForm;
 import com.upuptax.form.TaxReport;
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.FillingStatus;
 import com.upuptax.reference.TaxComputationWorksheet;
@@ -96,9 +97,10 @@ public class UIFormW2 extends Application {
 	List<Form> formProcess = new ArrayList<Form>();
 	List<InfoForm> info = new ArrayList<InfoForm>();
 	List<Form> wagesAndIncomes = new ArrayList<Form>();
+	List<String> filenames;
+	String fillingName="wei_tax_test";
 
 	public static void main(String[] args){
-
 
 		launch(args);
 	}
@@ -374,8 +376,9 @@ public class UIFormW2 extends Application {
 		Map<String,Double> w2tax1=new HashMap<String,Double>();
 		FormW2 w2f1=new FormW2();
 		w2f1.setForm(w2tax1);
-		w2f1.setName("name");
+		w2f1.setName(name);
 		w2f1.load();
+		w2f1.init();
 		return w2f1;
 			
 
@@ -407,94 +410,43 @@ public class UIFormW2 extends Application {
 	}
 
 	public List<Form> getWagesAndIncomeForms(){
-
-		
-		
-		Map<String,Double> w2tax1=new HashMap<String,Double>();
-		Map<String,Double> w2tax2=new HashMap<String,Double>();
-
-		
-		FormW2 w2f1=new FormW2();
-		w2f1.setForm(w2tax1);
-		w2f1.setName("f1");
-		try {
-			w2f1.load();
-			w2tax1=w2f1.getForm();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(String fname:filenames){
+			if(fname.startsWith(TaxConstant.FORM_W2)){
+				try {
+					
+					wagesAndIncomes.add(createW2Form(fname.replace(".properies", "")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else if(fname.startsWith(TaxConstant.FORM_1099_DIV)){
+				try {
+//					create1099DivForm(fname.replace(".properies", ""));
+					wagesAndIncomes.add(create1099DivForm(fname.replace(".properies", "")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}else if(fname.startsWith(TaxConstant.FORM_1099_INT)){
+				try {
+					
+					wagesAndIncomes.add(create1099IntForm(fname.replace(".properies", "")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+				
 		}
-		FormW2 w2f2=new FormW2();
-		w2f2.setForm(w2tax2);
-		w2f2.setName("f2");
-		try {
-			w2f2.load();
-			w2tax2=w2f2.getForm();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-//		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
-//		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
-		
-		
-		Form1099DIV f1099div01=new Form1099DIV();
-		f1099div01.setName("ETrade");
-		try {
-			f1099div01.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099div01.init();
-		
-		Form1099DIV f1099div02=new Form1099DIV();
-		f1099div02.setName("ETrade TW");
-		try {
-			f1099div02.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099div02.init();
 
-		Form1099INT f1099int01=new Form1099INT();
-		f1099int01.setName("ETrade Wei");
-		try {
-			f1099int01.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099int01.init();
-
-		Form1099INT f1099int02=new Form1099INT();
-		f1099int02.setName("Citibank Wei");
-		try {
-			f1099int02.load();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		f1099int02.init();
-
-		//		fillingforms.putForm(f1099div01.getName(),f1099div01);
-
-	    wagesAndIncomes.add(w2f2);
-	    wagesAndIncomes.add(w2f1);
-	    wagesAndIncomes.add(f1099div01);
-	    wagesAndIncomes.add(f1099div02);
-	    wagesAndIncomes.add(f1099int01);
-	    wagesAndIncomes.add(f1099int02);
 		return wagesAndIncomes;
 	}
 
 
 	public void start(Stage stage) throws Exception {
+		filenames=FileUtil.getListOfFiledForms(fillingName);
 		stage.setTitle("Federal Tax");
 		Group root = new Group();
         Scene scene = new Scene(root, 1024, 768, Color.WHITE);

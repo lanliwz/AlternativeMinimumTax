@@ -27,7 +27,8 @@ public class Form1099INT implements Form {
 
 	@Override
 	public String getName() {
-		return TaxConstant.FORM_1099_INT+name;
+//		return TaxConstant.FORM_1099_INT+name;
+		return name;
 	}
 
 	@Override

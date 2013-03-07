@@ -17,7 +17,8 @@ public class FormW2 implements Form {
 	private Map<String,String> employmentWks;
 	private Map<String,Double> incomeWks;
 	public String getName() {
-		return TaxConstant.FORM_W2+name;
+//		return TaxConstant.FORM_W2+name;
+		return name;
 	}
 	public void setName(String myname){
 		this.name=myname;

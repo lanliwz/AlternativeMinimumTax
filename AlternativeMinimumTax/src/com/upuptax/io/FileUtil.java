@@ -1,6 +1,7 @@
 package com.upuptax.io;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -90,6 +91,24 @@ public class FileUtil {
 	
 		return form;
 		
+	}
+	
+	public static List<String> getListOfFiledForms(String fillingBy){
+		List<String> filenames=new ArrayList<String>();
+		File[] files=null;
+		Path folder = Paths.get(System.getProperty("user.home"),fillingBy);
+		if (Files.isDirectory(folder)){
+			files = folder.toFile().listFiles();
+			
+		}
+		if(files!=null && files.length>0){
+			for(File f:files){
+				if(f.isFile())
+					filenames.add(f.getName());
+			}
+		}
+		
+		return filenames;
 	}
 	public static Map<String,String> loadInfo(String formName,String fillingBy,Map<String,String> form) throws IOException{
 		Path file = Paths.get(System.getProperty("user.home"),fillingBy,formName+".properies");
