@@ -49,12 +49,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBuilder;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuBarBuilder;
 import javafx.scene.control.MenuBuilder;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.MenuItemBuilder;
 import javafx.scene.control.Separator;
 import javafx.scene.control.SplitPane;
@@ -88,6 +90,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 
@@ -115,8 +118,7 @@ public class UIFormW2 extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return info;
-		
+		return info;		
 	}
 	
 	public List<Form> getListOfForm(){
@@ -133,90 +135,11 @@ public class UIFormW2 extends Application {
 			e.printStackTrace();
 		}
 		
-		
-
-//		Map<String,Double> w2tax1=new HashMap<String,Double>();
-//		Map<String,Double> w2tax2=new HashMap<String,Double>();
-//
-//		
-//		FormW2 w2f1=new FormW2();
-//		w2f1.setForm(w2tax1);
-//		w2f1.setName("f1");
-//		try {
-//			w2f1.load();
-//			w2tax1=w2f1.getForm();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		FormW2 w2f2=new FormW2();
-//		w2f2.setForm(w2tax2);
-//		w2f2.setName("f2");
-//		try {
-//			w2f2.load();
-//			w2tax2=w2f2.getForm();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
 		if(wagesAndIncomes!=null)
 		for (Form f:wagesAndIncomes){
 			if(f.getName().contains(TaxConstant.FORM_W2))
 				fillingforms.putForm(f.getName(), f.getForm());
-			
-
 		}
-
-		
-		
-//		fillingforms.putForm(TaxConstant.FORM_W2+"-1", w2tax1);
-//		fillingforms.putForm(TaxConstant.FORM_W2+"-2", w2tax2);
-		
-		
-//		Form1099DIV f1099div01=new Form1099DIV();
-//		f1099div01.setName("ETrade");
-//		try {
-//			f1099div01.load();
-//		} catch (IOException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//		f1099div01.init();
-//		
-//		Form1099DIV f1099div02=new Form1099DIV();
-//		f1099div02.setName("ETrade TW");
-//		try {
-//			f1099div02.load();
-//		} catch (IOException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//		f1099div02.init();
-//
-//		Form1099INT f1099int01=new Form1099INT();
-//		f1099int01.setName("ETrade Wei");
-//		try {
-//			f1099int01.load();
-//		} catch (IOException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//		f1099int01.init();
-//
-//		Form1099INT f1099int02=new Form1099INT();
-//		f1099int02.setName("Citibank Wei");
-//		try {
-//			f1099int02.load();
-//		} catch (IOException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//		f1099int02.init();
-
-		//		fillingforms.putForm(f1099div01.getName(),f1099div01);
-
-		
 		Form1040ScheduleB scheduleB=new Form1040ScheduleB();
 		scheduleB.setFillingForms(fillingforms);
 		Map<String,Double> interests = new HashMap<String,Double>();
@@ -234,16 +157,8 @@ public class UIFormW2 extends Application {
 			
 
 		}
-//		interests.put(f1099int01.getName(), f1099int01.getForm().get("1"));
-//		interests.put(f1099int02.getName(), f1099int02.getForm().get("1"));
 		scheduleB.setInterests(interests);
 
-
-//		dividends.put(f1099div01.getName(), f1099div01.getForm().get("1a"));
-//		dividends.put(f1099div02.getName(), f1099div02.getForm().get("1a"));
-//
-//		qdividends.put(f1099div01.getName(), f1099div01.getForm().get("1b"));
-//		qdividends.put(f1099div02.getName(), f1099div02.getForm().get("1b"));
 		scheduleB.setOrdinaryDividends(dividends);
 		scheduleB.setQualifiedDividends(qdividends);
 		try {
@@ -449,7 +364,8 @@ public class UIFormW2 extends Application {
 		filenames=FileUtil.getListOfFiledForms(fillingName);
 		stage.setTitle("Federal Tax");
 		Group root = new Group();
-        Scene scene = new Scene(root, 1024, 768, Color.WHITE);
+        Scene scene = new Scene(root, 1024, 700, Color.WHITE);
+        
         
 
 		VBox hbox = new VBox();
@@ -567,28 +483,69 @@ public class UIFormW2 extends Application {
                   .build(),
                 MenuItemBuilder.create()
                   .text("Save")
-                  .build()
-              ).build(),
-              MenuBuilder.create()
-              .text("Edit")
-              .items(
-                MenuItemBuilder.create()
-                  .text("Cut")
                   .build(),
-                MenuItemBuilder.create()
-                  .text("Copy")
+                  MenuItemBuilder.create()
+                  .text("Save As")
                   .build(),
-                MenuItemBuilder.create()
-                  .text("Paste")
+                  MenuItemBuilder.create()
+                  .text("Exit")
+                  .onAction(new EventHandler<ActionEvent>() {
+                      @Override public void handle(ActionEvent e) {
+                        System.exit(0);
+                      }
+                    }
+                  )
+                  .build())
                   .build()
-              )
-    
-             .build()
+//                  ,
+//              MenuBuilder.create()
+//              .text("Edit")
+//              .items(
+//                MenuItemBuilder.create()
+//                  .text("Cut")
+//                  .build(),
+//                MenuItemBuilder.create()
+//                  .text("Copy")
+//                  .build(),
+//                MenuItemBuilder.create()
+//                  .text("Paste")
+//                  .build()
+//              )
+//    
+//             .build()
           )
           .build();
     
        return menuBar;
       }
+    public ContextMenu createPopupMenu(){
+    	ContextMenu contextMenu = new ContextMenu();
+    	contextMenu.setOnShowing(new EventHandler<WindowEvent>() {
+    	    public void handle(WindowEvent e) {
+    	        System.out.println("showing");
+    	    }
+    	});
+    	contextMenu.setOnShown(new EventHandler<WindowEvent>() {
+    	    public void handle(WindowEvent e) {
+    	        System.out.println("shown");
+    	    }
+    	});
+
+    	MenuItem item1 = new MenuItem("About");
+    	item1.setOnAction(new EventHandler<ActionEvent>() {
+    	    public void handle(ActionEvent e) {
+    	        System.out.println("About");
+    	    }
+    	});
+    	MenuItem item2 = new MenuItem("Preferences");
+    	item2.setOnAction(new EventHandler<ActionEvent>() {
+    	    public void handle(ActionEvent e) {
+    	        System.out.println("Preferences");
+    	    }
+    	});
+    	contextMenu.getItems().addAll(item1, item2);
+    	return contextMenu;
+    }
     public ToolBar createToolBar() {
         final ToggleGroup alignToggleGroup = new ToggleGroup();
         ToolBar toolBar = ToolBarBuilder.create()
@@ -952,7 +909,8 @@ public class UIFormW2 extends Application {
                 
         
         fillingformsView.setPrefWidth(150);
-        fillingformsView.setPrefHeight(scene.getHeight());
+//        fillingformsView.setPrefHeight(scene.getHeight());
+        fillingformsView.prefHeightProperty().bind(scene.heightProperty());
         
         
         // display first and last name with tooltip using alias
@@ -987,6 +945,7 @@ public class UIFormW2 extends Application {
 						}
                     	
                     });
+//                    cell.setContextMenu(createPopupMenu());
 
                     return cell;
             
@@ -998,6 +957,7 @@ public class UIFormW2 extends Application {
 		Label leftLabel = new Label("Filling Forms");
 		leftArea.getChildren().add(leftLabel);
 		final TextArea fname = new TextArea("Type your form name here");
+//		fname.setContextMenu(createPopupMenu());
 		leftArea.getChildren().add(fname);
 		Button addW2 = new Button("Add New W-2");
 		leftArea.getChildren().add(addW2);
@@ -1008,8 +968,9 @@ public class UIFormW2 extends Application {
 			    new EventHandler<MouseEvent>() {
 	        @Override public void handle(MouseEvent e) {
 	        	try {
-					Form nform = create1099IntForm(fname.getText());
+					Form nform = create1099IntForm(TaxConstant.FORM_1099_INT+fname.getText());
 					fillingforms.add(nform);
+					wagesAndIncomes.add(nform);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1123,7 +1084,8 @@ public class UIFormW2 extends Application {
                 
         
         fillingformsView.setPrefWidth(150);
-        fillingformsView.setPrefHeight(scene.getHeight());
+//        fillingformsView.setPrefHeight(scene.getHeight());
+        fillingformsView.prefHeightProperty().bind(scene.heightProperty());
         
         
         // display first and last name with tooltip using alias
