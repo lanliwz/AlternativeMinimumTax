@@ -82,6 +82,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -364,7 +365,14 @@ public class UIFormW2 extends Application {
 		filenames=FileUtil.getListOfFiledForms(fillingName);
 		stage.setTitle("Federal Tax");
 		Group root = new Group();
+		
+//		BorderPane root=new BorderPane();
         Scene scene = new Scene(root, 1024, 700, Color.WHITE);
+//        stage.heightProperty().add(scene.heightProperty());
+//        stage.widthProperty().add(scene.widthProperty());
+        
+//        scene.widthProperty().add(stage.widthProperty());
+       
         
         
 
@@ -388,8 +396,10 @@ public class UIFormW2 extends Application {
 		wfbox.getChildren().add(stage2);
 		wfbox.getChildren().add(stage3);
 		wfbox.getChildren().add(stage4);
+//		root.setTop(hbox);
 		hbox.getChildren().add(createMenus());
 		hbox.getChildren().add(createToolBar());
+//		root.setCenter(createTabs(scene));
 		hbox.getChildren().add(createTabs(scene));
 //		hbox.getChildren().add(wfbox);
 //		hbox.getChildren().add(splitPane);
