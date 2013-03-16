@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <MenuBar prefHeight="24.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <HBox minHeight="36.0" prefHeight="36.0" prefWidth="332.0" AnchorPane.bottomAnchor="540.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+      <children>
+        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="Federal Tax:" HBox.hgrow="NEVER">
+          <HBox.margin>
+            <Insets bottom="2.0" top="2.0" fx:id="x1" />
+          </HBox.margin>
+        </Label>
+        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="0" HBox.hgrow="NEVER" HBox.margin="$x1" />
+        <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="34.0" prefWidth="9.0" HBox.hgrow="NEVER" />
+        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="State Tax:" HBox.hgrow="NEVER" HBox.margin="$x1" />
+        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="0" HBox.hgrow="NEVER" HBox.margin="$x1" />
+      </children>
+      <padding>
+        <Insets bottom="1.0" top="1.0" />
+      </padding>
+    </HBox>
+    <TabPane prefHeight="539.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <tabs>
+        <Tab text="Personal Information">
+          <content>
+            <ListView prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab text="Federal Tax ">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab text="State Tax">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab text="Tax Report">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab text="Filing Status">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView prefHeight="509.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="Catergory" />
+                    <TableColumn prefWidth="75.0" text="Amount" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>

@@ -60,6 +60,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.MenuItemBuilder;
 import javafx.scene.control.Separator;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabBuilder;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPaneBuilder;
@@ -368,6 +369,8 @@ public class UIFormW2 extends Application {
 		
 //		BorderPane root=new BorderPane();
         Scene scene = new Scene(root, 1024, 700, Color.WHITE);
+//        stage.maxHeightProperty().set(700);
+//        stage.maxWidthProperty().set(1024);
 //        stage.heightProperty().add(scene.heightProperty());
 //        stage.widthProperty().add(scene.widthProperty());
         
@@ -405,8 +408,14 @@ public class UIFormW2 extends Application {
 //		hbox.getChildren().add(splitPane);
 		
 		root.getChildren().add(hbox);
-		
+//		hbox.maxHeightProperty().set(700);
+//		hbox.maxWidthProperty().set(1024);
+//		stage.maxHeightProperty().bindBidirectional(hbox.maxHeightProperty());
+//		stage.maxWidthProperty().bindBidirectional(hbox.maxWidthProperty());
+//		hbox.maxHeightProperty().bind(stage.maxHeightProperty());
+//		hbox.maxWidthProperty().bind(stage.maxWidthProperty());
 		stage.setScene(scene);
+		stage.titleProperty().bind(scene.widthProperty().asString().concat(":").concat(scene.heightProperty().asString()));
 		stage.show();
 		
 	}
@@ -680,11 +689,6 @@ public class UIFormW2 extends Application {
         TabPane tabPane = TabPaneBuilder.create()
           .tabs(
             TabBuilder.create()
-              .text("Personal Information")
-              .content(createPersonalInfoNode(scene))
-              .closable(false)
-              .build(),
-            TabBuilder.create()
               .text("Wages and Incomes")
               .content(createWagesAndIncomesNode(scene))
               .closable(false)
@@ -696,7 +700,16 @@ public class UIFormW2 extends Application {
               .build())
 
           .build();
-    
+        Tab pinfo = TabBuilder.create()
+        .text("Personal Information")
+        .content(createPersonalInfoNode(scene))
+        .closable(false)
+        .build();
+        
+        tabPane.getTabs().add(pinfo);
+
+        tabPane.prefHeightProperty().bind(scene.heightProperty().subtract(200));
+        tabPane.prefHeightProperty().bind(scene.widthProperty());
        return tabPane;
       }   
     public Node createPersonalInfoNode(Scene scene) {
@@ -705,6 +718,7 @@ public class UIFormW2 extends Application {
         
         ObservableList<InfoForm> infoforms=FXCollections.observableArrayList();
         final ListView<InfoForm> infoView = new ListView<InfoForm>(infoforms);
+        infoView.setPrefWidth(150);
         
         
         ObservableMap<String,Double> form = FXCollections.observableHashMap();
@@ -719,7 +733,11 @@ public class UIFormW2 extends Application {
         lineinput.setPrefWidth(200);
         
         TableView<FormLineDetail> formInputView = new TableView<FormLineDetail>();
-        formInputView.setPrefHeight(scene.getHeight());
+//        formInputView.setPrefHeight(scene.getHeight());
+        
+//        formInputView.setPrefWidth(scene.getWidth()-infoView.getWidth());
+//        formInputView.prefWidthProperty().bind(scene.heightProperty().subtract(infoView.getWidth()));
+        
         final ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
         formInputView.setItems(forminputs);
         formInputView.getColumns().addAll(linenumber,lineinput);
@@ -772,8 +790,8 @@ public class UIFormW2 extends Application {
         
         
 
-        infoView.setPrefWidth(150);
-        infoView.setPrefHeight(scene.getHeight());
+        
+//        infoView.setPrefHeight(scene.getHeight());
         
         // display first and last name with tooltip using alias
         infoView.setCellFactory(new Callback<ListView<InfoForm>, ListCell<InfoForm>>() {
@@ -814,6 +832,7 @@ public class UIFormW2 extends Application {
        
         
 		VBox leftArea = new VBox(10);
+		leftArea.prefWidthProperty().set(150);
 		Label leftLabel = new Label("Filling Forms");
 		leftArea.getChildren().add(leftLabel);
 		leftArea.getChildren().add(infoView);
@@ -827,10 +846,13 @@ public class UIFormW2 extends Application {
 		
 		rightArea.setAlignment(Pos.TOP_CENTER);
 		rightArea.getChildren().add(formInputView);
-
+//		rightArea.prefWidthProperty().bind(scene.widthProperty().subtract(leftArea.getWidth()));
+//		rightArea.prefHeightProperty().bind(scene.heightProperty().subtract(200));
 		// add left area
+	    
 		splitPane.getItems().add(leftArea);
 		splitPane.getItems().add(rightArea);
+//		formInputView.prefWidthProperty().bind(rightArea.widthProperty());
 
 
 		// evenly position divider
@@ -838,6 +860,10 @@ public class UIFormW2 extends Application {
 		for (int i = 0; i < dividers.size(); i++) {
 		    dividers.get(i).setPosition((i + 1.0) / 3);
 		}
+		SplitPane.Divider divider=dividers.get(0);
+		splitPane.setPrefWidth(scene.getWidth());
+		formInputView.prefWidthProperty().bind(scene.widthProperty().multiply(1-divider.getPosition()));
+		System.out.println("width:"+splitPane.getWidth()+";left:"+splitPane.getWidth()*dividers.get(0).getPosition());
 
 
         
