@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.upuptaxfx.UpupTaxFXMainController">
   <children>
     <MenuBar prefHeight="24.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <menus>
@@ -35,10 +35,10 @@
             <Insets bottom="2.0" top="2.0" fx:id="x1" />
           </HBox.margin>
         </Label>
-        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="0" HBox.hgrow="NEVER" HBox.margin="$x1" />
+        <Label fx:id="federalTaxAmount" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="0" HBox.hgrow="NEVER" HBox.margin="$x1" />
         <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="34.0" prefWidth="9.0" HBox.hgrow="NEVER" />
         <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="State Tax:" HBox.hgrow="NEVER" HBox.margin="$x1" />
-        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="0" HBox.hgrow="NEVER" HBox.margin="$x1" />
+        <Label fx:id="stateTaxAmount" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="0" HBox.hgrow="NEVER" HBox.margin="$x1" />
       </children>
       <padding>
         <Insets bottom="1.0" top="1.0" />

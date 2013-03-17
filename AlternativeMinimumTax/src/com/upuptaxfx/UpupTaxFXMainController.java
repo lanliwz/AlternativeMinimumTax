@@ -15,8 +15,8 @@ public class UpupTaxFXMainController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-
+		federalTaxAmount.setText("$0");
+		stateTaxAmount.setText("$0");
 	}
 
 }
