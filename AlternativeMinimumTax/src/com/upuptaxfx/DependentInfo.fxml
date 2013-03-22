@@ -27,10 +27,14 @@
               </children>
             </HBox>
             <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Middle Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <GridPane.margin>
+                <Insets right="5.0" fx:id="x1" />
+              </GridPane.margin>
+            </TextField>
             <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Jr., Sr., etc" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.margin="$x1" GridPane.rowIndex="1" />
             <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <children>
                 <RadioButton mnemonicParsing="false" prefWidth="60.0" text="Son" />
@@ -41,7 +45,7 @@
             <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
               <children>
                 <RadioButton mnemonicParsing="false" prefWidth="96.0" text="Adopted" />
-                <RadioButton mnemonicParsing="false" prefWidth="113.0" text="A Folseter child" />
+                <RadioButton mnemonicParsing="false" prefWidth="113.0" text="A Folster child" />
                 <RadioButton mnemonicParsing="false" selected="true" text="None of Above" />
               </children>
             </VBox>

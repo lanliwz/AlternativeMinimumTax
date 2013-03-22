@@ -43,10 +43,7 @@ public class UpupTaxFXMainController implements Initializable {
     @FXML
     private ListView<InfoForm> infoView;
     
-    @FXML
-    private ListView<String> textListView;
     
-    private ObservableList<String> textList;
     @FXML
     private TableColumn<FormLineDetail,String> linenumber;
     @FXML
@@ -55,8 +52,9 @@ public class UpupTaxFXMainController implements Initializable {
     private TableView<FormLineDetail> formInputView;
     
     private List<InfoForm> info = new ArrayList<InfoForm>();
-    private ObservableList<InfoForm> infoforms;
-    private ObservableList<FormLineDetail> forminputs;
+    private ObservableList<InfoForm>    infoforms=FXCollections.observableArrayList();
+    private ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
+    private ObservableMap<String,Double> form = FXCollections.observableHashMap();
 
 
 	@Override
@@ -64,42 +62,14 @@ public class UpupTaxFXMainController implements Initializable {
 		federalTaxAmount.setText("$0");
 		stateTaxAmount.setText("$0");
 		createPersonalInfoNode();
-//		textList=FXCollections.observableArrayList();
-//		textList.add("Hello");
-//		textList.add("You");
-//		textListView = new ListView<String>(textList);
-//		textListView.setItems(textList);
-		
+	
 	}
     
 	private void createPersonalInfoNode() {
-	
+	      
         
-        infoforms=FXCollections.observableArrayList();
-        
-        
-        
-        
-        ObservableMap<String,Double> form = FXCollections.observableHashMap();
-        
-        linenumber = new TableColumn<FormLineDetail,String>("Line Number");
-        
-        
-        
-        
-        
-        lineinput = new TableColumn<FormLineDetail,String>("Value");
-       
-        
-        formInputView = new TableView<FormLineDetail>();
-        
-        forminputs=FXCollections.observableArrayList();
         formInputView.setItems(forminputs);
-        formInputView.getColumns().addAll(linenumber,lineinput);
-        formInputView.setEditable(true);
-        linenumber.setEditable(false);
         linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
-        lineinput.setEditable(true);
         lineinput.setCellFactory(cellFactory);
         lineinput.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("value"));
         lineinput.setOnEditCommit(new EventHandler<CellEditEvent<FormLineDetail, String>>() {
