@@ -5,8 +5,11 @@
 package com.upuptaxfx;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.upuptax.form.Form;
 import com.upuptax.form.FormLineDetail;
@@ -17,8 +20,11 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -26,16 +32,25 @@ import javafx.stage.Stage;
  * @author lli
  */
 public class UpupTaxFX extends Application {
+	private Stage stage;
+	private static String VERSION="1.0.0.001";
+	private static String TAXYEAR="2012";
+	private String installedFolder="upuptax";
+	
 	FillingStatus fillingStatus=FillingStatus.JOIN;
 	String fillingName="wei_tax_test";
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("UpupTaxFXMain.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
+    	this.stage=stage;
+//    	FXMLLoader loader = new FXMLLoader(getClass().getResource("UpupTaxFXMain.fxml"));
+//    	UpupTaxFXMainController maincontroller=loader.getController();
+//        Parent root = (Parent) loader.load();
+//        
+//        Scene scene = new Scene(root);
+//        
+//        stage.setScene(scene);
+    	gotoFilePicker();
         stage.show();
     }
 
@@ -97,5 +112,41 @@ public class UpupTaxFX extends Application {
     	}
     	return inputs;
     }
+    private void gotoFXMain() {
+        try {
+            UpupTaxFXMainController ctl = (UpupTaxFXMainController) replaceSceneContent("UpupTaxFXMain.fxml");
+            ctl.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void gotoFilePicker() {
+        try {
+        	UpupTaxFXMainController login = (UpupTaxFXMainController) replaceSceneContent("TaxFileChooser.fxml");
+            login.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    private Initializable replaceSceneContent(String fxml) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        InputStream in = this.getClass().getResourceAsStream(fxml);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        loader.setLocation(this.getClass().getResource(fxml));
+        AnchorPane page;
+        try {
+            page = (AnchorPane) loader.load(in);
+        } finally {
+            in.close();
+        } 
+        Scene scene = new Scene(page, 800, 600);
+        stage.setScene(scene);
+        stage.sizeToScene();
+        return (Initializable) loader.getController();
+    }
+
 
 }

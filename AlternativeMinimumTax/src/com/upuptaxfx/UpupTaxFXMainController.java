@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.upuptax.form.FederalInfoWorksheet;
 import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.InfoForm;
+import com.upuptax.io.FileUtil;
 import com.upuptax.ui.EditingCell;
 
 import javafx.collections.FXCollections;
@@ -36,6 +37,14 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class UpupTaxFXMainController implements Initializable {
+	private UpupTaxFX app;
+	@FXML
+	private ListView<String> listView4taxFile;
+	
+	ObservableList<String> olist4taxFile=FXCollections.observableArrayList();
+	
+	List<String> list4taxFile=new ArrayList<String>();
+	
 	@FXML
 	private Label stateTaxAmount;
 	@FXML
@@ -56,14 +65,39 @@ public class UpupTaxFXMainController implements Initializable {
     private ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
     private ObservableMap<String,Double> form = FXCollections.observableHashMap();
 
-
+    public void setApp(UpupTaxFX app){
+    	this.app=app;
+    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		federalTaxAmount.setText("$0");
-		stateTaxAmount.setText("$0");
-		createPersonalInfoNode();
+//		federalTaxAmount.setText("$0");
+//		stateTaxAmount.setText("$0");
+//		createPersonalInfoNode();
+		fillListView4TaxFile();
 	
 	}
+	
+	@FXML
+	private void fillListView4TaxFile(){
+		olist4taxFile.clear();
+		try {
+			list4taxFile=FileUtil.loadParameters("FILENAME", "");
+			for(String raw:list4taxFile){
+				String[] token=raw.split(";");
+				olist4taxFile.add(token[1]);
+			}
+	
+			if (listView4taxFile!=null)
+				listView4taxFile.setItems(olist4taxFile);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
     
 	private void createPersonalInfoNode() {
 	      
