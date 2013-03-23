@@ -29,6 +29,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,9 +41,12 @@ public class UpupTaxFXMainController implements Initializable {
 	private UpupTaxFX app;
 	
 	@FXML
-	private Label stateTaxAmount;
+	private TextField stateTaxAmount;
 	@FXML
-	private Label federalTaxAmount;
+	private TextField federalTaxAmount;
+	@FXML
+	private TextField fileName;
+	
     @FXML
     private ListView<InfoForm> infoView;
     
@@ -61,11 +65,14 @@ public class UpupTaxFXMainController implements Initializable {
 
     public void setApp(UpupTaxFX app){
     	this.app=app;
+    	fileName.setText(app.getFileName());
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-//		federalTaxAmount.setText("$0");
-//		stateTaxAmount.setText("$0");
+		if(app!=null)
+			fileName.setText(app.getFileName());
+		federalTaxAmount.setText("$0");
+		stateTaxAmount.setText("$0");
 //		createPersonalInfoNode();
 //		fillListView4TaxFile();
 	
