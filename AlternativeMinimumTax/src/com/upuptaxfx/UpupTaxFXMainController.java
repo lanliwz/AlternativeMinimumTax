@@ -38,12 +38,6 @@ import javafx.util.Callback;
 
 public class UpupTaxFXMainController implements Initializable {
 	private UpupTaxFX app;
-	@FXML
-	private ListView<String> listView4taxFile;
-	
-	ObservableList<String> olist4taxFile=FXCollections.observableArrayList();
-	
-	List<String> list4taxFile=new ArrayList<String>();
 	
 	@FXML
 	private Label stateTaxAmount;
@@ -73,27 +67,15 @@ public class UpupTaxFXMainController implements Initializable {
 //		federalTaxAmount.setText("$0");
 //		stateTaxAmount.setText("$0");
 //		createPersonalInfoNode();
-		fillListView4TaxFile();
+//		fillListView4TaxFile();
 	
 	}
 	
 	@FXML
 	private void fillListView4TaxFile(){
-		olist4taxFile.clear();
-		try {
-			list4taxFile=FileUtil.loadParameters("FILENAME", "");
-			for(String raw:list4taxFile){
-				String[] token=raw.split(";");
-				olist4taxFile.add(token[1]);
-			}
-	
-			if (listView4taxFile!=null)
-				listView4taxFile.setItems(olist4taxFile);
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			app.gotoFilePicker();
+			
 		
 	}
 	

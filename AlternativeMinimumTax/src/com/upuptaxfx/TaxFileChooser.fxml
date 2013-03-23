@@ -8,28 +8,28 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane blendMode="GREEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="319.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.upuptaxfx.UpupTaxFXMainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="319.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.upuptaxfx.TaxFilePicker">
   <children>
-    <VBox prefHeight="400.0" prefWidth="319.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="319.0">
       <children>
         <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="600.0" text="Tax Files" VBox.vgrow="SOMETIMES">
           <font>
             <Font name="System Bold" size="16.0" />
           </font>
         </Label>
-        <ListView id="" fx:id="listView4taxFile" blendMode="COLOR_BURN" prefHeight="341.0" prefWidth="333.0">
+        <ListView id="" fx:id="listView4taxFile" prefHeight="341.0" prefWidth="333.0">
           <VBox.margin>
             <Insets left="5.0" right="5.0" />
           </VBox.margin>
         </ListView>
         <GridPane>
           <children>
-            <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Open" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+            <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openTaxFile" prefWidth="60.0" text="Open" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
               <GridPane.margin>
                 <Insets right="20.0" />
               </GridPane.margin>
             </Button>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefWidth="50.0" text="Exit" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancel" onDragDetected="#cancel" prefWidth="60.0" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="0">
               <GridPane.margin>
                 <Insets left="20.0" />
               </GridPane.margin>

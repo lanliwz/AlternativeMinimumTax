@@ -38,7 +38,14 @@ public class UpupTaxFX extends Application {
 	private String installedFolder="upuptax";
 	
 	FillingStatus fillingStatus=FillingStatus.JOIN;
-	String fillingName="wei_tax_test";
+	private String fileName;//="wei_tax_test";
+	
+	public void setFileName(String filename){
+		this.fileName=filename;
+	}
+	public String getFileName(){
+		return this.fileName;
+	}
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -50,7 +57,8 @@ public class UpupTaxFX extends Application {
 //        Scene scene = new Scene(root);
 //        
 //        stage.setScene(scene);
-    	gotoFilePicker();
+//    	gotoFilePicker();
+    	gotoFXMain();
         stage.show();
     }
 
@@ -112,7 +120,7 @@ public class UpupTaxFX extends Application {
     	}
     	return inputs;
     }
-    private void gotoFXMain() {
+    public void gotoFXMain() {
         try {
             UpupTaxFXMainController ctl = (UpupTaxFXMainController) replaceSceneContent("UpupTaxFXMain.fxml");
             ctl.setApp(this);
@@ -121,10 +129,10 @@ public class UpupTaxFX extends Application {
         }
     }
 
-    private void gotoFilePicker() {
+    public void gotoFilePicker() {
         try {
-        	UpupTaxFXMainController login = (UpupTaxFXMainController) replaceSceneContent("TaxFileChooser.fxml");
-            login.setApp(this);
+        	TaxFilePicker ctl = (TaxFilePicker) replaceSceneContent("TaxFileChooser.fxml");
+            ctl.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
