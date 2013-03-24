@@ -13,7 +13,13 @@ public class FederalInfoWorksheet implements InfoForm {
 	private Map<String,String> form;
 	private List<FormLineDetail> lineDetails;
 	private String filedBy="wei_tax_test";
-
+	
+	public FederalInfoWorksheet(){
+		
+	}
+	public FederalInfoWorksheet(String filedBy){
+		this.filedBy=filedBy;
+	}
 	@Override
 	public Map<String, String> getForm() {
 		// TODO Auto-generated method stub

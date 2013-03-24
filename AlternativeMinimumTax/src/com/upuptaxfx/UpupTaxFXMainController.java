@@ -65,7 +65,12 @@ public class UpupTaxFXMainController implements Initializable {
 
     public void setApp(UpupTaxFX app){
     	this.app=app;
+    	
+    }
+    public void init(){
     	fileName.setText(app.getFileName());
+    	createPersonalInfoNode();
+    	
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -89,7 +94,9 @@ public class UpupTaxFXMainController implements Initializable {
 	
     
 	private void createPersonalInfoNode() {
-	      
+	    if(app==null || app.getFileName()==null){
+	    	return;
+	    }
         
         formInputView.setItems(forminputs);
         linenumber.setCellValueFactory(new PropertyValueFactory<FormLineDetail,String>("lineDescription"));
@@ -189,7 +196,7 @@ public class UpupTaxFXMainController implements Initializable {
     };
 	public List<InfoForm> getListOfInfoForm(){
 		
-		FederalInfoWorksheet infowks = new FederalInfoWorksheet();
+		FederalInfoWorksheet infowks = new FederalInfoWorksheet(app.getFileName());
 		info.add(infowks);
 		try {
 			infowks.init();

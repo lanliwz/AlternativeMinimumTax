@@ -124,6 +124,7 @@ public class UpupTaxFX extends Application {
         try {
             UpupTaxFXMainController ctl = (UpupTaxFXMainController) replaceSceneContent("UpupTaxFXMain.fxml");
             ctl.setApp(this);
+            ctl.init();
         } catch (Exception ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
