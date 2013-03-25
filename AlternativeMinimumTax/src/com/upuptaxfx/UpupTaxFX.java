@@ -156,7 +156,7 @@ public class UpupTaxFX extends Application {
             in.close();
         } 
         Scene scene = new Scene(page, 800, 600);
-        scene.getStylesheets().add(this.getClass().getResource("dialog.css").toExternalForm());
+//        scene.getStylesheets().add(this.getClass().getResource("dialog.css").toExternalForm());
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
