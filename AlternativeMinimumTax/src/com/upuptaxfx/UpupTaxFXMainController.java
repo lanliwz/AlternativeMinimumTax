@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 import com.upuptax.form.FederalInfoWorksheet;
 import com.upuptax.form.FormLineDetail;
@@ -13,6 +16,8 @@ import com.upuptax.form.InfoForm;
 import com.upuptax.io.FileUtil;
 import com.upuptax.ui.EditingCell;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -59,6 +64,11 @@ public class UpupTaxFXMainController implements Initializable {
 	@FXML
 	private TextField fileName;
 	
+	@FXML
+	private TextField saveAsfileName;
+	
+	private StringProperty strFileName = new SimpleStringProperty();
+	
     @FXML
     private ListView<InfoForm> infoView;
     
@@ -88,6 +98,7 @@ public class UpupTaxFXMainController implements Initializable {
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		fileName.textProperty().bindBidirectional(strFileName);
 //		popupWin = new Popup();
 
 
@@ -114,16 +125,23 @@ public class UpupTaxFXMainController implements Initializable {
 	@FXML
 	private void createNewTaxFile(ActionEvent event){
 		
-//		MenuItem mitem =(MenuItem)event.getSource();
-		
-		vboxPopup.visibleProperty().set(true);
+		MenuItem mitem =(MenuItem)event.getSource();
+		if (mitem.getText().equalsIgnoreCase("save as")){
+			Logger.getLogger(this.getClass().getName()).log(Level.INFO,"Save As - " +strFileName.getValue() );
+			if(strFileName.getValue()!=null){
+				saveAsfileName.setText(strFileName.getValue());
+				vboxPopup.visibleProperty().set(true);
+			}
+			
+		} else
+			vboxPopup.visibleProperty().set(true);
 //		popupWin.show(app.getStage());
 //		popupWin.show(app.getStage(),app.getStage().getX(),app.getStage().getY());//,.scaleXProperty().getValue(),mitem.getGraphic().scaleYProperty().getValue());
 	}
 	@FXML
 	private void cancelCreateNewTaxFile(ActionEvent event){
 		
-//		MenuItem mitem =(MenuItem)event.getSource();
+
 		
 		vboxPopup.visibleProperty().set(false);
 
@@ -131,7 +149,7 @@ public class UpupTaxFXMainController implements Initializable {
 	@FXML
 	private void commitCreateNewTaxFile(ActionEvent event){
 		
-//		MenuItem mitem =(MenuItem)event.getSource();
+
 		
 		vboxPopup.visibleProperty().set(false);
 
