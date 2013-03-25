@@ -63,11 +63,12 @@ public class UpupTaxFXMainController implements Initializable {
 	private TextField federalTaxAmount;
 	@FXML
 	private TextField fileName;
+	private StringProperty strFileName = new SimpleStringProperty();
 	
 	@FXML
 	private TextField saveAsfileName;
+	private StringProperty strSaveAsFileName = new SimpleStringProperty();
 	
-	private StringProperty strFileName = new SimpleStringProperty();
 	
     @FXML
     private ListView<InfoForm> infoView;
@@ -99,6 +100,7 @@ public class UpupTaxFXMainController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		fileName.textProperty().bindBidirectional(strFileName);
+		saveAsfileName.textProperty().bindBidirectional(strSaveAsFileName);
 //		popupWin = new Popup();
 
 
@@ -150,7 +152,13 @@ public class UpupTaxFXMainController implements Initializable {
 	private void commitCreateNewTaxFile(ActionEvent event){
 		
 
-		
+		app.getAvailableFiles().add("FILENAME;"+strSaveAsFileName.getValue()+";");
+		try {
+			FileUtil.saveParameters("FILENAME", "",app.getAvailableFiles() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		vboxPopup.visibleProperty().set(false);
 
 	}

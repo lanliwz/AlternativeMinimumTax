@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import com.upuptax.form.Form;
 import com.upuptax.form.FormLineDetail;
 import com.upuptax.form.InfoForm;
+import com.upuptax.io.FileUtil;
 import com.upuptax.reference.FillingStatus;
 
 import javafx.application.Application;
@@ -39,6 +40,7 @@ public class UpupTaxFX extends Application {
 	
 	FillingStatus fillingStatus=FillingStatus.JOIN;
 	private String fileName;//="wei_tax_test";
+	private List<String> availableFiles;
 	
 	public Stage getStage(){
 		return stage;
@@ -49,10 +51,14 @@ public class UpupTaxFX extends Application {
 	public String getFileName(){
 		return this.fileName;
 	}
+	public List<String> getAvailableFiles(){
+		return availableFiles;
+	}
     
     @Override
     public void start(Stage stage) throws Exception {
     	this.stage=stage;
+    	availableFiles = FileUtil.loadParameters("FILENAME", "");
 //    	FXMLLoader loader = new FXMLLoader(getClass().getResource("UpupTaxFXMain.fxml"));
 //    	UpupTaxFXMainController maincontroller=loader.getController();
 //        Parent root = (Parent) loader.load();
@@ -63,6 +69,7 @@ public class UpupTaxFX extends Application {
 //    	gotoFilePicker();
     	gotoFXMain();
         stage.show();
+        
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.upuptax.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -262,13 +263,15 @@ public class FileUtil {
 		
 			
 		}
-		Writer writer = Files.newBufferedWriter(file,Charset.defaultCharset());
+		BufferedWriter writer = Files.newBufferedWriter(file,Charset.defaultCharset());
 
 		if(Files.exists(file)){
 			for (String str:lines){
 				writer.write(str);
+				writer.newLine();
 			}
-			}			
+			}	
+		writer.close();
 	
 	}
 	public static List<TaxRateRule> loadTaxParameters(String year,FillingStatus status) throws IOException{
