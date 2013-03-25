@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="fileName_x0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.upuptaxfx.UpupTaxFXMainController">
+<AnchorPane fx:id="fileName_x0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.upuptaxfx.UpupTaxFXMainController">
   <children>
     <MenuBar prefHeight="24.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#createNewTaxFile" text="New" />
             <MenuItem mnemonicParsing="false" onAction="#fillListView4TaxFile" text="Open" />
             <MenuItem mnemonicParsing="false" text="Save" />
             <MenuItem mnemonicParsing="false" text="Save As" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Exit" />
+            <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
@@ -33,27 +33,46 @@
         </Menu>
       </menus>
     </MenuBar>
-    <HBox minHeight="36.0" prefHeight="36.0" prefWidth="786.0" AnchorPane.bottomAnchor="540.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+    <HBox alignment="CENTER_LEFT" minHeight="36.0" prefHeight="36.0" prefWidth="786.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
       <children>
         <Label labelFor="$fileName_x0" prefHeight="34.0" prefWidth="73.0" text="File Name:">
+          <stylesheets>
+            <URL value="@UpupTaxFXMain.css" />
+          </stylesheets>
           <HBox.margin>
             <Insets />
           </HBox.margin>
         </Label>
-        <TextField fx:id="fileName" prefHeight="34.0" prefWidth="155.0" />
-        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="Federal Tax:" HBox.hgrow="NEVER">
+        <TextField fx:id="fileName" prefHeight="27.0" prefWidth="155.0">
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+        </TextField>
+        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="99.0" text="Federal Tax:" HBox.hgrow="NEVER">
+          <labelFor>
+            <TextField fx:id="federalTaxAmount" prefHeight="27.0" prefWidth="114.0" />
+          </labelFor>
+          <stylesheets>
+            <URL value="@UpupTaxFXMain.css" />
+          </stylesheets>
           <HBox.margin>
             <Insets bottom="2.0" right="5.0" top="2.0" />
           </HBox.margin>
         </Label>
-        <TextField fx:id="federalTaxAmount" prefHeight="34.0" prefWidth="114.0" />
+        <fx:reference source="federalTaxAmount" />
         <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="34.0" prefWidth="9.0" HBox.hgrow="NEVER" />
-        <Label contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="State Tax:" HBox.hgrow="NEVER">
+        <Label id="" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="73.0" text="State Tax:" HBox.hgrow="NEVER">
+          <labelFor>
+            <TextField fx:id="stateTaxAmount" prefHeight="27.0" prefWidth="114.0" />
+          </labelFor>
+          <stylesheets>
+            <URL value="@UpupTaxFXMain.css" />
+          </stylesheets>
           <HBox.margin>
             <Insets bottom="2.0" top="2.0" fx:id="x1" />
           </HBox.margin>
         </Label>
-        <TextField fx:id="stateTaxAmount" prefHeight="34.0" prefWidth="114.0" />
+        <fx:reference source="stateTaxAmount" />
       </children>
       <padding>
         <Insets bottom="1.0" top="1.0" />
@@ -120,4 +139,8 @@
       </tabs>
     </TabPane>
   </children>
+  <stylesheets>
+    <URL value="@dialog.css" />
+    <URL value="@UpupTaxFXMain.css" />
+  </stylesheets>
 </AnchorPane>

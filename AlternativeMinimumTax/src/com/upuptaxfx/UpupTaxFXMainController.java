@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -33,8 +34,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
 import javafx.util.Callback;
 
 public class UpupTaxFXMainController implements Initializable {
@@ -62,6 +69,8 @@ public class UpupTaxFXMainController implements Initializable {
     private ObservableList<InfoForm>    infoforms=FXCollections.observableArrayList();
     private ObservableList<FormLineDetail> forminputs=FXCollections.observableArrayList();
     private ObservableMap<String,Double> form = FXCollections.observableHashMap();
+    
+    private Popup popupWin;
 
     public void setApp(UpupTaxFX app){
     	this.app=app;
@@ -74,6 +83,22 @@ public class UpupTaxFXMainController implements Initializable {
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		popupWin = new Popup();
+		popupWin.setWidth(200);
+		popupWin.setHeight(300);
+		AnchorPane apNewFile= new AnchorPane();
+
+		VBox vboxNewFile=VBoxBuilder.create().styleClass("dialog").build();
+		apNewFile.getChildren().add(vboxNewFile);
+//		vboxNewFile.styleProperty().set("dialog");
+		
+		vboxNewFile.getChildren().add(new TextField("Enter new file name"));
+		vboxNewFile.getChildren().add(new Button("Save"));
+		vboxNewFile.getChildren().add(new Button("Cancel"));
+		popupWin.getContent().addAll(apNewFile);
+		popupWin.autoHideProperty().set(true);
+		popupWin.hide();
+		
 		if(app!=null)
 			fileName.setText(app.getFileName());
 		federalTaxAmount.setText("$0");
@@ -81,6 +106,15 @@ public class UpupTaxFXMainController implements Initializable {
 //		createPersonalInfoNode();
 //		fillListView4TaxFile();
 	
+	}
+	@FXML
+	private void exit(){
+		System.exit(0);
+	}
+	@FXML
+	private void createNewTaxFile(){
+		
+		popupWin.show(app.getStage());
 	}
 	
 	@FXML

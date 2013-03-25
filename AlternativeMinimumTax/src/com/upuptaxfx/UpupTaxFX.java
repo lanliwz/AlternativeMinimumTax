@@ -40,6 +40,9 @@ public class UpupTaxFX extends Application {
 	FillingStatus fillingStatus=FillingStatus.JOIN;
 	private String fileName;//="wei_tax_test";
 	
+	public Stage getStage(){
+		return stage;
+	}
 	public void setFileName(String filename){
 		this.fileName=filename;
 	}
@@ -145,6 +148,7 @@ public class UpupTaxFX extends Application {
         InputStream in = this.getClass().getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(this.getClass().getResource(fxml));
+        
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);
@@ -152,6 +156,7 @@ public class UpupTaxFX extends Application {
             in.close();
         } 
         Scene scene = new Scene(page, 800, 600);
+        scene.getStylesheets().add(this.getClass().getResource("dialog.css").toExternalForm());
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();

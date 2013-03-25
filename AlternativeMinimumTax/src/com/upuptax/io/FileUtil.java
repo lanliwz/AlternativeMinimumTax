@@ -250,6 +250,27 @@ public class FileUtil {
 	
 		return null;
 	}
+	public static void saveParameters(String formName,String year,List<String> lines) throws IOException {
+		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,formName+"-PARAMETERS.properies");
+		
+		Path folder=Paths.get(System.getProperty("user.home"),formName);
+		if (!Files.exists(folder)){
+			Files.createDirectory(folder);
+		}
+		if(!Files.exists(file)){
+			Files.createFile(file);		
+		
+			
+		}
+		Writer writer = Files.newBufferedWriter(file,Charset.defaultCharset());
+
+		if(Files.exists(file)){
+			for (String str:lines){
+				writer.write(str);
+			}
+			}			
+	
+	}
 	public static List<TaxRateRule> loadTaxParameters(String year,FillingStatus status) throws IOException{
 		Path file = Paths.get(System.getProperty("user.home"),"upuptax"+year,"TAX-PARAMETERS.properies");
 		List<TaxRateRule> lines = new ArrayList<TaxRateRule>(); 
