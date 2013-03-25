@@ -125,7 +125,7 @@ public class UpupTaxFX extends Application {
     }
     public void gotoFXMain() {
         try {
-            UpupTaxFXMainController ctl = (UpupTaxFXMainController) replaceSceneContent("UpupTaxFXMain.fxml");
+            UpupTaxFXMainController ctl = (UpupTaxFXMainController) replaceSceneContent("UpupTaxFXMain.fxml",800,600);
             ctl.setApp(this);
             ctl.init();
         } catch (Exception ex) {
@@ -135,7 +135,7 @@ public class UpupTaxFX extends Application {
 
     public void gotoFilePicker() {
         try {
-        	TaxFilePicker ctl = (TaxFilePicker) replaceSceneContent("TaxFileChooser.fxml");
+        	TaxFilePicker ctl = (TaxFilePicker) replaceSceneContent("TaxFileChooser.fxml",320,400);
             ctl.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -143,7 +143,7 @@ public class UpupTaxFX extends Application {
     }
 
     
-    private Initializable replaceSceneContent(String fxml) throws Exception {
+    private Initializable replaceSceneContent(String fxml,double width,double height) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = this.getClass().getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -155,7 +155,7 @@ public class UpupTaxFX extends Application {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page, 800, 600);
+        Scene scene = new Scene(page, width,height);
 //        scene.getStylesheets().add(this.getClass().getResource("dialog.css").toExternalForm());
         stage.setScene(scene);
         stage.sizeToScene();

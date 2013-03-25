@@ -16,6 +16,7 @@ import com.upuptax.ui.EditingCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -46,6 +48,9 @@ import javafx.util.Callback;
 
 public class UpupTaxFXMainController implements Initializable {
 	private UpupTaxFX app;
+	
+	@FXML
+	private VBox vboxPopup;
 	
 	@FXML
 	private TextField stateTaxAmount;
@@ -83,21 +88,16 @@ public class UpupTaxFXMainController implements Initializable {
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		popupWin = new Popup();
-		popupWin.setWidth(200);
-		popupWin.setHeight(300);
-		AnchorPane apNewFile= new AnchorPane();
+//		popupWin = new Popup();
 
-		VBox vboxNewFile=VBoxBuilder.create().styleClass("dialog").build();
-		apNewFile.getChildren().add(vboxNewFile);
+
 //		vboxNewFile.styleProperty().set("dialog");
 		
-		vboxNewFile.getChildren().add(new TextField("Enter new file name"));
-		vboxNewFile.getChildren().add(new Button("Save"));
-		vboxNewFile.getChildren().add(new Button("Cancel"));
-		popupWin.getContent().addAll(apNewFile);
-		popupWin.autoHideProperty().set(true);
-		popupWin.hide();
+	
+		vboxPopup.visibleProperty().set(false);
+//		popupWin.getContent().addAll(vboxPopup);
+//		popupWin.autoHideProperty().set(true);
+//		popupWin.hide();
 		
 		if(app!=null)
 			fileName.setText(app.getFileName());
@@ -112,10 +112,31 @@ public class UpupTaxFXMainController implements Initializable {
 		System.exit(0);
 	}
 	@FXML
-	private void createNewTaxFile(){
+	private void createNewTaxFile(ActionEvent event){
 		
-		popupWin.show(app.getStage());
+//		MenuItem mitem =(MenuItem)event.getSource();
+		
+		vboxPopup.visibleProperty().set(true);
+//		popupWin.show(app.getStage());
+//		popupWin.show(app.getStage(),app.getStage().getX(),app.getStage().getY());//,.scaleXProperty().getValue(),mitem.getGraphic().scaleYProperty().getValue());
 	}
+	@FXML
+	private void cancelCreateNewTaxFile(ActionEvent event){
+		
+//		MenuItem mitem =(MenuItem)event.getSource();
+		
+		vboxPopup.visibleProperty().set(false);
+
+	}
+	@FXML
+	private void commitCreateNewTaxFile(ActionEvent event){
+		
+//		MenuItem mitem =(MenuItem)event.getSource();
+		
+		vboxPopup.visibleProperty().set(false);
+
+	}
+	
 	
 	@FXML
 	private void fillListView4TaxFile(){
