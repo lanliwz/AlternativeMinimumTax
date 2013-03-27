@@ -8,38 +8,54 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <ScrollPane prefHeight="272.0" prefWidth="586.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <content>
-        <GridPane alignment="CENTER_RIGHT" hgap="4.0" prefHeight="245.0" prefWidth="586.0" vgap="2.0">
+    <GridPane alignment="CENTER_RIGHT" hgap="4.0" prefHeight="245.0" prefWidth="298.0" vgap="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="96.0" text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="LastName" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="Date Of Birth" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Social Security No" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="96.0" text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="LastName" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="Date Of Birth" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Social Security No" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <children>
-                <TextField prefWidth="140.0" />
-                <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
-              </children>
-            </HBox>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Middle Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="97.0" text="Occupation" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="109.0" text="State Of Residence " GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <HBox id="HBox" alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="6">
-              <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="260.0" text="You lived in another state in 2012" />
-                <RadioButton mnemonicParsing="false" text="Yes" />
-                <RadioButton mnemonicParsing="false" selected="true" text="No" />
-              </children>
-            </HBox>
-            <ComboBox prefHeight="21.0" prefWidth="109.0" promptText="Select State" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField prefWidth="71.0" />
+            <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
+          </children>
+        </HBox>
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Middle Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets right="5.0" fx:id="x2" />
+          </GridPane.margin>
+        </TextField>
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="97.0" text="Occupation" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="109.0" text="State Of Residence " GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="6">
+          <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="248.0" text="You lived in another state in 2012" />
+            <RadioButton mnemonicParsing="false" text="Yes" />
+            <RadioButton mnemonicParsing="false" selected="true" text="No" />
+          </children>
+        </HBox>
+        <ComboBox prefHeight="21.0" prefWidth="109.0" promptText="Select State" GridPane.columnIndex="1" GridPane.rowIndex="5">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Jr., Sr., etc" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField prefWidth="96.0" GridPane.columnIndex="3" GridPane.margin="$x2" GridPane.rowIndex="1" />
+        <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="303.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="7">
+          <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="248.0" text="Previours State of Residence" />
+            <ComboBox prefHeight="21.0" prefWidth="109.0" promptText="Select State">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -47,53 +63,37 @@
                   <String fx:value="Item 3" />
                 </FXCollections>
               </items>
+              <HBox.margin>
+                <Insets left="5.0" fx:id="x1" />
+              </HBox.margin>
             </ComboBox>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Jr., Sr., etc" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="303.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="7">
-              <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="260.0" text="Previours State of Residence" />
-                <ComboBox prefHeight="21.0" prefWidth="109.0" promptText="Select State">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                  <HBox.margin>
-                    <Insets left="5.0" fx:id="x1" />
-                  </HBox.margin>
-                </ComboBox>
-              </children>
-            </HBox>
-            <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="303.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="8">
-              <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="260.0" text="Date you became a resident of new State" />
-                <TextField prefWidth="140.0" HBox.margin="$x1" />
-                <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
-              </children>
-            </HBox>
           </children>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="119.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="232.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="96.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="97.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-        </GridPane>
-      </content>
-    </ScrollPane>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="303.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="8">
+          <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="260.0" text="Date you became a resident of new State" />
+            <TextField prefWidth="65.0" HBox.margin="$x1" />
+            <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
+          </children>
+        </HBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="103.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="130.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="79.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="68.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
   </children>
 </AnchorPane>

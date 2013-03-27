@@ -8,65 +8,65 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <ScrollPane prefHeight="272.0" prefWidth="586.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <content>
-        <GridPane alignment="CENTER_RIGHT" hgap="4.0" prefHeight="257.0" prefWidth="586.0" vgap="2.0">
+    <GridPane alignment="CENTER_RIGHT" hgap="4.0" prefHeight="270.0" prefWidth="400.0" vgap="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="96.0" text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets left="5.0" fx:id="x2" />
+          </GridPane.margin>
+        </Label>
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="LastName" GridPane.columnIndex="0" GridPane.margin="$x2" GridPane.rowIndex="1" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="Date Of Birth" GridPane.columnIndex="0" GridPane.margin="$x2" GridPane.rowIndex="2" />
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Social Security No" GridPane.columnIndex="0" GridPane.margin="$x2" GridPane.rowIndex="3" />
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="96.0" text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="LastName" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="Date Of Birth" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Social Security No" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <children>
-                <TextField prefWidth="140.0" />
-                <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
-              </children>
-            </HBox>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Middle Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
-              <GridPane.margin>
-                <Insets right="5.0" fx:id="x1" />
-              </GridPane.margin>
-            </TextField>
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Jr., Sr., etc" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.margin="$x1" GridPane.rowIndex="1" />
-            <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-              <children>
-                <RadioButton mnemonicParsing="false" prefWidth="60.0" text="Son" />
-                <RadioButton mnemonicParsing="false" selected="true" text="Daughter" />
-              </children>
-            </VBox>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="This child is my" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-              <children>
-                <RadioButton mnemonicParsing="false" prefWidth="96.0" text="Adopted" />
-                <RadioButton mnemonicParsing="false" prefWidth="113.0" text="A Folster child" />
-                <RadioButton mnemonicParsing="false" selected="true" text="None of Above" />
-              </children>
-            </VBox>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="This child is" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField prefWidth="69.0" />
+            <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
           </children>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="119.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="232.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="96.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="97.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-        </GridPane>
-      </content>
-    </ScrollPane>
+        </HBox>
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Middle Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets right="5.0" fx:id="x1" />
+          </GridPane.margin>
+        </TextField>
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Jr., Sr., etc" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField prefWidth="86.0" GridPane.columnIndex="3" GridPane.margin="$x1" GridPane.rowIndex="1" />
+        <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+          <children>
+            <RadioButton mnemonicParsing="false" prefWidth="60.0" text="Son" />
+            <RadioButton mnemonicParsing="false" selected="true" text="Daughter" />
+          </children>
+        </VBox>
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="This child is my" GridPane.columnIndex="0" GridPane.margin="$x2" GridPane.rowIndex="4" />
+        <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+          <children>
+            <RadioButton mnemonicParsing="false" prefWidth="96.0" text="Adopted" />
+            <RadioButton mnemonicParsing="false" prefWidth="113.0" text="A Folster child" />
+            <RadioButton mnemonicParsing="false" selected="true" text="None of Above" />
+          </children>
+        </VBox>
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="96.0" text="This child is" GridPane.columnIndex="0" GridPane.margin="$x2" GridPane.rowIndex="5" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="109.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="142.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="78.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="59.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
   </children>
 </AnchorPane>

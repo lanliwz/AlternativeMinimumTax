@@ -133,10 +133,13 @@ public class UpupTaxFXMainController implements Initializable {
 			if(strFileName.getValue()!=null){
 				saveAsfileName.setText(strFileName.getValue());
 				vboxPopup.visibleProperty().set(true);
+				vboxPopup.toFront();
 			}
 			
-		} else
+		} else{
 			vboxPopup.visibleProperty().set(true);
+			vboxPopup.toFront();
+		}
 //		popupWin.show(app.getStage());
 //		popupWin.show(app.getStage(),app.getStage().getX(),app.getStage().getY());//,.scaleXProperty().getValue(),mitem.getGraphic().scaleYProperty().getValue());
 	}
