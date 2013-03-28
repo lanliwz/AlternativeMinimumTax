@@ -20,8 +20,7 @@
         <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Social Security No" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <children>
-            <TextField prefWidth="71.0" />
-            <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
+            <TextField prefWidth="132.0" promptText="mm/dd/yyyy" />
           </children>
         </HBox>
         <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="91.0" text="Middle Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
@@ -71,9 +70,8 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="303.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="8">
           <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="260.0" text="Date you became a resident of new State" />
-            <TextField prefWidth="65.0" HBox.margin="$x1" />
-            <Label prefWidth="97.0" text="(mm/dd/yyyy)" />
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="248.0" text="Date you became a resident of new State" />
+            <TextField prefWidth="132.0" text="mm/dd/yyyy" HBox.margin="$x1" />
           </children>
         </HBox>
       </children>

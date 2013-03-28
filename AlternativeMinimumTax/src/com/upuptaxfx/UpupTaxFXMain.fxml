@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.web.*?>
 
 <AnchorPane fx:id="fileName_x0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.upuptaxfx.UpupTaxFXMainController">
   <children>
@@ -43,7 +44,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <HBox alignment="CENTER_LEFT" minHeight="36.0" prefHeight="36.0" prefWidth="786.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+    <HBox alignment="CENTER_LEFT" minHeight="36.0" prefHeight="36.0" prefWidth="786.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="24.0">
       <children>
         <Label labelFor="$fileName_x0" prefHeight="34.0" prefWidth="73.0" text="File Name:">
           <stylesheets>
@@ -94,21 +95,38 @@
           <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
               <children>
-                <SplitPane dividerPositions="0.2669172932330827" focusTraversable="true" prefHeight="509.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <SplitPane dividerPositions="0.5100250626566416" focusTraversable="true" prefHeight="509.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <items>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                       <children>
-                        <ListView fx:id="infoView" editable="true" prefHeight="507.0" prefWidth="210.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <VBox prefHeight="507.0" prefWidth="399.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="0.0">
+                          <children>
+                            <Label prefHeight="34.0" text="Taxpayer information:" />
+                            <fx:include source="PersonInfo.fxml" prefHeight="270.0" prefWidth="398.9998779296875" />
+                            <HBox id="HBox" alignment="CENTER_LEFT" prefWidth="399.0" spacing="20.0">
+                              <children>
+                                <Button mnemonicParsing="false" text="Back">
+                                  <HBox.margin>
+                                    <Insets />
+                                  </HBox.margin>
+                                </Button>
+                                <Button mnemonicParsing="false" text="Continue" />
+                                <Button mnemonicParsing="false" text="Done" />
+                              </children>
+                              <padding>
+                                <Insets left="70.0" />
+                              </padding>
+                              <VBox.margin>
+                                <Insets top="30.0" />
+                              </VBox.margin>
+                            </HBox>
+                          </children>
+                        </VBox>
                       </children>
                     </AnchorPane>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="399.0">
                       <children>
-                        <TableView fx:id="formInputView" editable="true" prefHeight="507.0" prefWidth="582.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn editable="false" prefWidth="300.0" text="Line NUmber" fx:id="linenumber" />
-                            <TableColumn prefWidth="200.0" text="Value" fx:id="lineinput" />
-                          </columns>
-                        </TableView>
+                        <WebView prefHeight="507.0" prefWidth="388.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                       </children>
                     </AnchorPane>
                   </items>
