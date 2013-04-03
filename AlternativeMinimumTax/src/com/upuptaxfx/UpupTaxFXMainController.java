@@ -48,12 +48,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 import javafx.util.Callback;
 
 public class UpupTaxFXMainController implements Initializable {
 	private UpupTaxFX app;
 	
+	@FXML
+	private WebView webViewInfo;
 	@FXML
 	private VBox vboxPopup;
 	
@@ -101,6 +104,7 @@ public class UpupTaxFXMainController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		fileName.textProperty().bindBidirectional(strFileName);
 		saveAsfileName.textProperty().bindBidirectional(strSaveAsFileName);
+		webViewInfo.getEngine().load("http://www.google.com");
 //		popupWin = new Popup();
 
 

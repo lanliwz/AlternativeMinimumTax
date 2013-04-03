@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/TAX-FORM" xmlns:tns="http://www.example.org/TAX-FORM" elementFormDefault="qualified">
+
+
+    <complexType name="part">
+    	<sequence>
+    		<element name="line" type="string" maxOccurs="unbounded"></element>
+    	</sequence>
+    	<attribute name="number" type="int"></attribute>
+    	<attribute name="title" type="string"></attribute>
+    	<attribute name="description" type="string"></attribute>
+    </complexType>
+
+    <complexType name="lineItem">
+    	<sequence>
+    		<element name="doubleValue" type="double" minOccurs="0" maxOccurs="10"></element>
+    		<element name="stringValue" type="string" maxOccurs="10" minOccurs="0"></element>
+    		<element name="booleanValue" type="boolean" minOccurs="0" maxOccurs="10"></element>
+    	</sequence>
+    	<attribute name="lineItemId" type="string"></attribute>
+    	<attribute name="description" type="string"></attribute>
+    	<attribute name="valueType" type="string"></attribute>
+    </complexType>
+
+
+    <complexType name="taxForm">
+    	<sequence minOccurs="1" maxOccurs="10">
+    		<element name="part" type="tns:part"></element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="id" type="string"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    	<attribute name="taxPayerNames" type="string"></attribute>
+    	<attribute name="socialSecurityNo" type="string"></attribute>
+    </complexType>
+
+    <element name="root" type="tns:taxForm"></element>
+
+    <complexType name="line">
+    	<sequence>
+    		<element name="lineItem" type="tns:lineItem"
+    			maxOccurs="5">
+    		</element>
+    	</sequence>
+    	<attribute name="lineNumber" type="string"></attribute>
+    	<attribute name="description" type="string"></attribute>
+    </complexType>
+</schema>
