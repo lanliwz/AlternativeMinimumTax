@@ -4,7 +4,9 @@
 
     <complexType name="part">
     	<sequence>
-    		<element name="line" type="string" maxOccurs="unbounded"></element>
+    		<element name="line" type="tns:lineItem"
+    			maxOccurs="unbounded">
+    		</element>
     	</sequence>
     	<attribute name="number" type="int"></attribute>
     	<attribute name="title" type="string"></attribute>
@@ -32,13 +34,12 @@
 
     <complexType name="taxForm">
     	<sequence minOccurs="1" maxOccurs="10">
-    		<element name="part" type="tns:part"></element>
+    		<element name="part" type="tns:part" maxOccurs="unbounded"></element>
+    		<element name="header" type="tns:header"></element>
     	</sequence>
     	<attribute name="name" type="string" use="required"></attribute>
     	<attribute name="id" type="string"></attribute>
     	<attribute name="type" type="string" use="optional" default="FEDERAL"></attribute>
-    	<attribute name="taxPayerNames" type="string"></attribute>
-    	<attribute name="socialSecurityNo" type="string"></attribute>
     </complexType>
 
     <element name="root" type="tns:taxForm"></element>
@@ -56,5 +57,14 @@
     <complexType name="nameValue">
     	<attribute name="name" type="string"></attribute>
     	<attribute name="type" type="string"></attribute>
+    </complexType>
+
+
+    <complexType name="header">
+    	<sequence>
+    		<element name="item" type="tns:nameValue"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
     </complexType>
 </schema>

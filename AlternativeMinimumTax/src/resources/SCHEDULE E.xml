@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:root name="SCHEDULE E" xmlns:tns="http://www.example.org/TAX-FORM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/TAX-FORM TAX-FORM.xsd ">
+  <tns:part number="1" title="Income or Loss From Rental Real Estate and Royalties Note" description="If you are in the business of renting personal property, use Schedule C or C-EZ (see instructions). If you are an individual, report farm rental income or loss from Form 4835 on page 2, line 40"> 
+   <tns:line></tns:line>
+  
+
+  </tns:part>
+  <tns:part number="2" title="Income or Loss From Partnerships and S Corporations" description="If you report a loss from an at-risk activity for which
+any amount is not at risk, you must check the box in column (e) on line 28 and attach Form 6198. See instructions">
+   <tns:line></tns:line>
+  
+
+  </tns:part>
+  <tns:part number="3" title="Income or Loss From Estates and Trusts" description="">
+   <tns:line></tns:line>
+  
+
+  </tns:part>
+  <tns:header>
+    <tns:item name="names" type="string"/>
+    <tns:item name="socialSecurityNumber" type="string"/>
+  </tns:header>
+</tns:root>
