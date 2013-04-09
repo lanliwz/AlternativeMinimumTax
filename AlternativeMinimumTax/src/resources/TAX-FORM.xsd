@@ -56,6 +56,7 @@
     <complexType name="nameValue">
     	<attribute name="name" type="string"></attribute>
     	<attribute name="type" type="string"></attribute>
+    	<attribute name="value" type="string"></attribute>
     </complexType>
 
 

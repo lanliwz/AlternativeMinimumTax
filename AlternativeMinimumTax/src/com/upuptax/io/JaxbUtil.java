@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -32,6 +33,16 @@ public class JaxbUtil {
 	public static void main(String[] args){
 		try {
 			TaxForm form = JaxbUtil.load("SCHEDULE E", "wei zhang");
+			System.out.println("Form Name:"+form.getName());
+			List<Object> elements = form.getPartAndHeader();
+			for(Object obj:elements){
+				if(obj instanceof Header){
+					List<NameValue> headerItems = ((Header) obj).getItem();
+					for(NameValue nv:headerItems){
+						System.out.println(nv.getName()+":"+nv.getValue());
+					}
+				}
+			}
 			
 //			TaxForm root=new TaxForm();
 //			root.setName("SCHEDULE E");
