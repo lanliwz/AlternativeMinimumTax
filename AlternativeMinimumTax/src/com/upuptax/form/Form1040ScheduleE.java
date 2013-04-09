@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.upuptax.io.FileUtil;
+import com.upuptax.io.JaxbUtil;
 import com.upuptax.reference.FillingFormsAndSchedules;
 import com.upuptax.reference.TaxConstant;
 import com.upuptax.utils.TaxNumberUtil;
@@ -73,6 +74,7 @@ public class Form1040ScheduleE implements Form {
 
 	@Override
 	public List<FormLineDetail> getLineDetails() throws IOException {
+		
 		if(lineDetails==null){
 		   lineDetails=FileUtil.loadLineDescription(getName(), "");	
 		}

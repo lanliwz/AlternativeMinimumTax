@@ -42,7 +42,6 @@
     	<attribute name="type" type="string" use="optional" default="FEDERAL"></attribute>
     </complexType>
 
-    <element name="root" type="tns:taxForm"></element>
 
     <complexType name="line">
     	<sequence>
@@ -67,4 +66,9 @@
     		</element>
     	</sequence>
     </complexType>
+
+
+
+
+
 </schema>

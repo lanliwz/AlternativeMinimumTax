@@ -18,6 +18,8 @@ import com.upuptax.model.jaxb.*;
 public class JaxbUtil {
 	private static JAXBContext jc;
 	
+
+	
 	static {
 		try {
 			jc= JAXBContext.newInstance( "com.upuptax.model.jaxb" );
@@ -27,18 +29,35 @@ public class JaxbUtil {
 		}
 	}
 	
+	public static void main(String[] args){
+		try {
+			TaxForm form = JaxbUtil.load("SCHEDULE E", "wei zhang");
+			
+//			TaxForm root=new TaxForm();
+//			root.setName("SCHEDULE E");
+//			JaxbUtil.save("SCHEDULE E", "wei zhang", root);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	}	
 	public static TaxForm load(String formName,String fillingBy) throws JAXBException{
+
 		Path file = Paths.get(System.getProperty("user.home"),fillingBy,formName+".xml");
 		Unmarshaller u = jc.createUnmarshaller();
 		
-		TaxForm frm=(TaxForm) u.unmarshal(file.toFile());
+		Object frm= u.unmarshal(file.toFile());
 		
-		return frm;
+		return (TaxForm)frm;
 
 		
 	}
 	public static void save(String formName,String fillingBy,TaxForm form) throws IOException, JAXBException{
-		Path file = Paths.get(System.getProperty("user.home"),fillingBy,formName+".properies");
+		Path file = Paths.get(System.getProperty("user.home"),fillingBy,formName+".xml");
 		Path folder=Paths.get(System.getProperty("user.home"),fillingBy);
 		if (!Files.exists(folder)){
 			Files.createDirectory(folder);
@@ -48,6 +67,7 @@ public class JaxbUtil {
 		
 			
 		}
+		
 		Marshaller m = jc.createMarshaller();
 		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		m.marshal(form, new FileOutputStream(file.toFile()));
