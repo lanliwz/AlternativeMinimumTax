@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:form name="SCHEDULE E" xmlns:tns="http://www.example.org/TAX-FORM" >
   <tns:part number="1" title="Income or Loss From Rental Real Estate and Royalties Note" description="If you are in the business of renting personal property, use Schedule C or C-EZ (see instructions). If you are an individual, report farm rental income or loss from Form 4835 on page 2, line 40"> 
-   <tns:line></tns:line>
+   <tns:line lineNumber="A" description="Did you make any payments in 2012 that would require you to file Form(s) 1099? (see instructions)">
+   	<tns:lineItem type="boolean">
+   		<tns:booleanValue></tns:booleanValue>
+   	</tns:lineItem>
+   </tns:line>
+   <tns:line lineNumber="B" description="If “Yes,” did you or will you file required Forms 1099?">
+   	<tns:lineItem type="boolean">
+   		<tns:booleanValue></tns:booleanValue>
+   	</tns:lineItem>
+   </tns:line>
   
 
   </tns:part>

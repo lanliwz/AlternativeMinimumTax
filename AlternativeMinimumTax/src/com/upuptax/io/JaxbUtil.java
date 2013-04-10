@@ -42,6 +42,11 @@ public class JaxbUtil {
 						System.out.println(nv.getName()+":"+nv.getValue());
 					}
 				}
+				if(obj instanceof Part){
+					Part part=(Part) obj;
+						System.out.println("Part "+part.getNumber()+"--"+part.getTitle()+part.getDescription());
+					
+				}
 			}
 			
 //			TaxForm root=new TaxForm();

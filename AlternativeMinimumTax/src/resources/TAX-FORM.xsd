@@ -4,7 +4,7 @@
 
     <complexType name="part">
     	<sequence>
-    		<element name="line" type="tns:lineItem"
+    		<element name="line" type="tns:line"
     			maxOccurs="unbounded">
     		</element>
     	</sequence>
