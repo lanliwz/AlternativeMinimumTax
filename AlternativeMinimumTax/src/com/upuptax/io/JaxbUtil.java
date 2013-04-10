@@ -45,6 +45,17 @@ public class JaxbUtil {
 				if(obj instanceof Part){
 					Part part=(Part) obj;
 						System.out.println("Part "+part.getNumber()+"--"+part.getTitle()+part.getDescription());
+						List<Line> lines = part.getLine();
+						if(lines!=null){
+							for (Line line:lines){
+								List<LineItem> items =line.getLineItem();
+								if(items!=null)
+								for(LineItem item:items){
+									if(item.getValueType()!=null && item.getValueType().equals("boolean"))
+										System.out.println(item.getBooleanValue().get(0));
+								}
+							}
+						}
 					
 				}
 			}
