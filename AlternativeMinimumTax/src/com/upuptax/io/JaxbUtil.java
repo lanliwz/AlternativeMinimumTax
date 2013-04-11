@@ -48,6 +48,7 @@ public class JaxbUtil {
 						List<Line> lines = part.getLine();
 						if(lines!=null){
 							for (Line line:lines){
+								System.out.println(line.getLineNumber());
 								List<LineItem> items =line.getLineItem();
 								if(items!=null)
 								for(LineItem item:items){
