@@ -71,7 +71,7 @@
         <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="303.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="8">
           <children>
             <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="248.0" text="Date you became a resident of new State" />
-            <TextField prefWidth="132.0" text="mm/dd/yyyy" HBox.margin="$x1" />
+            <TextField prefWidth="132.0" promptText="mm/dd/yyyy" HBox.margin="$x1" />
           </children>
         </HBox>
       </children>

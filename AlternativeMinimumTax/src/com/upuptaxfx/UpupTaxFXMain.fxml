@@ -99,7 +99,7 @@
                   <items>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                       <children>
-                        <VBox prefHeight="507.0" prefWidth="399.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="507.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <children>
                             <Label prefHeight="34.0" text="Taxpayer information:" />
                             <fx:include source="PersonInfo.fxml" prefHeight="270.0" prefWidth="398.9998779296875" />
@@ -167,8 +167,4 @@
       </tabs>
     </TabPane>
   </children>
-  <stylesheets>
-    <URL value="@dialog.css" />
-    <URL value="@UpupTaxFXMain.css" />
-  </stylesheets>
 </AnchorPane>
