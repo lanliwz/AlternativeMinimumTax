@@ -137,7 +137,17 @@
         </Tab>
         <Tab text="Federal Tax ">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <AnchorPane prefHeight="509.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <TableView fx:id="formInputView" editable="true" layoutX="10.0" layoutY="10.0" prefHeight="507.0" prefWidth="582.0" tableMenuButtonVisible="true">
+                  <columns>
+                    <TableColumn editable="false" prefWidth="300.0" text="Line NUmber" fx:id="linenumber" />
+                    <TableColumn prefWidth="200.0" text="Value" fx:id="lineinput" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
         <Tab text="State Tax">
